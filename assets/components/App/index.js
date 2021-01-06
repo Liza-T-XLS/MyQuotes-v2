@@ -2,10 +2,12 @@
 
 import React from 'react';
 
+import './app.scss';
+
 // == Component
 
 const App = () => (
-    <div>
+    <div className="app">
         I am App.
     </div>
 );
