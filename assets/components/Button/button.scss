@@ -1,0 +1,16 @@
+.buttonComponent {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: #34aa2f;
+    color: white;
+    border-radius: 2rem;
+    padding: 0.5rem;
+    font-weight: bold;
+    width: max-content;
+    a {
+        display: block;
+        padding: 0rem 1rem 0rem 1rem;
+        color: white;
+    }
+}

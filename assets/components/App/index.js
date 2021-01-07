@@ -11,11 +11,11 @@ import Footer from '../Footer';
 // == Component
 
 const App = () => (
-    <div className="app">
-        <Header />
-        <Home />
-        <Footer />
-    </div>
+  <div className="app">
+    <Header />
+    <Home />
+    <Footer />
+  </div>
 );
 
 // == Export

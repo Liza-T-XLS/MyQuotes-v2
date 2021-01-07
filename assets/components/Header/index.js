@@ -7,9 +7,9 @@ import './header.scss';
 // == Component
 
 const Header = () => (
-    <header className="header">
-        <h1>MyQuotes</h1>
-    </header>
+  <header className="header">
+    <h1>MyQuotes</h1>
+  </header>
 );
 
 // == Export
