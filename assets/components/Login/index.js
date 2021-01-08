@@ -2,14 +2,14 @@
 
 import React from 'react';
 
-import './signup.scss';
+import './login.scss';
 
 // == Component
 
-const Signup = () => (
-  <div className="signup">
-    <h2>Sign up!</h2>
-    <form className="signupForm">
+const Login = () => (
+  <div className="login">
+    <h2>Login!</h2>
+    <form className="loginForm">
       <label htmlFor="pseudonym">
         <span>Pseudonym</span>
         <input type="text" name="pseudonym" id="pseudonym" required />
@@ -18,11 +18,7 @@ const Signup = () => (
         <span>Enter a password</span>
         <input type="password" name="password" id="password" required />
       </label>
-      <label htmlFor="confirmPassword">
-        <span>Confirm your Password</span>
-        <input type="password" name="confirmPassword" id="confirmPassword" required />
-      </label>
-      <button type="submit">Sign up</button>
+      <button type="submit">Login</button>
     </form>
   </div>
 );
@@ -31,4 +27,4 @@ const Signup = () => (
 
 // == Export
 
-export default Signup;
+export default Login;

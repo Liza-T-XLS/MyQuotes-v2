@@ -10,6 +10,7 @@ import Header from '../Header';
 import Home from '../Home';
 import Footer from '../Footer';
 import Signup from '../Signup';
+import Login from '../Login';
 
 // == Component
 
@@ -27,6 +28,12 @@ const App = () => (
       exact
     >
       <Signup />
+    </Route>
+    <Route
+      path="/login"
+      exact
+    >
+      <Login />
     </Route>
     <Footer />
   </div>

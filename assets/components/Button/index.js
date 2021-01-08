@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import slugify from 'slugify';
+import { Link } from 'react-router-dom';
 
 import './button.scss';
 
@@ -14,7 +15,7 @@ const Button = ({ buttonLabel }) => {
 
   return (
     <button className="buttonComponent" type="button">
-      <a href={link}>{buttonLabel}</a>
+      <Link to={link}>{buttonLabel}</Link>
     </button>
   );
 };
