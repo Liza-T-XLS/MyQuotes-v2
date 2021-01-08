@@ -5,16 +5,16 @@ import PropTypes from 'prop-types';
 import slugify from 'slugify';
 import { Link } from 'react-router-dom';
 
-import './button.scss';
+import './linkButton.scss';
 
 // == Component
 
-const Button = ({ buttonLabel }) => {
+const LinkButton = ({ buttonLabel }) => {
   const slugifiedLink = slugify(buttonLabel, { lower: true });
   const link = `/${slugifiedLink}`;
 
   return (
-    <button className="buttonComponent" type="button">
+    <button className="linkButton" type="button">
       <Link to={link}>{buttonLabel}</Link>
     </button>
   );
@@ -22,10 +22,10 @@ const Button = ({ buttonLabel }) => {
 
 // PropTypes
 
-Button.propTypes = {
+LinkButton.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
 };
 
 // == Export
 
-export default Button;
+export default LinkButton;

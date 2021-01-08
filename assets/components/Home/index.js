@@ -7,7 +7,7 @@ import React from 'react';
 
 import './home.scss';
 
-import Button from '../Button';
+import LinkButton from '../LinkButton';
 
 // == Component
 
@@ -20,9 +20,9 @@ const Home = () => (
       MyQuotes enables you to save any quote to your personal space. They are <strong>your</strong> quotes!
     </p>
     <div className="access">
-      <Button buttonLabel="Sign up" />
+      <LinkButton buttonLabel="Sign up" />
       <span>Already have an account?</span>
-      <Button buttonLabel="Login" />
+      <LinkButton buttonLabel="Login" />
     </div>
   </div>
 );
