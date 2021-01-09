@@ -25,7 +25,7 @@ const Signup = ({
   const onChangeHandler = (e) => {
     console.log('onChangeHandler triggered: ' + e.target.value + ' for: ' + e.target.name);
     changeField(e.target.value, e.target.name);
-    checkErrors();
+    checkErrors(e.target.name);
   };
 
   const onSubmitHandler = (e) => {

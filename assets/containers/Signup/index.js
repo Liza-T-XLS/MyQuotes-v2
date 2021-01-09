@@ -17,8 +17,8 @@ const mapDispatchToProps = (dispatch) => ({
   changeField: (newValue, fieldName) => {
     dispatch(changeField(newValue, fieldName));
   },
-  checkErrors: () => {
-    dispatch(checkErrors());
+  checkErrors: (fieldName) => {
+    dispatch(checkErrors(fieldName));
   },
 });
 

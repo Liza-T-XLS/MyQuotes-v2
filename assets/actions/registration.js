@@ -11,6 +11,7 @@ export const changeField = (newValue, fieldName) => ({
   fieldName,
 });
 
-export const checkErrors = () => ({
+export const checkErrors = (fieldName) => ({
   type: CHECK_ERRORS,
+  fieldName,
 });

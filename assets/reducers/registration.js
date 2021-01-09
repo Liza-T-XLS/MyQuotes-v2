@@ -30,34 +30,65 @@ const registrationReducer = (state = initialState, action = {}) => {
       };
     }
     case CHECK_ERRORS: {
-      let pseudonymMsg = '';
-      let emailMsg = '';
-      let passwordMsg = '';
-      let confirmedPasswordMsg = '';
-
-      if (state.pseudonym.length < 2) {
-        pseudonymMsg = 'Your pseudonym must be at least 2-character long.';
+      switch (action.fieldName) {
+        case 'pseudonym': {
+          let pseudonymMsg = '';
+          if (state.pseudonym.length < 2) {
+            pseudonymMsg = 'Your pseudonym must be at least 2-character long.';
+          }
+          const newFormErrors = {
+            ...state.formErrors,
+            pseudonym: pseudonymMsg,
+          };
+          return {
+            ...state,
+            formErrors: newFormErrors,
+          };
+        }
+        case 'email': {
+          let emailMsg = '';
+          if (!validEmailRegex.test(state.email)) {
+            emailMsg = 'The email you entered is not valid.';
+          }
+          const newFormErrors = {
+            ...state.formErrors,
+            email: emailMsg,
+          };
+          return {
+            ...state,
+            formErrors: newFormErrors,
+          };
+        }
+        case 'password': {
+          let passwordMsg = '';
+          if (state.password.length < 4) {
+            passwordMsg = 'Your password must be at least 4-character long.';
+          }
+          const newFormErrors = {
+            ...state.formErrors,
+            password: passwordMsg,
+          };
+          return {
+            ...state,
+            formErrors: newFormErrors,
+          };
+        }
+        case 'confirmedPassword': {
+          let confirmedPasswordMsg = '';
+          if (state.confirmedPassword !== state.password) {
+            confirmedPasswordMsg = 'The passwords you entered do not match..';
+          }
+          const newFormErrors = {
+            ...state.formErrors,
+            confirmedPassword: confirmedPasswordMsg,
+          };
+          return {
+            ...state,
+            formErrors: newFormErrors,
+          };
+        }
+        default: return state;
       }
-      if (!validEmailRegex.test(state.email)) {
-        emailMsg = 'The email you entered is not valid.';
-      }
-      if (state.password.length < 4) {
-        passwordMsg = 'Your password must be at least 4-character long.';
-      }
-      if (state.confirmedPassword !== state.password) {
-        confirmedPasswordMsg = 'The passwords you entered do not match.';
-      }
-      const newFormErrors = {
-        ...state.formErrors,
-        pseudonym: pseudonymMsg,
-        email: emailMsg,
-        password: passwordMsg,
-        confirmedPassword: confirmedPasswordMsg,
-      };
-      return {
-        ...state,
-        formErrors: newFormErrors,
-      };
     }
     default: return state;
   }
