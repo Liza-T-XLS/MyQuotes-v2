@@ -14,18 +14,25 @@
       margin: 0.5rem;
       label {
         position: relative;
+        margin-bottom: 2rem;
         span {
           display: block;
         }
         input {
           display: inline-block;
-          margin-bottom: 0.5rem;
+          // margin-bottom: 0.5rem;
         }
         .passwordToggle {
           position: absolute;
           right: 5px;
           top: 27px;
           z-index: 1;
+        }
+        .errorMsg {
+          position: absolute;
+          color: red;
+          font-size: 0.9rem;
+          line-height: 1rem;
         }
       }
       button {
