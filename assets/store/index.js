@@ -3,7 +3,7 @@
 import { createStore } from 'redux';
 
 import { devToolsEnhancer } from 'redux-devtools-extension';
-import registrationReducer from '../reducers/registrationReducer';
+import registrationReducer from '../reducers/registration';
 
 // == Components
 
