@@ -13,12 +13,20 @@
       align-items: center;
       margin: 0.5rem;
       label {
+        position: relative;
         span {
           display: block;
         }
         input {
-          display: block;
+          display: inline-block;
           margin-bottom: 0.5rem;
+          position: relative;
+        }
+        .passwordToggle {
+          position: absolute;
+          right: 5px;
+          top: 27px;
+          z-index: 1;
         }
       }
       button {

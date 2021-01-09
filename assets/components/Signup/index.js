@@ -1,9 +1,13 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
 // == Imports
 
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import './signup.scss';
+import visibleIcon from '../../images/visible-24.png';
 
 // == Component
 
@@ -18,6 +22,13 @@ const Signup = ({
     changeField(e.target.value, e.target.name);
   };
 
+  // onClickHandler to toggle the visibility of the passwords when the eye icon is clicked on
+  const onClickHandler = (e) => {
+    const passwordField = e.target.previousSibling;
+    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordField.setAttribute('type', type);
+  };
+
   return (
     <div className="signup">
       <h2>Sign up!</h2>
@@ -29,10 +40,12 @@ const Signup = ({
         <label htmlFor="password">
           <span>Enter a password</span>
           <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} required />
+          <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={onClickHandler} />
         </label>
         <label htmlFor="confirmedPassword">
           <span>Confirm your Password</span>
           <input type="password" name="confirmedPassword" id="confirmedPassword" value={confirmedPassword} onChange={onChangeHandler} required />
+          <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={onClickHandler} />
         </label>
         <button type="submit">Sign up</button>
       </form>
