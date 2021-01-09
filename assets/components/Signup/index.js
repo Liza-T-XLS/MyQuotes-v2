@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 import './signup.scss';
 import visibleIcon from '../../images/visible-24.png';
 
+import { passwordVisibilityOnClickHandler } from '../../utils/handlers';
+
 // == Component
 
 const Signup = ({
@@ -23,11 +25,11 @@ const Signup = ({
   };
 
   // onClickHandler to toggle the visibility of the passwords when the eye icon is clicked on
-  const onClickHandler = (e) => {
-    const passwordField = e.target.previousSibling;
-    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordField.setAttribute('type', type);
-  };
+  // const onClickHandler = (e) => {
+  //   const passwordField = e.target.previousSibling;
+  //   const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+  //   passwordField.setAttribute('type', type);
+  // };
 
   return (
     <div className="signup">
@@ -40,12 +42,12 @@ const Signup = ({
         <label htmlFor="password">
           <span>Enter a password</span>
           <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} required />
-          <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={onClickHandler} />
+          <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
         </label>
         <label htmlFor="confirmedPassword">
           <span>Confirm your Password</span>
           <input type="password" name="confirmedPassword" id="confirmedPassword" value={confirmedPassword} onChange={onChangeHandler} required />
-          <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={onClickHandler} />
+          <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
         </label>
         <button type="submit">Sign up</button>
       </form>
