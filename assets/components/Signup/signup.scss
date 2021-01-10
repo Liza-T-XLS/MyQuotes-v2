@@ -21,6 +21,11 @@
         input {
           display: inline-block;
           // margin-bottom: 0.5rem;
+          &.invalid {
+            border: solid 1px red;
+            border-radius: 5px;
+            padding: 0.5rem;
+          }
         }
         .passwordToggle {
           position: absolute;
@@ -30,10 +35,11 @@
         }
         .errorMsg {
           position: absolute;
-          color: red;
+          color: darkslategrey;
           font-size: 0.9rem;
           line-height: 1rem;
         }
+
       }
       button {
         border: none;
