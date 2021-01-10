@@ -17,6 +17,7 @@ const mapStateToProps = (state) => ({
   confirmedPassword: state.confirmedPassword,
   formErrors: state.formErrors,
   loader: state.loader,
+  registrationComplete: state.registrationComplete,
 });
 
 const mapDispatchToProps = (dispatch) => ({

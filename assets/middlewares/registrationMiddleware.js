@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-import { SIGN_UP, setLoader } from '../actions/registration';
+import { SIGN_UP, setLoader, confirmSignUp } from '../actions/registration';
 
 // == Middleware
 
@@ -20,6 +20,7 @@ const registrationMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response.data);
+          store.dispatch(confirmSignUp(true));
           store.dispatch(setLoader(false));
         })
         .catch((error) => {

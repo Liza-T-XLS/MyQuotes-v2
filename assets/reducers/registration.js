@@ -1,6 +1,6 @@
 // == Imports
 
-import { CHANGE_FIELD, CHECK_ERRORS, SET_LOADER } from '../actions/registration';
+import { CHANGE_FIELD, CHECK_ERRORS, SET_LOADER, CONFIRM_SIGN_UP } from '../actions/registration';
 import { validEmailRegex } from '../utils/regex';
 
 // == Initial State
@@ -17,6 +17,7 @@ const initialState = {
     confirmedPassword: '',
   },
   loader: false,
+  registrationComplete: false,
 };
 
 // == Reducer
@@ -95,6 +96,15 @@ const registrationReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         loader: action.boolean,
+      };
+    case CONFIRM_SIGN_UP:
+      return {
+        ...state,
+        registrationComplete: action.boolean,
+        pseudonym: '',
+        email: '',
+        password: '',
+        confirmedPassword: '',
       };
     default: return state;
   }

@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import './signup.scss';
 import visibleIcon from '../../images/visible-24.png';
 import Loader from '../Loader';
+import LinkButton from '../LinkButton';
 
 import { passwordVisibilityOnClickHandler } from '../../utils/handlers';
 
@@ -26,6 +27,7 @@ const Signup = ({
   signUp,
   loader,
   setLoader,
+  registrationComplete,
 }) => {
   const pseudonymClassName = classNames('pseudonym', { invalid: formErrors.pseudonym.length > 0 });
   const emailClassName = classNames('email', { invalid: formErrors.email.length > 0 });
@@ -56,6 +58,7 @@ const Signup = ({
   return (
     <>
       {loader && <Loader />}
+      {!registrationComplete && (
       <div className="signup">
         <h2>Sign up!</h2>
         <form className="signupForm" onSubmit={onSubmitHandler} noValidate>
@@ -84,6 +87,16 @@ const Signup = ({
           <button type="submit">Sign up</button>
         </form>
       </div>
+      )}
+      {registrationComplete && (
+        <div className="confirmationMsg">
+          <h2>Thank you for signing up!</h2>
+          <p>
+            You can now access your personal space by logging in.
+          </p>
+          <LinkButton buttonLabel="Login" />
+        </div>
+      )}
     </>
   );
 };
@@ -108,6 +121,7 @@ Signup.propTypes = {
   signUp: PropTypes.func.isRequired,
   loader: PropTypes.bool.isRequired,
   setLoader: PropTypes.func.isRequired,
+  registrationComplete: PropTypes.bool.isRequired,
 };
 
 // == Export
