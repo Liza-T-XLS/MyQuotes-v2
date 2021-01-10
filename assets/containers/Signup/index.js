@@ -3,7 +3,12 @@
 import { connect } from 'react-redux';
 
 import Signup from '../../components/Signup';
-import { changeField, checkErrors, signUp } from '../../actions/registration';
+import {
+  changeField,
+  checkErrors,
+  signUp,
+  setLoader,
+} from '../../actions/registration';
 
 const mapStateToProps = (state) => ({
   pseudonym: state.pseudonym,
@@ -11,6 +16,7 @@ const mapStateToProps = (state) => ({
   password: state.password,
   confirmedPassword: state.confirmedPassword,
   formErrors: state.formErrors,
+  loader: state.loader,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -22,6 +28,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   signUp: () => {
     dispatch(signUp());
+  },
+  setLoader: (boolean) => {
+    dispatch(setLoader(boolean));
   },
 });
 
