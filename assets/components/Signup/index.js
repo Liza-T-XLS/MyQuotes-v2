@@ -22,6 +22,7 @@ const Signup = ({
   changeField,
   checkErrors,
   formErrors,
+  signUp,
 }) => {
   const pseudonymClassName = classNames('pseudonym', { invalid: formErrors.pseudonym.length > 0 });
   const emailClassName = classNames('email', { invalid: formErrors.email.length > 0 });
@@ -44,6 +45,7 @@ const Signup = ({
     console.log(Object.values(formErrors));
     if (errors === undefined && pseudonym !== '' && email !== '' && password !== '' && confirmedPassword !== '') {
       console.log('form submitted');
+      signUp();
     }
   };
 
@@ -96,6 +98,7 @@ Signup.propTypes = {
       confirmedPassword: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
+  signUp: PropTypes.func.isRequired,
 };
 
 // == Export

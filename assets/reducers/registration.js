@@ -34,7 +34,7 @@ const registrationReducer = (state = initialState, action = {}) => {
         case 'pseudonym': {
           let pseudonymMsg = '';
           if (state.pseudonym.length < 2) {
-            pseudonymMsg = 'Your pseudonym must be at least 2-character long.';
+            pseudonymMsg = 'Your pseudonym must be at least 2 characters long.';
           }
           const newFormErrors = {
             ...state.formErrors,
@@ -62,7 +62,7 @@ const registrationReducer = (state = initialState, action = {}) => {
         case 'password': {
           let passwordMsg = '';
           if (state.password.length < 4) {
-            passwordMsg = 'Your password must be at least 4-character long.';
+            passwordMsg = 'Your password must be at least 4 characters long.';
           }
           const newFormErrors = {
             ...state.formErrors,

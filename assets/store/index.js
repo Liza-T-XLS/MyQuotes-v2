@@ -1,17 +1,26 @@
 // == Imports
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
-import { devToolsEnhancer } from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import registrationReducer from '../reducers/registration';
 
+import registrationMiddleware from '../middlewares/registrationMiddleware';
+
 // == Components
+
+const enhancers = composeWithDevTools(
+  applyMiddleware(
+    registrationMiddleware,
+    // ... other middlewares
+  ),
+);
 
 const store = createStore(
   // reducer
   registrationReducer,
   // enhancer
-  devToolsEnhancer(),
+  enhancers,
 );
 
 // == Export
