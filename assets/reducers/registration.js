@@ -6,6 +6,7 @@ import {
   SET_LOADER,
   CONFIRM_SIGN_UP,
   CLEAR_SIGN_UP_FORM,
+  ADD_SERVER_ERRORS,
 } from '../actions/registration';
 
 import { validEmailRegex } from '../utils/regex';
@@ -85,7 +86,7 @@ const registrationReducer = (state = initialState, action = {}) => {
         case 'confirmedPassword': {
           let confirmedPasswordMsg = '';
           if (state.confirmedPassword !== state.password) {
-            confirmedPasswordMsg = 'The passwords you entered do not match..';
+            confirmedPasswordMsg = 'The passwords you entered do not match.';
           }
           const newFormErrors = {
             ...state.formErrors,
@@ -113,6 +114,36 @@ const registrationReducer = (state = initialState, action = {}) => {
         password: '',
         confirmedPassword: '',
       };
+    case ADD_SERVER_ERRORS: {
+      let newFormErrors = {
+        ...state.formErrors,
+      };
+      action.errors.map((error) => {
+        if (error.field === 'pseudonym') {
+          newFormErrors = {
+            ...newFormErrors,
+            pseudonym: error.message,
+          };
+        }
+        if (error.field === 'email') {
+          newFormErrors = {
+            ...newFormErrors,
+            email: error.message,
+          };
+        }
+        if (error.field === 'password') {
+          newFormErrors = {
+            ...newFormErrors,
+            password: error.message,
+          };
+        }
+        return newFormErrors;
+      });
+      return {
+        ...state,
+        formErrors: newFormErrors,
+      };
+    }
     case CLEAR_SIGN_UP_FORM:
       return {
         ...state,

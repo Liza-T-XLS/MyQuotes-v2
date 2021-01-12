@@ -6,6 +6,7 @@ export const SIGN_UP = 'SIGN_UP';
 export const SET_LOADER = 'SET_LOADER';
 export const CONFIRM_SIGN_UP = 'CONFIRM_SIGN_UP';
 export const CLEAR_SIGN_UP_FORM = 'CLEAR_SIGN_UP_FORM';
+export const ADD_SERVER_ERRORS = 'ADD_SERVER_ERRORS';
 
 // == Action creators
 
@@ -36,4 +37,9 @@ export const confirmSignUp = (boolean) => ({
 
 export const clearSignUpForm = () => ({
   type: CLEAR_SIGN_UP_FORM,
+});
+
+export const addServerErrors = (errors) => ({
+  type: ADD_SERVER_ERRORS,
+  errors,
 });
