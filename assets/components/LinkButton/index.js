@@ -9,8 +9,8 @@ import './linkButton.scss';
 
 // == Component
 
-const LinkButton = ({ buttonLabel }) => {
-  const slugifiedLink = slugify(buttonLabel, { lower: true });
+const LinkButton = ({ buttonLabel, buttonLink }) => {
+  const slugifiedLink = slugify(buttonLink, { lower: true });
   const link = `/${slugifiedLink}`;
 
   return (
@@ -24,6 +24,7 @@ const LinkButton = ({ buttonLabel }) => {
 
 LinkButton.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
+  buttonLink: PropTypes.string.isRequired,
 };
 
 // == Export

@@ -94,7 +94,7 @@ const Signup = ({
           <p>
             You can now access your personal space by logging in.
           </p>
-          <LinkButton buttonLabel="Login" />
+          <LinkButton buttonLabel="Log in" buttonLink="login" />
         </div>
       )}
     </>

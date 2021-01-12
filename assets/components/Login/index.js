@@ -13,7 +13,7 @@ import { passwordVisibilityOnClickHandler } from '../../utils/handlers';
 
 const Login = () => (
   <div className="login">
-    <h2>Login!</h2>
+    <h2>Log in!</h2>
     <form className="loginForm">
       <label htmlFor="pseudonym">
         <span>Pseudonym</span>
@@ -24,7 +24,7 @@ const Login = () => (
         <input type="password" name="password" id="password" required />
         <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
       </label>
-      <button type="submit">Login</button>
+      <button type="submit">Log in</button>
     </form>
   </div>
 );

@@ -20,9 +20,9 @@ const Home = () => (
       MyQuotes enables you to save any quote to your personal space. They are <strong>your</strong> quotes!
     </p>
     <div className="access">
-      <LinkButton buttonLabel="Sign up" />
+      <LinkButton buttonLabel="Sign up" buttonLink="signup" />
       <span>Already have an account?</span>
-      <LinkButton buttonLabel="Login" />
+      <LinkButton buttonLabel="Log in" buttonLink="login" />
     </div>
   </div>
 );
