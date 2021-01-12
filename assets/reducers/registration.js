@@ -116,18 +116,7 @@ const registrationReducer = (state = initialState, action = {}) => {
     case CLEAR_SIGN_UP_FORM:
       return {
         ...state,
-        pseudonym: '',
-        email: '',
-        password: '',
-        confirmedPassword: '',
-        formErrors: {
-          pseudonym: '',
-          email: '',
-          password: '',
-          confirmedPassword: '',
-        },
-        loader: false,
-        registrationComplete: false,
+        ...initialState,
       };
     default: return state;
   }
