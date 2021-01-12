@@ -24,7 +24,7 @@ const App = () => (
       <Home />
     </Route>
     <Route
-      path="/sign-up"
+      path="/signup"
       exact
     >
       <Signup />

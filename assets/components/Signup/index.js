@@ -3,7 +3,7 @@
 
 // == Imports
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -28,7 +28,13 @@ const Signup = ({
   loader,
   setLoader,
   registrationComplete,
+  clearSignUpForm,
 }) => {
+  useEffect(() => {
+    console.log('Signup form useEffect');
+    clearSignUpForm();
+  }, []);
+
   const pseudonymClassName = classNames('pseudonym', { invalid: formErrors.pseudonym.length > 0 });
   const emailClassName = classNames('email', { invalid: formErrors.email.length > 0 });
   const passwordClassName = classNames('password', { invalid: formErrors.password.length > 0 });
@@ -122,6 +128,7 @@ Signup.propTypes = {
   loader: PropTypes.bool.isRequired,
   setLoader: PropTypes.func.isRequired,
   registrationComplete: PropTypes.bool.isRequired,
+  clearSignUpForm: PropTypes.func.isRequired,
 };
 
 // == Export

@@ -8,6 +8,7 @@ import {
   checkErrors,
   signUp,
   setLoader,
+  clearSignUpForm,
 } from '../../actions/registration';
 
 const mapStateToProps = (state) => ({
@@ -32,6 +33,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setLoader: (boolean) => {
     dispatch(setLoader(boolean));
+  },
+  clearSignUpForm: () => {
+    dispatch(clearSignUpForm());
   },
 });
 

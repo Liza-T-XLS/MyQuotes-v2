@@ -1,6 +1,13 @@
 // == Imports
 
-import { CHANGE_FIELD, CHECK_ERRORS, SET_LOADER, CONFIRM_SIGN_UP } from '../actions/registration';
+import {
+  CHANGE_FIELD,
+  CHECK_ERRORS,
+  SET_LOADER,
+  CONFIRM_SIGN_UP,
+  CLEAR_SIGN_UP_FORM,
+} from '../actions/registration';
+
 import { validEmailRegex } from '../utils/regex';
 
 // == Initial State
@@ -105,6 +112,22 @@ const registrationReducer = (state = initialState, action = {}) => {
         email: '',
         password: '',
         confirmedPassword: '',
+      };
+    case CLEAR_SIGN_UP_FORM:
+      return {
+        ...state,
+        pseudonym: '',
+        email: '',
+        password: '',
+        confirmedPassword: '',
+        formErrors: {
+          pseudonym: '',
+          email: '',
+          password: '',
+          confirmedPassword: '',
+        },
+        loader: false,
+        registrationComplete: false,
       };
     default: return state;
   }
