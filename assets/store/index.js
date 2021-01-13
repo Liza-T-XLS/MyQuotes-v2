@@ -6,12 +6,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from '../reducers';
 
 import registrationMiddleware from '../middlewares/registrationMiddleware';
+import authenticationMiddleware from '../middlewares/authenticationMiddleware';
 
 // == Components
 
 const enhancers = composeWithDevTools(
   applyMiddleware(
     registrationMiddleware,
+    authenticationMiddleware,
     // ... other middlewares
   ),
 );
