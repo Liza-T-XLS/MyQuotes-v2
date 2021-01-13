@@ -15,12 +15,12 @@ const Login = () => (
   <div className="login">
     <h2>Log in!</h2>
     <form className="loginForm">
-      <label htmlFor="pseudonym">
-        <span>Pseudonym</span>
-        <input type="text" name="pseudonym" id="pseudonym" required />
+      <label htmlFor="email">
+        <span>Email</span>
+        <input type="text" name="email" id="email" required />
       </label>
       <label htmlFor="password">
-        <span>Enter a password</span>
+        <span>Enter your password</span>
         <input type="password" name="password" id="password" required />
         <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
       </label>

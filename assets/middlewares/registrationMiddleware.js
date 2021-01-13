@@ -2,7 +2,12 @@
 
 import axios from 'axios';
 
-import { SIGN_UP, setLoader, confirmSignUp, addServerErrors } from '../actions/registration';
+import {
+  SIGN_UP,
+  setLoader,
+  confirmSignUp,
+  addServerErrors,
+} from '../actions/registration';
 
 // == Middleware
 
@@ -13,9 +18,9 @@ const registrationMiddleware = (store) => (next) => (action) => {
         method: 'post',
         url: 'http://localhost:8000/api/registration',
         data: {
-          pseudonym: store.getState().pseudonym,
-          email: store.getState().email,
-          password: store.getState().password,
+          pseudonym: store.getState().registration.pseudonym,
+          email: store.getState().registration.email,
+          password: store.getState().registration.password,
         },
       })
         .then((response) => {

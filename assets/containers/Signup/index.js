@@ -12,13 +12,13 @@ import {
 } from '../../actions/registration';
 
 const mapStateToProps = (state) => ({
-  pseudonym: state.pseudonym,
-  email: state.email,
-  password: state.password,
-  confirmedPassword: state.confirmedPassword,
-  formErrors: state.formErrors,
-  loader: state.loader,
-  registrationComplete: state.registrationComplete,
+  pseudonym: state.registration.pseudonym,
+  email: state.registration.email,
+  password: state.registration.password,
+  confirmedPassword: state.registration.confirmedPassword,
+  formErrors: state.registration.formErrors,
+  loader: state.registration.loader,
+  registrationComplete: state.registration.registrationComplete,
 });
 
 const mapDispatchToProps = (dispatch) => ({

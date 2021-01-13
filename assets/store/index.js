@@ -3,7 +3,7 @@
 import { createStore, applyMiddleware } from 'redux';
 
 import { composeWithDevTools } from 'redux-devtools-extension';
-import registrationReducer from '../reducers/registration';
+import reducer from '../reducers';
 
 import registrationMiddleware from '../middlewares/registrationMiddleware';
 
@@ -18,7 +18,7 @@ const enhancers = composeWithDevTools(
 
 const store = createStore(
   // reducer
-  registrationReducer,
+  reducer,
   // enhancer
   enhancers,
 );
