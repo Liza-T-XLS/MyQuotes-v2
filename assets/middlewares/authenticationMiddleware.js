@@ -5,6 +5,8 @@ import axios from 'axios';
 import {
   LOG_IN,
   showServerError,
+  setLoginLoader,
+  setIsLogged,
 } from '../actions/authentication';
 
 // == Middleware
@@ -24,18 +26,19 @@ const authenticationMiddleware = (store) => (next) => (action) => {
           console.log(response.data);
           console.log('logged');
           // store.dispatch(confirmSignUp(true));
-          // store.dispatch(setLoader(false));
+          store.dispatch(setLoginLoader(false));
+          store.dispatch(setIsLogged(true));
         })
         .catch((error) => {
           console.warn(error);
           console.log(error.response.data);
           console.log('login failed');
-          // store.dispatch(setLoader(false));
+          store.dispatch(setLoginLoader(false));
           store.dispatch(showServerError());
         })
         .finally(() => {
           console.log('finally');
-          // store.dispatch(setLoader(false));
+          store.dispatch(setLoginLoader(false));
         });
       next(action);
       break;

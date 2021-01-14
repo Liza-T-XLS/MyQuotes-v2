@@ -1,14 +1,16 @@
 // ==  Action types
 
-export const CHANGE_FIELD = 'CHANGE_FIELD';
+export const CHANGE_LOGIN_FIELD = 'CHANGE_LOGIN_FIELD';
 export const LOG_IN = 'LOG_IN';
 export const SHOW_SERVER_ERROR = 'SHOW_SERVER_ERROR';
 export const CLEAR_LOG_IN_FORM = 'CLEAR_LOG_IN_FORM';
+export const SET_LOGIN_LOADER = 'SET_LOGIN_LOADER';
+export const SET_IS_LOGGED = 'SET_IS_LOGGED';
 
 // == Action creators
 
 export const changeField = (newValue, fieldName) => ({
-  type: CHANGE_FIELD,
+  type: CHANGE_LOGIN_FIELD,
   newValue,
   fieldName,
 });
@@ -25,4 +27,14 @@ export const showServerError = () => ({
 
 export const clearLogInForm = () => ({
   type: CLEAR_LOG_IN_FORM,
+});
+
+export const setLoginLoader = (boolean) => ({
+  type: SET_LOGIN_LOADER,
+  boolean,
+});
+
+export const setIsLogged = (boolean) => ({
+  type: SET_IS_LOGGED,
+  boolean,
 });

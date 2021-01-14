@@ -1,6 +1,12 @@
 // == Imports
 
-import { CHANGE_FIELD, SHOW_SERVER_ERROR, CLEAR_LOG_IN_FORM } from '../actions/authentication';
+import {
+  CHANGE_LOGIN_FIELD,
+  SHOW_SERVER_ERROR,
+  CLEAR_LOG_IN_FORM,
+  SET_LOGIN_LOADER,
+  SET_IS_LOGGED,
+} from '../actions/authentication';
 
 // == Initial state
 
@@ -11,12 +17,12 @@ const initialState = {
     error: '',
   },
   loader: false,
-  registrationComplete: false,
+  isLogged: false,
 };
 
 const authenticationReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case CHANGE_FIELD: {
+    case CHANGE_LOGIN_FIELD: {
       const target = action.fieldName;
       return {
         ...state,
@@ -36,7 +42,21 @@ const authenticationReducer = (state = initialState, action = {}) => {
     case CLEAR_LOG_IN_FORM:
       return {
         ...state,
-        ...initialState,
+        email: '',
+        password: '',
+        formErrors: {
+          error: '',
+        },
+      };
+    case SET_LOGIN_LOADER:
+      return {
+        ...state,
+        loader: action.boolean,
+      };
+    case SET_IS_LOGGED:
+      return {
+        ...state,
+        isLogged: action.boolean,
       };
     default: return state;
   }

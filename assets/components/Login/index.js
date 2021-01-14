@@ -6,9 +6,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import LinkButton from '../LinkButton';
 
 import './login.scss';
 import visibleIcon from '../../images/visible-24.png';
+
+import Loader from '../Loader';
 
 import { passwordVisibilityOnClickHandler } from '../../utils/handlers';
 
@@ -21,6 +24,9 @@ const Login = ({
   formErrors,
   logIn,
   clearLogInForm,
+  loader,
+  setLoginLoader,
+  isLogged,
 }) => {
   useEffect(() => {
     console.log('Login form useEffect');
@@ -38,25 +44,40 @@ const Login = ({
     e.preventDefault();
     console.log('onSubmitHandler triggered');
     logIn();
+    setLoginLoader(true);
   };
 
   return (
-    <div className="login">
-      <h2>Log in!</h2>
-      <form className="loginForm" onSubmit={onSubmitHandler} noValidate>
-        <label htmlFor="email">
-          <span>Email</span>
-          <input type="text" name="email" id="email" value={email} onChange={onChangeHandler} required className={emailClassName} />
-        </label>
-        <label htmlFor="password">
-          <span>Enter your password</span>
-          <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} required className={passwordClassName} />
-          <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
-        </label>
-        <div className="errorMsg">{[formErrors.error].length > 0 && <span>{formErrors.error}</span>}</div>
-        <button type="submit">Log in</button>
-      </form>
-    </div>
+    <>
+      {loader && <Loader />}
+      {!isLogged && (
+        <div className="login">
+          <h2>Log in!</h2>
+          <form className="loginForm" onSubmit={onSubmitHandler} noValidate>
+            <label htmlFor="email">
+              <span>Email</span>
+              <input type="text" name="email" id="email" value={email} onChange={onChangeHandler} required className={emailClassName} />
+            </label>
+            <label htmlFor="password">
+              <span>Enter your password</span>
+              <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} required className={passwordClassName} />
+              <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
+            </label>
+            <div className="errorMsg">{[formErrors.error].length > 0 && <span>{formErrors.error}</span>}</div>
+            <button type="submit">Log in</button>
+          </form>
+        </div>
+      )}
+      {isLogged && (
+        <div className="confirmationMsg">
+          <h2>You are logged in!</h2>
+          <p>
+            You can now access and manage your quotes.
+          </p>
+          <LinkButton buttonLabel="Quotes" buttonLink="quotes" />
+        </div>
+      )}
+    </>
   );
 };
 
@@ -73,6 +94,9 @@ Login.propTypes = {
     }).isRequired,
   ).isRequired,
   clearLogInForm: PropTypes.func.isRequired,
+  loader: PropTypes.bool.isRequired,
+  setLoginLoader: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 // == Export

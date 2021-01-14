@@ -7,12 +7,15 @@ import {
   changeField,
   logIn,
   clearLogInForm,
+  setLoginLoader,
 } from '../../actions/authentication';
 
 const mapStateToProps = (state) => ({
   email: state.authentication.email,
   password: state.authentication.password,
   formErrors: state.authentication.formErrors,
+  loader: state.authentication.loader,
+  isLogged: state.authentication.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -24,6 +27,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   clearLogInForm: () => {
     dispatch(clearLogInForm());
+  },
+  setLoginLoader: (boolean) => {
+    dispatch(setLoginLoader(boolean));
   },
 });
 
