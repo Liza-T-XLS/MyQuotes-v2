@@ -13,7 +13,13 @@ import { passwordVisibilityOnClickHandler } from '../../utils/handlers';
 
 // == Component
 
-const Login = ({ email, password, changeField, logIn }) => {
+const Login = ({
+  email,
+  password,
+  changeField,
+  formErrors,
+  logIn,
+}) => {
   const onChangeHandler = (e) => {
     console.log('onChangeHandler triggered: ' + e.target.value + ' for: ' + e.target.name);
     changeField(e.target.value, e.target.name);
@@ -27,7 +33,7 @@ const Login = ({ email, password, changeField, logIn }) => {
   return (
     <div className="login">
       <h2>Log in!</h2>
-      <form className="loginForm" onSubmit={onSubmitHandler}>
+      <form className="loginForm" onSubmit={onSubmitHandler} noValidate>
         <label htmlFor="email">
           <span>Email</span>
           <input type="text" name="email" id="email" value={email} onChange={onChangeHandler} required />
@@ -37,6 +43,7 @@ const Login = ({ email, password, changeField, logIn }) => {
           <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} required />
           <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
         </label>
+        <div className="errorMsg">{[formErrors.error].length > 0 && <span>{formErrors.error}</span>}</div>
         <button type="submit">Log in</button>
       </form>
     </div>
@@ -50,6 +57,11 @@ Login.propTypes = {
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   logIn: PropTypes.func.isRequired,
+  formErrors: PropTypes.objectOf(
+    PropTypes.shape({
+      error: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
 };
 
 // == Export
