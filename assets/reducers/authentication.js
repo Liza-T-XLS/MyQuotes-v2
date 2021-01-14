@@ -1,6 +1,6 @@
 // == Imports
 
-import { CHANGE_FIELD, ADD_SERVER_ERROR } from '../actions/authentication';
+import { CHANGE_FIELD, SHOW_SERVER_ERROR, CLEAR_LOG_IN_FORM } from '../actions/authentication';
 
 // == Initial state
 
@@ -23,16 +23,21 @@ const authenticationReducer = (state = initialState, action = {}) => {
         [target]: action.newValue,
       };
     }
-    case ADD_SERVER_ERROR: {
+    case SHOW_SERVER_ERROR: {
       const newFormErrors = {
         ...state.formErrors,
-        error: action.error.error,
+        error: 'Invalid credentials',
       };
       return {
         ...state,
         formErrors: newFormErrors,
       };
     }
+    case CLEAR_LOG_IN_FORM:
+      return {
+        ...state,
+        ...initialState,
+      };
     default: return state;
   }
 };

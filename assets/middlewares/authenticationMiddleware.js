@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import {
   LOG_IN,
-  addServerError,
+  showServerError,
 } from '../actions/authentication';
 
 // == Middleware
@@ -31,7 +31,7 @@ const authenticationMiddleware = (store) => (next) => (action) => {
           console.log(error.response.data);
           console.log('login failed');
           // store.dispatch(setLoader(false));
-          store.dispatch(addServerError(error.response.data));
+          store.dispatch(showServerError());
         })
         .finally(() => {
           console.log('finally');

@@ -6,6 +6,7 @@ import Login from '../../components/Login';
 import {
   changeField,
   logIn,
+  clearLogInForm,
 } from '../../actions/authentication';
 
 const mapStateToProps = (state) => ({
@@ -20,6 +21,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   logIn: (email, password) => {
     dispatch(logIn(email, password));
+  },
+  clearLogInForm: () => {
+    dispatch(clearLogInForm());
   },
 });
 

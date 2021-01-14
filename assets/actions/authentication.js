@@ -2,7 +2,8 @@
 
 export const CHANGE_FIELD = 'CHANGE_FIELD';
 export const LOG_IN = 'LOG_IN';
-export const ADD_SERVER_ERROR = 'ADD_SERVER_ERROR';
+export const SHOW_SERVER_ERROR = 'SHOW_SERVER_ERROR';
+export const CLEAR_LOG_IN_FORM = 'CLEAR_LOG_IN_FORM';
 
 // == Action creators
 
@@ -18,7 +19,10 @@ export const logIn = (email, password) => ({
   password,
 });
 
-export const addServerError = (error) => ({
-  type: ADD_SERVER_ERROR,
-  error,
+export const showServerError = () => ({
+  type: SHOW_SERVER_ERROR,
+});
+
+export const clearLogInForm = () => ({
+  type: CLEAR_LOG_IN_FORM,
 });

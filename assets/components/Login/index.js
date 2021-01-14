@@ -3,8 +3,9 @@
 
 // == Imports
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import './login.scss';
 import visibleIcon from '../../images/visible-24.png';
@@ -19,7 +20,16 @@ const Login = ({
   changeField,
   formErrors,
   logIn,
+  clearLogInForm,
 }) => {
+  useEffect(() => {
+    console.log('Login form useEffect');
+    clearLogInForm();
+  }, []);
+
+  const emailClassName = classNames('email', { invalid: formErrors.error.length > 0 });
+  const passwordClassName = classNames('password', { invalid: formErrors.error.length > 0 });
+
   const onChangeHandler = (e) => {
     console.log('onChangeHandler triggered: ' + e.target.value + ' for: ' + e.target.name);
     changeField(e.target.value, e.target.name);
@@ -36,11 +46,11 @@ const Login = ({
       <form className="loginForm" onSubmit={onSubmitHandler} noValidate>
         <label htmlFor="email">
           <span>Email</span>
-          <input type="text" name="email" id="email" value={email} onChange={onChangeHandler} required />
+          <input type="text" name="email" id="email" value={email} onChange={onChangeHandler} required className={emailClassName} />
         </label>
         <label htmlFor="password">
           <span>Enter your password</span>
-          <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} required />
+          <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} required className={passwordClassName} />
           <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
         </label>
         <div className="errorMsg">{[formErrors.error].length > 0 && <span>{formErrors.error}</span>}</div>
@@ -62,6 +72,7 @@ Login.propTypes = {
       error: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
+  clearLogInForm: PropTypes.func.isRequired,
 };
 
 // == Export
