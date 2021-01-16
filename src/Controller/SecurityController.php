@@ -20,4 +20,30 @@ class SecurityController extends AbstractController
             'roles' => $user->getRoles(),
         ]);
     }
+
+    /**
+     * @Route("/api/logout", name="api_logout", methods={"GET"})
+     */
+    public function logout()
+    {
+        // blank, controller never executed
+    }
+
+    /**
+     * @Route("/api/islogged", name="api_isLogged", methods={"GET"})
+     */
+    public function isLogged()
+    {
+        $user = $this->getUser();
+        if($user) {
+            $isLogged = true;
+        } else {
+            $isLogged = false;
+        }
+
+        return $this->json([
+            'user' => $user,
+            'isLogged' => $isLogged,
+        ]);
+    }
 }

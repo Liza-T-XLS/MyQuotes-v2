@@ -8,6 +8,7 @@ import {
   logIn,
   clearLogInForm,
   setLoginLoader,
+  logOut,
 } from '../../actions/authentication';
 
 const mapStateToProps = (state) => ({
@@ -30,6 +31,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setLoginLoader: (boolean) => {
     dispatch(setLoginLoader(boolean));
+  },
+  logOut: () => {
+    dispatch(logOut());
   },
 });
 

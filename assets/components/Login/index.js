@@ -27,6 +27,7 @@ const Login = ({
   loader,
   setLoginLoader,
   isLogged,
+  logOut,
 }) => {
   useEffect(() => {
     console.log('Login form useEffect');
@@ -45,6 +46,11 @@ const Login = ({
     console.log('onSubmitHandler triggered');
     logIn();
     setLoginLoader(true);
+  };
+
+  const logOutOnClickHandler = (e) => {
+    console.log('logOutOnClickHandler triggered');
+    logOut();
   };
 
   return (
@@ -75,6 +81,7 @@ const Login = ({
             You can now access and manage your quotes.
           </p>
           <LinkButton buttonLabel="Quotes" buttonLink="quotes" />
+          <button type="button" onClick={logOutOnClickHandler}>Log out</button>
         </div>
       )}
     </>
@@ -97,6 +104,7 @@ Login.propTypes = {
   loader: PropTypes.bool.isRequired,
   setLoginLoader: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
+  logOut: PropTypes.func.isRequired,
 };
 
 // == Export

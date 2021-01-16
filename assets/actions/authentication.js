@@ -6,6 +6,8 @@ export const SHOW_SERVER_ERROR = 'SHOW_SERVER_ERROR';
 export const CLEAR_LOG_IN_FORM = 'CLEAR_LOG_IN_FORM';
 export const SET_LOGIN_LOADER = 'SET_LOGIN_LOADER';
 export const SET_IS_LOGGED = 'SET_IS_LOGGED';
+export const LOG_OUT = 'LOG_OUT';
+export const CHECK_IS_LOGGED = 'CHECK_IS_LOGGED';
 
 // == Action creators
 
@@ -37,4 +39,12 @@ export const setLoginLoader = (boolean) => ({
 export const setIsLogged = (boolean) => ({
   type: SET_IS_LOGGED,
   boolean,
+});
+
+export const logOut = () => ({
+  type: LOG_OUT,
+});
+
+export const checkIsLogged = () => ({
+  type: CHECK_IS_LOGGED,
 });
