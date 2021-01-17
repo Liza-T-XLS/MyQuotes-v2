@@ -4,6 +4,7 @@
 // == Imports
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './home.scss';
 
@@ -11,7 +12,7 @@ import LinkButton from '../LinkButton';
 
 // == Component
 
-const Home = () => (
+const Home = ({ isLogged }) => (
   <div className="home">
     <h2>Welcome to MyQuotes!</h2>
     <p>
@@ -20,12 +21,27 @@ const Home = () => (
       MyQuotes enables you to save any quote to your personal space. They are <strong>your</strong> quotes!
     </p>
     <div className="access">
-      <LinkButton buttonLabel="Sign up" buttonLink="signup" />
-      <span>Already have an account?</span>
-      <LinkButton buttonLabel="Log in" buttonLink="login" />
+      {!isLogged && (
+      <>
+        <LinkButton buttonLabel="Sign up" buttonLink="signup" />
+        <span>Already have an account?</span>
+        <LinkButton buttonLabel="Log in" buttonLink="login" />
+      </>
+      )}
+      {isLogged && (
+      <>
+        <LinkButton buttonLabel="My quotes" buttonLink="quotes" />
+      </>
+      )}
     </div>
   </div>
 );
+
+// == PropTypes
+
+Home.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
+};
 
 // == Export
 

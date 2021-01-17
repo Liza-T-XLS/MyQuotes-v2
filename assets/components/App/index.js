@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 import './app.scss';
 
 import Header from '../Header';
-import Home from '../Home';
+import Home from '../../containers/Home';
 import Footer from '../Footer';
 import Signup from '../../containers/Signup';
 import Login from '../../containers/Login';
