@@ -6,11 +6,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import LinkButton from '../LinkButton';
+import Helmet from 'react-helmet';
 
 import './login.scss';
 import visibleIcon from '../../images/visible-24.png';
 
+import LinkButton from '../LinkButton';
 import Loader from '../Loader';
 
 import { passwordVisibilityOnClickHandler } from '../../utils/handlers';
@@ -55,6 +56,9 @@ const Login = ({
 
   return (
     <>
+      <Helmet>
+        <title>MyQuotes | Log In</title>
+      </Helmet>
       {loader && <Loader />}
       {!isLogged && (
         <div className="login">

@@ -5,6 +5,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 
 import './home.scss';
 
@@ -14,6 +15,9 @@ import LinkButton from '../LinkButton';
 
 const Home = ({ isLogged }) => (
   <div className="home">
+    <Helmet>
+      <title>MyQuotes | Home</title>
+    </Helmet>
     <h2>Welcome to MyQuotes!</h2>
     <p>
       Any group of words, short or long, can be a quote. Some quotes are popular, some aren't. But they got <strong>your</strong> attention!<br />

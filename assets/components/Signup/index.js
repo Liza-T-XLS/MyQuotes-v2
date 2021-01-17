@@ -6,9 +6,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Helmet from 'react-helmet';
 
 import './signup.scss';
 import visibleIcon from '../../images/visible-24.png';
+
 import Loader from '../Loader';
 import LinkButton from '../LinkButton';
 
@@ -63,6 +65,9 @@ const Signup = ({
 
   return (
     <>
+      <Helmet>
+        <title>MyQuotes | Sign Up</title>
+      </Helmet>
       {loader && <Loader />}
       {!registrationComplete && (
       <div className="signup">

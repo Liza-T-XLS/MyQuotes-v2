@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import './app.scss';
 
@@ -11,6 +11,7 @@ import Home from '../../containers/Home';
 import Footer from '../Footer';
 import Signup from '../../containers/Signup';
 import Login from '../../containers/Login';
+import NotFound from '../NotFound';
 
 // == Component
 
@@ -23,24 +24,31 @@ const App = ({ checkIsLogged }) => {
   return (
     <div className="app">
       <Header />
-      <Route
-        path="/"
-        exact
-      >
-        <Home />
-      </Route>
-      <Route
-        path="/signup"
-        exact
-      >
-        <Signup />
-      </Route>
-      <Route
-        path="/login"
-        exact
-      >
-        <Login />
-      </Route>
+      <main>
+        <Switch>
+          <Route
+            path="/"
+            exact
+          >
+            <Home />
+          </Route>
+          <Route
+            path="/signup"
+            exact
+          >
+            <Signup />
+          </Route>
+          <Route
+            path="/login"
+            exact
+          >
+            <Login />
+          </Route>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
+      </main>
       <Footer />
     </div>
   );
