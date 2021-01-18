@@ -6,6 +6,7 @@ use App\Repository\QuoteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use DateTime;
 
 /**
@@ -22,6 +23,7 @@ class Quote
 
     /**
      * @ORM\Column(type="string", length=1000)
+     * @Assert\NotBlank()
      */
     private $text;
 
