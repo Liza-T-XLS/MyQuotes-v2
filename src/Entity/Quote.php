@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 use DateTime;
 
 /**
@@ -18,42 +19,50 @@ class Quote
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"quotes_get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=1000)
      * @Assert\NotBlank()
+     * @Groups({"quotes_get"})
      */
     private $text;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"quotes_get"})
      */
     private $authorFirstName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"quotes_get"})
      */
     private $authorLastName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"quotes_get"})
      */
     private $characterName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"quotes_get"})
      */
     private $mediumTitle;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"quotes_get"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"quotes_get"})
      */
     private $updatedAt;
 
@@ -65,6 +74,7 @@ class Quote
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="quotes")
+     * @Groups({"quotes_get"})
      */
     private $tags;
 

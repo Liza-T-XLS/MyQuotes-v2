@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Quote;
+use App\Repository\QuoteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,5 +61,21 @@ class QuoteController extends AbstractController
         $entityManager->flush();
 
         return $this->json(['message' => 'Quote created'], Response::HTTP_CREATED);
+    }
+
+    /**
+     * @Route("/api/quotes", name="api_quotes", methods={"GET"})
+     */
+    public function show(Request $request, QuoteRepository $quoteRepository, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+
+        if(!$user) {
+            return $this->json(['message' => 'User not found. Must be connected in order to load the quotes.'], Response::HTTP_UNAUTHORIZED);
+        }
+
+        $quotes = $quoteRepository->findBy(['user' => $user->getId()]);
+
+        return $this->json($quotes, 200, [], ['groups' => 'quotes_get']);
     }
 }
