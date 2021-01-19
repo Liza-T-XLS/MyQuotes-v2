@@ -11,6 +11,7 @@ import Home from '../../containers/Home';
 import Footer from '../Footer';
 import Signup from '../../containers/Signup';
 import Login from '../../containers/Login';
+import Quotes from '../../containers/Quotes';
 import NotFound from '../NotFound';
 
 // == Component
@@ -43,6 +44,12 @@ const App = ({ checkIsLogged }) => {
             exact
           >
             <Login />
+          </Route>
+          <Route
+            path="/quotes"
+            exact
+          >
+            <Quotes />
           </Route>
           <Route>
             <NotFound />
