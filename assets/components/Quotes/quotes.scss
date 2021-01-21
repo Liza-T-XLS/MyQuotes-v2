@@ -1,0 +1,58 @@
+.quotes {
+  .quotesMenu {
+      text-align: right;
+  }
+  .addQuoteForm {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0.5rem;
+    background-color: rgba( #2f50aa, 0);
+    box-sizing: border-box;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 0.5rem;
+    transition: height 0.5s;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    h2 {
+      align-self: center;
+    }
+    label {
+      margin-bottom: 1rem;
+      display: block;
+      span {
+        display: block;
+      }
+      textarea {
+        height: 100px;
+        display: block;
+        width: 99%;
+      }
+      .addQuoteFormInput {
+        display: block;
+        width: calc(100% - 1rem);
+      }
+    }
+    .addQuoteSubmitButton {
+      align-self: center;
+      color: #2f50aa;
+      background-color: white;
+      border: solid 2px #2f50aa;
+      &:hover {
+        color: white;
+        background-color: #2f50aa;
+        border: solid 2px white;
+      }
+    }
+    &.active {
+      background-color: rgba( #2f50aa, 1);
+      height: 600px;
+    }
+  }
+}
