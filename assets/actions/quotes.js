@@ -7,6 +7,7 @@ export const SAVE_HEADER_HEIGHT = 'SAVE_HEADER_HEIGHT';
 export const SAVE_FORM_HEIGHT = 'SAVE_FORM_HEIGHT';
 export const CHANGE_ADD_QUOTE_FORM_FIELD = 'CHANGE_ADD_QUOTE_FORM_FIELD';
 export const ADD_QUOTE = 'ADD_QUOTE';
+export const CLEAR_ADD_QUOTE_FORM = 'CLEAR_ADD_QUOTE_FORM';
 
 // == Action creators
 
@@ -41,4 +42,8 @@ export const changeAddQuoteFormField = (newValue, fieldName) => ({
 
 export const addQuote = () => ({
   type: ADD_QUOTE,
+});
+
+export const clearAddQuoteForm = () => ({
+  type: CLEAR_ADD_QUOTE_FORM,
 });

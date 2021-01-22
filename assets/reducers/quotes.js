@@ -6,6 +6,7 @@ import {
   SAVE_HEADER_HEIGHT,
   SAVE_FORM_HEIGHT,
   CHANGE_ADD_QUOTE_FORM_FIELD,
+  CLEAR_ADD_QUOTE_FORM,
 } from '../actions/quotes';
 
 // == Initial state
@@ -53,6 +54,15 @@ const quotesReducer = (state = initialState, action = {}) => {
         [target]: action.newValue,
       };
     }
+    case CLEAR_ADD_QUOTE_FORM:
+      return {
+        ...state,
+        quoteText: '',
+        authorFirstName: '',
+        authorLastName: '',
+        characterName: '',
+        mediumTitle: '',
+      };
     default: return state;
   }
 };

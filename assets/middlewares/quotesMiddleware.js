@@ -7,6 +7,7 @@ import {
   LOAD_QUOTES,
   saveQuotes,
   ADD_QUOTE,
+  clearAddQuoteForm,
 } from '../actions/quotes';
 
 // == Middleware
@@ -47,6 +48,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           store.dispatch(loadQuotes());
+          store.dispatch(clearAddQuoteForm());
         })
         .catch((error) => {
           console.warn(error);
