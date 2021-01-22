@@ -1,6 +1,12 @@
 // == Imports
 
-import { SAVE_QUOTES, CHANGE_ADD_QUOTE_FORM_STATUS, SAVE_HEADER_HEIGHT, SAVE_FORM_HEIGHT } from '../actions/quotes';
+import {
+  SAVE_QUOTES,
+  CHANGE_ADD_QUOTE_FORM_STATUS,
+  SAVE_HEADER_HEIGHT,
+  SAVE_FORM_HEIGHT,
+  CHANGE_ADD_QUOTE_FORM_FIELD,
+} from '../actions/quotes';
 
 // == Initial state
 
@@ -9,6 +15,11 @@ const initialState = {
   addQuoteFormStatus: false,
   addQuoteFormHeight: 1,
   headerHeight: 0,
+  quoteText: '',
+  authorFirstName: '',
+  authorLastName: '',
+  characterName: '',
+  mediumTitle: '',
 };
 
 // == Reducer
@@ -35,6 +46,13 @@ const quotesReducer = (state = initialState, action = {}) => {
         ...state,
         addQuoteFormHeight: action.height,
       };
+    case CHANGE_ADD_QUOTE_FORM_FIELD: {
+      const target = action.fieldName;
+      return {
+        ...state,
+        [target]: action.newValue,
+      };
+    }
     default: return state;
   }
 };

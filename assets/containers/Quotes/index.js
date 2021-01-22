@@ -7,6 +7,8 @@ import {
   loadQuotes,
   changeAddQuoteFormStatus,
   saveFormHeight,
+  changeAddQuoteFormField,
+  addQuote,
 } from '../../actions/quotes';
 
 const mapStateToProps = (state) => ({
@@ -14,6 +16,11 @@ const mapStateToProps = (state) => ({
   addQuoteFormStatus: state.quotes.addQuoteFormStatus,
   addQuoteFormHeight: state.quotes.addQuoteFormHeight,
   headerHeight: state.quotes.headerHeight,
+  quoteText: state.quotes.quoteText,
+  authorFirstName: state.quotes.authorFirstName,
+  authorLastName: state.quotes.authorLastName,
+  characterName: state.quotes.characterName,
+  mediumTitle: state.quotes.mediumTitle,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -25,6 +32,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   saveFormHeight: (height) => {
     dispatch(saveFormHeight(height));
+  },
+  changeAddQuoteFormField: (newValue, fieldName) => {
+    dispatch(changeAddQuoteFormField(newValue, fieldName));
+  },
+  addQuote: () => {
+    dispatch(addQuote());
   },
 });
 

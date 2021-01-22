@@ -25,6 +25,13 @@ const Quotes = ({
   addQuoteFormHeight,
   headerHeight,
   saveFormHeight,
+  changeAddQuoteFormField,
+  quoteText,
+  authorFirstName,
+  authorLastName,
+  characterName,
+  mediumTitle,
+  addQuote,
 }) => {
   useEffect(() => {
     console.log('useEffect: quotes');
@@ -42,16 +49,24 @@ const Quotes = ({
   const onClickHandler = (e) => {
     console.log('addQuote icon clicked');
     const formHeight = window.innerHeight - headerHeight - quotesMenuRef.current.clientHeight;
-    console.log(window.innerHeight);
-    console.log(headerHeight);
-    console.log(quotesMenuRef.current.clientHeight);
-    console.log(formHeight);
     if (!addQuoteFormStatus) {
       saveFormHeight(formHeight);
     } else {
       saveFormHeight(1);
     }
     changeAddQuoteFormStatus();
+  };
+
+  const onChangeHandler = (e) => {
+    console.log('onChangeHandler triggered: ' + e.target.value + ' for: ' + e.target.name);
+    changeAddQuoteFormField(e.target.value, e.target.name);
+    // checkErrors(e.target.name);
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log('submitted');
+    addQuote();
   };
 
   return (
@@ -68,27 +83,27 @@ const Quotes = ({
           <Quote key={quote.id} quote={quote} />
         ))}
       </div>
-      <form className={addQuoteFormClassName} style={addQuoteFormStyle}>
+      <form className={addQuoteFormClassName} style={addQuoteFormStyle} onSubmit={onSubmitHandler}>
         <h2>Add a quote</h2>
         <label htmlFor="quoteText">
           <span>Text</span>
-          <textarea name="quoteText" id="quoteText" minLength="1" required />
+          <textarea name="quoteText" value={quoteText} onChange={onChangeHandler} id="quoteText" minLength="1" required />
         </label>
         <label htmlFor="authorFirstName">
           <span>Author's first name</span>
-          <input className="addQuoteFormInput" name="authorFirstName" id="authorFirstName" minLength="1" />
+          <input className="addQuoteFormInput" name="authorFirstName" value={authorFirstName} onChange={onChangeHandler} id="authorFirstName" minLength="1" />
         </label>
         <label htmlFor="authorLastName">
           <span>Author's last name</span>
-          <input className="addQuoteFormInput" name="authorLastName" id="authorLastName" minLength="1" />
+          <input className="addQuoteFormInput" name="authorLastName" value={authorLastName} onChange={onChangeHandler} id="authorLastName" minLength="1" />
         </label>
         <label htmlFor="character's name">
           <span>Character's last name</span>
-          <input className="addQuoteFormInput" name="character's name" id="character's name" minLength="1" />
+          <input className="addQuoteFormInput" name="characterName" value={characterName} onChange={onChangeHandler} id="character's name" minLength="1" />
         </label>
         <label htmlFor="mediumTitle">
           <span>Medium's title</span>
-          <input className="addQuoteFormInput" name="mediumTitle" id="mediumTitle" minLength="1" />
+          <input className="addQuoteFormInput" name="mediumTitle" value={mediumTitle} onChange={onChangeHandler} id="mediumTitle" minLength="1" />
         </label>
         <button className="addQuoteSubmitButton" type="submit">Add</button>
       </form>
@@ -106,6 +121,13 @@ Quotes.propTypes = {
   addQuoteFormHeight: PropTypes.number.isRequired,
   headerHeight: PropTypes.number.isRequired,
   saveFormHeight: PropTypes.func.isRequired,
+  changeAddQuoteFormField: PropTypes.func.isRequired,
+  quoteText: PropTypes.string.isRequired,
+  authorFirstName: PropTypes.string.isRequired,
+  authorLastName: PropTypes.string.isRequired,
+  characterName: PropTypes.string.isRequired,
+  mediumTitle: PropTypes.string.isRequired,
+  addQuote: PropTypes.func.isRequired,
 };
 
 // == Export

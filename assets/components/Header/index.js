@@ -1,3 +1,5 @@
+/* eslint-disable radix */
+
 // == Imports
 
 import React, { useEffect, useRef } from 'react';
@@ -12,15 +14,9 @@ const Header = ({ saveHeaderHeight }) => {
   const headerRef = useRef(null);
   const titleRef = useRef(null);
   useEffect(() => {
-    console.log(headerRef.current.clientHeight);
     const headerHeight = headerRef.current.clientHeight;
-    console.log(headerHeight);
     const titleStyle = getComputedStyle(titleRef.current);
-    // console.log(titleStyle);
-    // console.log(parseInt(style.marginTop));
-    // console.log(parseInt(style.marginBottom));
     const totalHeaderHeight = headerHeight + parseInt(titleStyle.marginTop) + parseInt(titleStyle.marginBottom);
-    console.log(totalHeaderHeight);
     saveHeaderHeight(totalHeaderHeight);
   }, []);
   return (

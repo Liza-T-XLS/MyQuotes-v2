@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class QuoteController extends AbstractController
 {
     /**
-     * @Route("/api/quotes/add", name="api_quotes_add", methods={"POST"})
+     * @Route("/api/quotes", name="api_quotes_add", methods={"POST"})
      */
     public function add(Request $request, DenormalizerInterface $denormalizer, ValidatorInterface $validator, EntityManagerInterface $entityManager): Response
     {
