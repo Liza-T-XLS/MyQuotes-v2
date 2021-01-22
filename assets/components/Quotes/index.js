@@ -11,12 +11,21 @@ import classNames from 'classnames';
 
 import './quotes.scss';
 import addQuoteIcon from '../../images/addQuote-24.png';
+import closeIcon from '../../images/close-30.png';
 
 import Quote from './Quote';
 
 // == Component
 
-const Quotes = ({ loadQuotes, quotes, addQuoteFormStatus, changeAddQuoteFormStatus, addQuoteFormHeight, headerHeight, saveFormHeight }) => {
+const Quotes = ({
+  loadQuotes,
+  quotes,
+  addQuoteFormStatus,
+  changeAddQuoteFormStatus,
+  addQuoteFormHeight,
+  headerHeight,
+  saveFormHeight,
+}) => {
   useEffect(() => {
     console.log('useEffect: quotes');
     loadQuotes();
@@ -51,7 +60,8 @@ const Quotes = ({ loadQuotes, quotes, addQuoteFormStatus, changeAddQuoteFormStat
         <title>MyQuotes | Board</title>
       </Helmet>
       <div className="quotesMenu" ref={quotesMenuRef}>
-        <img src={addQuoteIcon} alt="add quote icon" onClick={onClickHandler} />
+        {!addQuoteFormStatus && <img src={addQuoteIcon} alt="add quote icon" onClick={onClickHandler} />}
+        {addQuoteFormStatus && <img src={closeIcon} alt="close form icon" onClick={onClickHandler} />}
       </div>
       <div className="quotesList">
         {quotes.map((quote) => (
