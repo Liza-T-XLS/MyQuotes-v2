@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import './app.scss';
 
-import Header from '../Header';
+import Header from '../../containers/Header';
 import Home from '../../containers/Home';
 import Footer from '../Footer';
 import Signup from '../../containers/Signup';

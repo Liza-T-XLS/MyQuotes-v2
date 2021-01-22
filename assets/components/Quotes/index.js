@@ -16,7 +16,7 @@ import Quote from './Quote';
 
 // == Component
 
-const Quotes = ({ loadQuotes, quotes, addQuoteFormStatus, changeAddQuoteFormStatus }) => {
+const Quotes = ({ loadQuotes, quotes, addQuoteFormStatus, changeAddQuoteFormStatus, addQuoteFormHeight, headerHeight, saveFormHeight }) => {
   useEffect(() => {
     console.log('useEffect: quotes');
     loadQuotes();
@@ -26,15 +26,22 @@ const Quotes = ({ loadQuotes, quotes, addQuoteFormStatus, changeAddQuoteFormStat
   const addQuoteFormClassName = classNames('addQuoteForm', { active: addQuoteFormStatus });
   const quotesDivRef = useRef(null);
   const quotesMenuRef = useRef(null);
-  let addQuoteFormStyle;
+  const addQuoteFormStyle = {
+    height: `${addQuoteFormHeight}px`,
+  };
 
   const onClickHandler = (e) => {
     console.log('addQuote icon clicked');
-    // const addQuoteFormHeight = quotesDivRef.current.clientHeight - quotesMenuRef.current.clientHeight;
-    // addQuoteFormStyle = {
-    //   height: `${addQuoteFormHeight}px`,
-    // };
-    // console.log(addQuoteFormStyle);
+    const formHeight = window.innerHeight - headerHeight - quotesMenuRef.current.clientHeight;
+    console.log(window.innerHeight);
+    console.log(headerHeight);
+    console.log(quotesMenuRef.current.clientHeight);
+    console.log(formHeight);
+    if (!addQuoteFormStatus) {
+      saveFormHeight(formHeight);
+    } else {
+      saveFormHeight(1);
+    }
     changeAddQuoteFormStatus();
   };
 
@@ -86,6 +93,9 @@ Quotes.propTypes = {
   quotes: PropTypes.array.isRequired,
   addQuoteFormStatus: PropTypes.bool.isRequired,
   changeAddQuoteFormStatus: PropTypes.func.isRequired,
+  addQuoteFormHeight: PropTypes.number.isRequired,
+  headerHeight: PropTypes.number.isRequired,
+  saveFormHeight: PropTypes.func.isRequired,
 };
 
 // == Export

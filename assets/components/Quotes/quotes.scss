@@ -12,7 +12,6 @@
     box-sizing: border-box;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    height: 0.5rem;
     transition: height 0.5s;
     overflow: hidden;
     position: absolute;
@@ -52,7 +51,7 @@
     }
     &.active {
       background-color: rgba( #2f50aa, 1);
-      height: 600px;
+      overflow: auto;
     }
   }
 }
