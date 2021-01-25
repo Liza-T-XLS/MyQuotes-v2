@@ -64,18 +64,32 @@ class QuoteController extends AbstractController
     }
 
     /**
-     * @Route("/api/quotes", name="api_quotes", methods={"GET"})
+     * @Route("/api/quotes/show", name="api_quotes_show", methods={"POST"})
      */
     public function show(Request $request, QuoteRepository $quoteRepository, EntityManagerInterface $entityManager): Response
     {
+        $data = json_decode($request->getContent());
+
         $user = $this->getUser();
 
         if(!$user) {
             return $this->json(['message' => 'User not found. Must be connected in order to load the quotes.'], Response::HTTP_UNAUTHORIZED);
         }
 
-        $quotes = $quoteRepository->findBy(['user' => $user->getId()]);
+        $userId = $user->getId();
 
-        return $this->json($quotes, 200, [], ['groups' => 'quotes_get']);
+        // maximum number of quotes per page
+        $maxResults = 2;
+        // aggregate number of quotes the user has saved
+        $totalQuoteNumber = $quoteRepository->loadUserQuoteNumber($userId);
+        // aggregate number of quotes divided by number of quotes per page to obtain the number of pages (pagination purposes)
+        $pageQuantity = round($totalQuoteNumber/$maxResults);
+        $currentPage = $data->currentPage;
+        // the current page allows to determine the index from which the SQL request should start retrieving results
+        $offset = ($maxResults * $currentPage) - $maxResults;
+
+        $quotes = $quoteRepository->loadQuotesByUserAndPagination($userId, $maxResults, $offset);
+
+        return $this->json(['pageQuantity' => $pageQuantity, 'quotes' => $quotes], 200, [], ['groups' => 'quotes_get']);
     }
 }

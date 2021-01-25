@@ -9,6 +9,7 @@ import {
   saveFormHeight,
   changeAddQuoteFormField,
   addQuote,
+  saveCurrentPage,
 } from '../../actions/quotes';
 
 const mapStateToProps = (state) => ({
@@ -21,6 +22,8 @@ const mapStateToProps = (state) => ({
   authorLastName: state.quotes.authorLastName,
   characterName: state.quotes.characterName,
   mediumTitle: state.quotes.mediumTitle,
+  pageQuantity: state.quotes.pageQuantity,
+  currentPage: state.quotes.currentPage,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -38,6 +41,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addQuote: () => {
     dispatch(addQuote());
+  },
+  saveCurrentPage: (pageNumber) => {
+    dispatch(saveCurrentPage(pageNumber));
   },
 });
 

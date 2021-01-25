@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import './quotes.scss';
+import Pagination from '@material-ui/lab/Pagination';
 import addQuoteIcon from '../../images/addQuote-24.png';
 import closeIcon from '../../images/close-30.png';
 
@@ -32,6 +33,8 @@ const Quotes = ({
   characterName,
   mediumTitle,
   addQuote,
+  pageQuantity,
+  saveCurrentPage,
 }) => {
   useEffect(() => {
     console.log('useEffect: quotes');
@@ -69,6 +72,13 @@ const Quotes = ({
     addQuote();
   };
 
+  const pageChangeHandler = (e, value) => {
+    console.log(e);
+    console.log(value);
+    saveCurrentPage(value);
+    loadQuotes();
+  };
+
   return (
     <div className="quotes" ref={quotesDivRef}>
       <Helmet>
@@ -82,6 +92,7 @@ const Quotes = ({
         {quotes.map((quote) => (
           <Quote key={quote.id} quote={quote} />
         ))}
+        <Pagination count={pageQuantity} onChange={pageChangeHandler} />
       </div>
       <form className={addQuoteFormClassName} style={addQuoteFormStyle} onSubmit={onSubmitHandler}>
         <h2>Add a quote</h2>
@@ -128,6 +139,8 @@ Quotes.propTypes = {
   characterName: PropTypes.string.isRequired,
   mediumTitle: PropTypes.string.isRequired,
   addQuote: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  saveCurrentPage: PropTypes.func.isRequired,
 };
 
 // == Export

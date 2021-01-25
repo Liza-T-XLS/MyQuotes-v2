@@ -8,6 +8,8 @@ export const SAVE_FORM_HEIGHT = 'SAVE_FORM_HEIGHT';
 export const CHANGE_ADD_QUOTE_FORM_FIELD = 'CHANGE_ADD_QUOTE_FORM_FIELD';
 export const ADD_QUOTE = 'ADD_QUOTE';
 export const CLEAR_ADD_QUOTE_FORM = 'CLEAR_ADD_QUOTE_FORM';
+export const SAVE_PAGE_QUANTITY = 'SAVE_PAGE_QUANTITY';
+export const SAVE_CURRENT_PAGE = 'SAVE_CURRENT_PAGE';
 
 // == Action creators
 
@@ -46,4 +48,14 @@ export const addQuote = () => ({
 
 export const clearAddQuoteForm = () => ({
   type: CLEAR_ADD_QUOTE_FORM,
+});
+
+export const savePageQuantity = (quantity) => ({
+  type: SAVE_PAGE_QUANTITY,
+  quantity,
+});
+
+export const saveCurrentPage = (pageNumber) => ({
+  type: SAVE_CURRENT_PAGE,
+  pageNumber,
 });

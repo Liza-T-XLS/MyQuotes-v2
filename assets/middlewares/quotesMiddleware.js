@@ -8,6 +8,7 @@ import {
   saveQuotes,
   ADD_QUOTE,
   clearAddQuoteForm,
+  savePageQuantity,
 } from '../actions/quotes';
 
 // == Middleware
@@ -16,16 +17,19 @@ const quotesMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case LOAD_QUOTES:
       axios({
-        method: 'get',
-        url: 'http://localhost:8000/api/quotes',
+        method: 'post',
+        url: 'http://localhost:8000/api/quotes/show',
+        data: {
+          currentPage: store.getState().quotes.currentPage,
+        },
       })
         .then((response) => {
           console.log(response.data);
-          store.dispatch(saveQuotes(response.data));
+          store.dispatch(savePageQuantity(response.data.pageQuantity));
+          store.dispatch(saveQuotes(response.data.quotes));
         })
         .catch((error) => {
           console.warn(error);
-          console.log(error.response.data);
           console.log('quotes loading failed');
         })
         .finally(() => {

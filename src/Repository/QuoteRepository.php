@@ -19,6 +19,38 @@ class QuoteRepository extends ServiceEntityRepository
         parent::__construct($registry, Quote::class);
     }
 
+    // SQL query:
+    // SELECT COUNT(*) FROM `quote` WHERE `user_id` = 2
+    public function loadUserQuoteNumber($userId) {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT COUNT(q)
+            FROM App\Entity\Quote q
+            WHERE q.user = :userId'
+        );
+        $query->setParameter('userId', $userId);
+
+        return $query->getSingleScalarResult();
+    }
+
+    // SQL query: 
+    // SELECT * FROM `quote` WHERE `user_id` = 24 LIMIT 5, 5
+    public function loadQuotesByUserAndPagination($userId, $maxResults, $offset) {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT q
+            FROM App\Entity\Quote q
+            WHERE q.user = :userId'
+        );
+        $query->setParameter('userId', $userId);
+        $query->setMaxResults($maxResults);
+        $query->setFirstResult($offset);
+
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Quote[] Returns an array of Quote objects
     //  */

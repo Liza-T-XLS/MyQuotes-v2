@@ -7,6 +7,8 @@ import {
   SAVE_FORM_HEIGHT,
   CHANGE_ADD_QUOTE_FORM_FIELD,
   CLEAR_ADD_QUOTE_FORM,
+  SAVE_PAGE_QUANTITY,
+  SAVE_CURRENT_PAGE,
 } from '../actions/quotes';
 
 // == Initial state
@@ -21,6 +23,8 @@ const initialState = {
   authorLastName: '',
   characterName: '',
   mediumTitle: '',
+  pageQuantity: 0,
+  currentPage: 1,
 };
 
 // == Reducer
@@ -62,6 +66,16 @@ const quotesReducer = (state = initialState, action = {}) => {
         authorLastName: '',
         characterName: '',
         mediumTitle: '',
+      };
+    case SAVE_PAGE_QUANTITY:
+      return {
+        ...state,
+        pageQuantity: action.quantity,
+      };
+    case SAVE_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.pageNumber,
       };
     default: return state;
   }
