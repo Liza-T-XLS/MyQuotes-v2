@@ -34,6 +34,7 @@ const Quotes = ({
   mediumTitle,
   addQuote,
   pageQuantity,
+  currentPage,
   saveCurrentPage,
 }) => {
   useEffect(() => {
@@ -92,7 +93,7 @@ const Quotes = ({
         {quotes.map((quote) => (
           <Quote key={quote.id} quote={quote} />
         ))}
-        <Pagination count={pageQuantity} onChange={pageChangeHandler} />
+        <Pagination size="small" count={pageQuantity} page={currentPage} showFirstButton showLastButton siblingCount={1} boundaryCount={1} onChange={pageChangeHandler} />
       </div>
       <form className={addQuoteFormClassName} style={addQuoteFormStyle} onSubmit={onSubmitHandler}>
         <h2>Add a quote</h2>
@@ -139,6 +140,7 @@ Quotes.propTypes = {
   characterName: PropTypes.string.isRequired,
   mediumTitle: PropTypes.string.isRequired,
   addQuote: PropTypes.func.isRequired,
+  pageQuantity: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
   saveCurrentPage: PropTypes.func.isRequired,
 };

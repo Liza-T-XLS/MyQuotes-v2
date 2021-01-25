@@ -79,11 +79,11 @@ class QuoteController extends AbstractController
         $userId = $user->getId();
 
         // maximum number of quotes per page
-        $maxResults = 2;
+        $maxResults = 5;
         // aggregate number of quotes the user has saved
         $totalQuoteNumber = $quoteRepository->loadUserQuoteNumber($userId);
         // aggregate number of quotes divided by number of quotes per page to obtain the number of pages (pagination purposes)
-        $pageQuantity = round($totalQuoteNumber/$maxResults);
+        $pageQuantity = ceil($totalQuoteNumber/$maxResults);
         $currentPage = $data->currentPage;
         // the current page allows to determine the index from which the SQL request should start retrieving results
         $offset = ($maxResults * $currentPage) - $maxResults;

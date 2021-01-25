@@ -8,6 +8,8 @@ import {
   saveQuotes,
   ADD_QUOTE,
   clearAddQuoteForm,
+  saveFormHeight,
+  changeAddQuoteFormStatus,
   savePageQuantity,
 } from '../actions/quotes';
 
@@ -53,6 +55,8 @@ const quotesMiddleware = (store) => (next) => (action) => {
           console.log(response.data);
           store.dispatch(loadQuotes());
           store.dispatch(clearAddQuoteForm());
+          store.dispatch(saveFormHeight(1));
+          store.dispatch(changeAddQuoteFormStatus());
         })
         .catch((error) => {
           console.warn(error);
