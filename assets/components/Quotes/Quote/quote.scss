@@ -12,4 +12,15 @@
       align-self: center;
     }
   }
+  .quoteDetails {
+    display: none;
+    background-color: rgba(grey, 0.5);
+    p {
+      margin: 0;
+      padding: 1rem;
+    }
+    &.active {
+      display: block;
+    }
+  }
 }

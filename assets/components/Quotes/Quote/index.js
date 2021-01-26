@@ -5,8 +5,9 @@
 
 // ==  Imports
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import './quote.scss';
 import copieIcon from '../../../images/copie-26.png';
@@ -14,25 +15,31 @@ import copieIcon from '../../../images/copie-26.png';
 // == Component
 
 const Quote = ({ quote }) => {
-  const onClickHandler = (e) => {
+  const copyOnClickHandler = (e) => {
     const quoteText = e.target.previousSibling.innerText;
     navigator.clipboard.writeText(quoteText);
+  };
+
+  const [isActive, setActive] = useState(false);
+
+  const quoteDetailsCSS = classNames('quoteDetails', { active: isActive });
+
+  const quoteOnClickHandler = (e) => {
+    console.log('quoteOnClickHandler');
+    setActive(!isActive);
   };
 
   return (
     <div className="quote">
       <div className="quoteMain">
-        <p className="quoteText">{quote.text}</p>
-        <img className="copieIcon" src={copieIcon} alt="copie icon" onClick={onClickHandler} />
+        <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text}</p>
+        <img className="copieIcon" src={copieIcon} alt="copie icon" onClick={copyOnClickHandler} />
       </div>
-      <details>
-        <summary>
-          More
-        </summary>
+      <div className={quoteDetailsCSS}>
         <p>
           {(quote.authorFirstName || quote.authorLastName) && `Author: ${quote.authorFirstName} ${quote.authorLastName}`}
         </p>
-      </details>
+      </div>
     </div>
   );
 };
