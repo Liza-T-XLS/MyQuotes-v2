@@ -93,8 +93,8 @@ const Quotes = ({
         {quotes.map((quote) => (
           <Quote key={quote.id} quote={quote} />
         ))}
-        <Pagination size="small" count={pageQuantity} page={currentPage} showFirstButton showLastButton siblingCount={1} boundaryCount={1} onChange={pageChangeHandler} />
       </div>
+      <Pagination size="small" count={pageQuantity} page={currentPage} showFirstButton showLastButton siblingCount={1} boundaryCount={1} onChange={pageChangeHandler} />
       <form className={addQuoteFormClassName} style={addQuoteFormStyle} onSubmit={onSubmitHandler}>
         <h2>Add a quote</h2>
         <label htmlFor="quoteText">
