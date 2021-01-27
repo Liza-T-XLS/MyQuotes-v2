@@ -39,7 +39,6 @@ const Login = ({
   const passwordClassName = classNames('password', { invalid: formErrors.error.length > 0 });
 
   const onChangeHandler = (e) => {
-    console.log('onChangeHandler triggered: ' + e.target.value + ' for: ' + e.target.name);
     changeField(e.target.value, e.target.name);
   };
   const onSubmitHandler = (e) => {

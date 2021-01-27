@@ -43,7 +43,6 @@ const Signup = ({
   const confirmedPasswordClassName = classNames('confirmedPassword', { invalid: formErrors.confirmedPassword.length > 0 });
 
   const onChangeHandler = (e) => {
-    console.log('onChangeHandler triggered: ' + e.target.value + ' for: ' + e.target.name);
     changeField(e.target.value, e.target.name);
     checkErrors(e.target.name);
   };

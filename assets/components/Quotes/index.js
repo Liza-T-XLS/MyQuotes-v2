@@ -43,6 +43,8 @@ const Quotes = ({
     console.log(quotes);
   }, []);
 
+  const quotesListRef = useRef(null);
+
   const addQuoteFormClassName = classNames('addQuoteForm', { active: addQuoteFormStatus });
   const quotesDivRef = useRef(null);
   const quotesMenuRef = useRef(null);
@@ -50,7 +52,7 @@ const Quotes = ({
     height: `${addQuoteFormHeight}px`,
   };
 
-  const onClickHandler = (e) => {
+  const onClickHandler = () => {
     console.log('addQuote icon clicked');
     const formHeight = window.innerHeight - headerHeight - quotesMenuRef.current.clientHeight;
     if (!addQuoteFormStatus) {
@@ -62,7 +64,7 @@ const Quotes = ({
   };
 
   const onChangeHandler = (e) => {
-    console.log('onChangeHandler triggered: ' + e.target.value + ' for: ' + e.target.name);
+    // console.log('onChangeHandler triggered: ' + e.target.value + ' for: ' + e.target.name);
     changeAddQuoteFormField(e.target.value, e.target.name);
     // checkErrors(e.target.name);
   };
@@ -74,8 +76,6 @@ const Quotes = ({
   };
 
   const pageChangeHandler = (e, value) => {
-    console.log(e);
-    console.log(value);
     saveCurrentPage(value);
     loadQuotes();
   };
@@ -89,9 +89,9 @@ const Quotes = ({
         {!addQuoteFormStatus && <img src={addQuoteIcon} alt="add quote icon" onClick={onClickHandler} />}
         {addQuoteFormStatus && <img src={closeIcon} alt="close form icon" onClick={onClickHandler} />}
       </div>
-      <div className="quotesList">
+      <div className="quotesList" ref={quotesListRef}>
         {quotes.map((quote) => (
-          <Quote key={quote.id} quote={quote} />
+          <Quote key={quote.id} quote={quote} ref={quotesListRef} />
         ))}
       </div>
       <Pagination size="small" count={pageQuantity} page={currentPage} showFirstButton showLastButton siblingCount={1} boundaryCount={1} onChange={pageChangeHandler} />

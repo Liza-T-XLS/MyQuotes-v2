@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/jsx-one-expression-per-line */
@@ -5,7 +6,7 @@
 
 // ==  Imports
 
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -14,7 +15,7 @@ import copieIcon from '../../../images/copie-26.png';
 
 // == Component
 
-const Quote = ({ quote }) => {
+const Quote = forwardRef(({ quote }, ref) => {
   const copyOnClickHandler = (e) => {
     const quoteText = e.target.previousSibling.innerText;
     navigator.clipboard.writeText(quoteText);
@@ -24,13 +25,25 @@ const Quote = ({ quote }) => {
 
   const quoteDetailsCSS = classNames('quoteDetails', { active: isActive });
 
-  const quoteOnClickHandler = (e) => {
-    console.log('quoteOnClickHandler');
+  const quoteRef = useRef(null);
+
+  const quotesList = ref.current;
+
+  const quotesListOnClickHandler = (e) => {
+    // if a click on another quote is detected, it opens the details of said quote and closes the quote's ones
+    if (e.target.closest('.quote').id !== quoteRef.current.id) {
+      setActive(false);
+      quotesList.removeEventListener('click', quotesListOnClickHandler);
+    }
+  };
+
+  const quoteOnClickHandler = () => {
     setActive(!isActive);
+    quotesList.addEventListener('click', quotesListOnClickHandler);
   };
 
   return (
-    <div className="quote">
+    <div className="quote" ref={quoteRef} id={quote.id}>
       <div className="quoteMain">
         <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text}</p>
         <img className="copieIcon" src={copieIcon} alt="copie icon" onClick={copyOnClickHandler} />
@@ -42,7 +55,8 @@ const Quote = ({ quote }) => {
       </div>
     </div>
   );
-};
+});
+
 // == PropTypes
 
 Quote.propTypes = {
