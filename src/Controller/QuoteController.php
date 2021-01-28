@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Quote;
+use App\Entity\Tag;
 use App\Repository\QuoteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,16 +23,22 @@ class QuoteController extends AbstractController
         /* 
             expected data format:
                 {
-                "text": "What a beautiful day!",
-                "authorFirstName": "John",
-                "authorLastName": "Doe",
-                "characterName": "Smith",
-                "mediumTitle": "The day"
+                "quote": {
+                    "text": "What a beautiful day!",
+                    "authorFirstName": "John",
+                    "authorLastName": "Doe",
+                    "characterName": "Smith",
+                    "mediumTitle": "The day"
+                },
+                "tags": {
+                    "joy",
+                    "sadness",
+                }
                 }
         */
         $data = json_decode($request->getContent());
-       
-        $quote= $denormalizer->denormalize($data, Quote::class);
+
+        $quote= $denormalizer->denormalize($data->quote, Quote::class);
         $errors = $validator->validate($quote);
 
         $jsonErrors = [];
@@ -49,6 +56,30 @@ class QuoteController extends AbstractController
             return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+        $tags = $data->tags;
+        foreach($tags as $tag) {
+            $newTag = new Tag();
+            $newTag->setName($tag);
+            $errors = $validator->validate($newTag);
+
+            $jsonErrors = [];
+
+            if (count($errors) !== 0) {
+                foreach ($errors as $error) {
+                    $jsonErrors[] = [
+                        'field' => $error->getPropertyPath(),
+                        'message' => $error->getMessage(),
+                    ];
+                }
+            }
+
+            if(!empty($jsonErrors)){
+                return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+            $entityManager->persist($newTag);
+            $quote->addTag($newTag);
+        }
+        
         $user = $this->getUser();
 
         if($user) {
