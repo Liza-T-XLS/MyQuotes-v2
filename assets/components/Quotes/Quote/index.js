@@ -49,9 +49,10 @@ const Quote = forwardRef(({ quote }, ref) => {
         <img className="copieIcon" src={copieIcon} alt="copie icon" onClick={copyOnClickHandler} />
       </div>
       <div className={quoteDetailsCSS}>
-        <p>
-          {(quote.authorFirstName || quote.authorLastName) && `Author: ${quote.authorFirstName} ${quote.authorLastName}`}
-        </p>
+        {(!quote.authorFirstName && !quote.authorLastName && !quote.characterName && !quote.mediumTitle) && <p>No details provided. <a href="/">Edit?</a></p>}
+        {(quote.authorFirstName || quote.authorLastName) && <p>Author: {quote.authorFirstName} {quote.authorLastName}</p>}
+        {(quote.characterName) && <p>Character: {quote.characterName}</p>}
+        {(quote.mediumTitle) && <p>Medium: {quote.mediumTitle}</p>}
       </div>
     </div>
   );
