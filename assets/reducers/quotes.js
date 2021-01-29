@@ -23,6 +23,8 @@ const initialState = {
   authorLastName: '',
   characterName: '',
   mediumTitle: '',
+  tagInput: '',
+  tags: [],
   pageQuantity: 0,
   currentPage: 1,
 };

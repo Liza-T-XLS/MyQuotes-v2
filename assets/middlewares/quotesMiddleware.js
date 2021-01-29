@@ -44,11 +44,14 @@ const quotesMiddleware = (store) => (next) => (action) => {
         method: 'post',
         url: 'http://localhost:8000/api/quotes',
         data: {
-          text: store.getState().quotes.quoteText,
-          authorFirstName: store.getState().quotes.authorFirstName,
-          authorLastName: store.getState().quotes.authorLastName,
-          characterName: store.getState().quotes.characterName,
-          mediumTitle: store.getState().quotes.mediumTitle,
+          quote: {
+            text: store.getState().quotes.quoteText,
+            authorFirstName: store.getState().quotes.authorFirstName,
+            authorLastName: store.getState().quotes.authorLastName,
+            characterName: store.getState().quotes.characterName,
+            mediumTitle: store.getState().quotes.mediumTitle,
+          },
+          tags: store.getState().quotes.tags,
         },
       })
         .then((response) => {
