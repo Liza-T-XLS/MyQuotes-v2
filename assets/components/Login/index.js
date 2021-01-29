@@ -84,7 +84,7 @@ const Login = ({
             You can now access and manage your quotes.
           </p>
           <LinkButton buttonLabel="Quotes" buttonLink="quotes" />
-          <button type="button" onClick={logOutOnClickHandler}>Log out</button>
+          <button className="logOutButton" type="button" onClick={logOutOnClickHandler}>Log out</button>
         </div>
       )}
     </>

@@ -6,6 +6,7 @@ import {
   SAVE_HEADER_HEIGHT,
   SAVE_FORM_HEIGHT,
   CHANGE_ADD_QUOTE_FORM_FIELD,
+  SAVE_TAG,
   CLEAR_ADD_QUOTE_FORM,
   SAVE_PAGE_QUANTITY,
   SAVE_CURRENT_PAGE,
@@ -60,6 +61,17 @@ const quotesReducer = (state = initialState, action = {}) => {
         [target]: action.newValue,
       };
     }
+    case SAVE_TAG: {
+      const newTagsArray = [
+        ...state.tags,
+        action.tagName,
+      ];
+      return {
+        ...state,
+        tagInput: '',
+        tags: newTagsArray,
+      };
+    }
     case CLEAR_ADD_QUOTE_FORM:
       return {
         ...state,
@@ -68,6 +80,8 @@ const quotesReducer = (state = initialState, action = {}) => {
         authorLastName: '',
         characterName: '',
         mediumTitle: '',
+        tagInput: '',
+        tags: [],
       };
     case SAVE_PAGE_QUANTITY:
       return {

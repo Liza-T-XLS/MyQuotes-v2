@@ -94,7 +94,7 @@ const Signup = ({
             <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
             <div className="errorMsg">{[formErrors.confirmedPassword].length > 0 && <span>{formErrors.confirmedPassword}</span>}</div>
           </label>
-          <button type="submit">Sign up</button>
+          <button className="signUpButton" type="submit">Sign up</button>
         </form>
       </div>
       )}

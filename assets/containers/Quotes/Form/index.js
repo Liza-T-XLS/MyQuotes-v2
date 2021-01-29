@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Form from '../../../components/Quotes/Form';
 import {
   changeAddQuoteFormField,
+  saveTag,
   addQuote,
 } from '../../../actions/quotes';
 
@@ -23,6 +24,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeAddQuoteFormField: (newValue, fieldName) => {
     dispatch(changeAddQuoteFormField(newValue, fieldName));
+  },
+  saveTag: (tagName) => {
+    dispatch(saveTag(tagName));
   },
   addQuote: () => {
     dispatch(addQuote());

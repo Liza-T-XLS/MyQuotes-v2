@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable react/forbid-prop-types */
 // == Imports
 
 import React from 'react';
@@ -5,6 +8,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import './form.scss';
+import addTagIcon from '../../../images/addTag-32.png';
+import deleteTagIcon from '../../../images/close-thin-18dp.svg';
 
 // == Component
 
@@ -16,6 +21,9 @@ const Form = ({
   authorLastName,
   characterName,
   mediumTitle,
+  tagInput,
+  tags,
+  saveTag,
   changeAddQuoteFormField,
   addQuote,
 }) => {
@@ -26,6 +34,17 @@ const Form = ({
 
   const onChangeHandler = (e) => {
     changeAddQuoteFormField(e.target.value, e.target.name);
+  };
+
+  const onKeyDownHandler = (e) => {
+    if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+      saveTag(tagInput);
+    }
+  };
+
+  const onClickHandler = () => {
+    console.log('onClickHandler');
+    saveTag(tagInput);
   };
 
   const onSubmitHandler = (e) => {
@@ -56,10 +75,21 @@ const Form = ({
         <span>Medium's title</span>
         <input className="addQuoteFormInput" name="mediumTitle" value={mediumTitle} onChange={onChangeHandler} id="mediumTitle" minLength="1" />
       </label>
-      <label htmlFor="tags">
+      <label htmlFor="tagInput">
         <span>Tags</span>
-        <input className="addQuoteFormInput" name="tags" id="tags" minLength="1" />
+        <input className="addQuoteFormInput" name="tagInput" value={tagInput} onChange={onChangeHandler} onKeyDown={onKeyDownHandler} id="tags" minLength="1" />
+        <img className="addTag" src={addTagIcon} alt="add tag icon" onClick={onClickHandler} />
       </label>
+      {tags && (
+        <div className="tagsToSave">
+          {tags.map((tag) => (
+            <div className="tag">
+              <span>{tag}</span>
+              <img className="tagDelete" src={deleteTagIcon} alt="delete tag icon" />
+            </div>
+          ))}
+        </div>
+      )}
       <button className="addQuoteSubmitButton" type="submit">Add</button>
     </form>
   );
@@ -75,8 +105,15 @@ Form.propTypes = {
   authorLastName: PropTypes.string.isRequired,
   characterName: PropTypes.string.isRequired,
   mediumTitle: PropTypes.string.isRequired,
+  tagInput: PropTypes.string.isRequired,
+  tags: PropTypes.array,
+  saveTag: PropTypes.func.isRequired,
   changeAddQuoteFormField: PropTypes.func.isRequired,
   addQuote: PropTypes.func.isRequired,
+};
+
+Form.defaultProps = {
+  tags: [],
 };
 
 // == Export

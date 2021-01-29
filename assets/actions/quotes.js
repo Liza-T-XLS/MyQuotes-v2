@@ -6,6 +6,7 @@ export const CHANGE_ADD_QUOTE_FORM_STATUS = 'CHANGE_ADD_QUOTE_FORM_STATUS';
 export const SAVE_HEADER_HEIGHT = 'SAVE_HEADER_HEIGHT';
 export const SAVE_FORM_HEIGHT = 'SAVE_FORM_HEIGHT';
 export const CHANGE_ADD_QUOTE_FORM_FIELD = 'CHANGE_ADD_QUOTE_FORM_FIELD';
+export const SAVE_TAG = 'SAVE_TAG';
 export const ADD_QUOTE = 'ADD_QUOTE';
 export const CLEAR_ADD_QUOTE_FORM = 'CLEAR_ADD_QUOTE_FORM';
 export const SAVE_PAGE_QUANTITY = 'SAVE_PAGE_QUANTITY';
@@ -40,6 +41,11 @@ export const changeAddQuoteFormField = (newValue, fieldName) => ({
   type: CHANGE_ADD_QUOTE_FORM_FIELD,
   newValue,
   fieldName,
+});
+
+export const saveTag = (tagName) => ({
+  type: SAVE_TAG,
+  tagName,
 });
 
 export const addQuote = () => ({
