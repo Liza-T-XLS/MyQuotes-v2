@@ -36,16 +36,18 @@ const Form = ({
     changeAddQuoteFormField(e.target.value, e.target.name);
   };
 
-  const onKeyDownHandler = (e) => {
-    if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+  const tagOnKeyDownHandler = (e) => {
+    if ((e.code === 'Enter' || e.code === 'NumpadEnter') && tagInput.length > 0) {
       console.log(e.code);
       saveTag(tagInput);
     }
   };
 
-  const onClickHandler = () => {
+  const tagOnClickHandler = () => {
     console.log('onClickHandler');
-    saveTag(tagInput);
+    if (tagInput.length > 0) {
+      saveTag(tagInput);
+    }
   };
 
   const formOnKeyDownHandler = (e) => {
@@ -86,8 +88,8 @@ const Form = ({
       </label>
       <label htmlFor="tagInput">
         <span>Tags</span>
-        <input className="addQuoteFormInput" name="tagInput" value={tagInput} onChange={onChangeHandler} onKeyDown={onKeyDownHandler} id="tags" minLength="1" />
-        <img className="addTag" src={addTagIcon} alt="add tag icon" onClick={onClickHandler} />
+        <input className="addQuoteFormInput" name="tagInput" value={tagInput} onChange={onChangeHandler} onKeyDown={tagOnKeyDownHandler} id="tags" minLength="1" />
+        <img className="addTag" src={addTagIcon} alt="add tag icon" onClick={tagOnClickHandler} />
       </label>
       {tags && (
         <div className="tagsToSave">
