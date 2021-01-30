@@ -38,6 +38,7 @@ const Form = ({
 
   const onKeyDownHandler = (e) => {
     if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+      console.log(e.code);
       saveTag(tagInput);
     }
   };
@@ -47,13 +48,21 @@ const Form = ({
     saveTag(tagInput);
   };
 
+  const formOnKeyDownHandler = (e) => {
+    if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+      e.preventDefault();
+    }
+  };
+
   const onSubmitHandler = (e) => {
+    console.log(e);
     e.preventDefault();
     console.log('submitted');
     addQuote();
   };
+
   return (
-    <form className={addQuoteFormClassName} style={addQuoteFormStyle} onSubmit={onSubmitHandler}>
+    <form className={addQuoteFormClassName} style={addQuoteFormStyle} onKeyDown={formOnKeyDownHandler} onSubmit={onSubmitHandler}>
       <h2>Add a quote</h2>
       <label htmlFor="quoteText">
         <span>Text</span>
@@ -83,7 +92,7 @@ const Form = ({
       {tags && (
         <div className="tagsToSave">
           {tags.map((tag) => (
-            <div className="tag">
+            <div key={tags.indexOf(tag)} className="tag">
               <span>{tag}</span>
               <img className="tagDelete" src={deleteTagIcon} alt="delete tag icon" />
             </div>
