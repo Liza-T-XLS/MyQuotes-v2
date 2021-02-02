@@ -15,10 +15,11 @@
   .quoteDetails {
     display: none;
     background-color: rgb(235, 235, 235);
-    padding-bottom: 0.025rem;
+    padding:0.5rem;
     p {
       margin: 0;
-      padding: 1rem;
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
       .detailLabel {
         font-weight: bold;
       }
@@ -26,7 +27,6 @@
     .quoteTags {
       display: flex;
       flex-wrap: wrap;
-      margin-bottom: 0.5rem;
       .quoteTag {
         margin: 0rem 0.5rem 0rem 0.5rem;
         padding: 0.1rem 0.2rem 0.1rem 0.2rem;

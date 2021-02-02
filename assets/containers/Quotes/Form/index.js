@@ -6,6 +6,7 @@ import Form from '../../../components/Quotes/Form';
 import {
   changeAddQuoteFormField,
   saveTag,
+  deleteTag,
   addQuote,
 } from '../../../actions/quotes';
 
@@ -27,6 +28,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   saveTag: (tagName) => {
     dispatch(saveTag(tagName));
+  },
+  deleteTag: (tagName) => {
+    dispatch(deleteTag(tagName));
   },
   addQuote: () => {
     dispatch(addQuote());

@@ -27,6 +27,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response.data);
+          console.log(response.data.quotes[0].tags.length);
           store.dispatch(savePageQuantity(response.data.pageQuantity));
           store.dispatch(saveQuotes(response.data.quotes));
         })

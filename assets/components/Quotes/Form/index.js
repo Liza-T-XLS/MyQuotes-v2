@@ -24,6 +24,7 @@ const Form = ({
   tagInput,
   tags,
   saveTag,
+  deleteTag,
   changeAddQuoteFormField,
   addQuote,
 }) => {
@@ -48,6 +49,13 @@ const Form = ({
     if (tagInput.length > 0) {
       saveTag(tagInput);
     }
+  };
+
+  const tagDeleteOnClickHandler = (e) => {
+    console.log('tag deleted');
+    console.log(e.target.previousSibling.textContent);
+    const tagName = e.target.previousSibling.textContent;
+    deleteTag(tagName);
   };
 
   const formOnKeyDownHandler = (e) => {
@@ -96,7 +104,7 @@ const Form = ({
           {tags.map((tag) => (
             <div key={tags.indexOf(tag)} className="tag">
               <span>{tag}</span>
-              <img className="tagDelete" src={deleteTagIcon} alt="delete tag icon" />
+              <img className="tagDelete" src={deleteTagIcon} alt="delete tag icon" onClick={tagDeleteOnClickHandler} />
             </div>
           ))}
         </div>
@@ -119,6 +127,7 @@ Form.propTypes = {
   tagInput: PropTypes.string.isRequired,
   tags: PropTypes.array,
   saveTag: PropTypes.func.isRequired,
+  deleteTag: PropTypes.func.isRequired,
   changeAddQuoteFormField: PropTypes.func.isRequired,
   addQuote: PropTypes.func.isRequired,
 };

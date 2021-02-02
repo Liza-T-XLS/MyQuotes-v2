@@ -7,6 +7,7 @@ import {
   SAVE_FORM_HEIGHT,
   CHANGE_ADD_QUOTE_FORM_FIELD,
   SAVE_TAG,
+  DELETE_TAG,
   CLEAR_ADD_QUOTE_FORM,
   SAVE_PAGE_QUANTITY,
   SAVE_CURRENT_PAGE,
@@ -69,6 +70,13 @@ const quotesReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         tagInput: '',
+        tags: newTagsArray,
+      };
+    }
+    case DELETE_TAG: {
+      const newTagsArray = [...state.tags.filter((tag) => tag !== action.tagName)];
+      return {
+        ...state,
         tags: newTagsArray,
       };
     }

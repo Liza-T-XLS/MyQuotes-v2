@@ -49,18 +49,20 @@ const Quote = forwardRef(({ quote }, ref) => {
         <img className="copieIcon" src={copieIcon} alt="copie icon" onClick={copyOnClickHandler} />
       </div>
       <div className={quoteDetailsCSS}>
-        {(!quote.authorFirstName && !quote.authorLastName && !quote.characterName && !quote.mediumTitle && !quote.tags) && <p>No details provided. <a href="/">Edit?</a></p>}
+        {(!quote.authorFirstName && !quote.authorLastName && !quote.characterName && !quote.mediumTitle && quote.tags < 1) && <p>No details provided. <a href="/">Edit?</a></p>}
         {(quote.authorFirstName || quote.authorLastName) && <p><span className="detailLabel">Author</span>: {quote.authorFirstName} {quote.authorLastName}</p>}
         {quote.characterName && <p><span className="detailLabel">Character</span>: {quote.characterName}</p>}
         {quote.mediumTitle && <p><span className="detailLabel">Medium</span>: {quote.mediumTitle}</p>}
-        <div className="quoteTags">
-          {quote.tags.map((tag) => (
-            <div key={tag.id} className="quoteTag">
-              <span>{tag.name}</span>
-              {/* <img className="tagDelete" src={deleteTagIcon} alt="delete tag icon" /> */}
-            </div>
-          ))}
-        </div>
+        {quote.tags.length > 0 && (
+          <div className="quoteTags">
+            {quote.tags.map((tag) => (
+              <div key={tag.id} className="quoteTag">
+                <span>{tag.name}</span>
+                {/* <img className="tagDelete" src={deleteTagIcon} alt="delete tag icon" /> */}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
