@@ -12,6 +12,8 @@ import classNames from 'classnames';
 
 import './quote.scss';
 import copieIcon from '../../../images/copie-26.png';
+import editIcon from '../../../images/edit.svg';
+import binIcon from '../../../images/bin.svg';
 
 // == Component
 
@@ -49,6 +51,10 @@ const Quote = forwardRef(({ quote }, ref) => {
         <img className="copieIcon" src={copieIcon} alt="copie icon" onClick={copyOnClickHandler} />
       </div>
       <div className={quoteDetailsCSS}>
+        <div className="quoteOptions">
+          <img className="editIcon" src={editIcon} alt="edit icon" />
+          <img className="binIcon" src={binIcon} alt="bin icon" />
+        </div>
         {(!quote.authorFirstName && !quote.authorLastName && !quote.characterName && !quote.mediumTitle && quote.tags < 1) && <p>No details provided. <a href="/">Edit?</a></p>}
         {(quote.authorFirstName || quote.authorLastName) && <p><span className="detailLabel">Author</span>: {quote.authorFirstName} {quote.authorLastName}</p>}
         {quote.characterName && <p><span className="detailLabel">Character</span>: {quote.characterName}</p>}

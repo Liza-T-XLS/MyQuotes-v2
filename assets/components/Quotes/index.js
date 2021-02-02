@@ -7,10 +7,11 @@
 import React, { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import './quotes.scss';
 import Pagination from '@material-ui/lab/Pagination';
-import addQuoteIcon from '../../images/addQuote-24.png';
+import addQuoteIcon from '../../images/addQuote-18dp.svg';
 import closeIcon from '../../images/close-30.png';
 
 import Quote from './Quote';
@@ -55,14 +56,17 @@ const Quotes = ({
     loadQuotes();
   };
 
+  const addQuoteIconClassName = classNames('addQuoteIcon', { active: addQuoteFormStatus });
+
   return (
     <div className="quotes" ref={quotesDivRef}>
       <Helmet>
         <title>MyQuotes | Board</title>
       </Helmet>
       <div className="quotesMenu" ref={quotesMenuRef}>
-        {!addQuoteFormStatus && <img src={addQuoteIcon} alt="add quote icon" onClick={onClickHandler} />}
-        {addQuoteFormStatus && <img src={closeIcon} alt="close form icon" onClick={onClickHandler} />}
+        {/* {!addQuoteFormStatus && <img src={addQuoteIcon} alt="add quote icon" onClick={onClickHandler} />}
+        {addQuoteFormStatus && <img src={closeIcon} alt="close form icon" onClick={onClickHandler} />} */}
+        <img className={addQuoteIconClassName} src={addQuoteIcon} alt="add quote icon" onClick={onClickHandler} />
       </div>
       <div className="quotesList" ref={quotesListRef}>
         {quotes.map((quote) => (

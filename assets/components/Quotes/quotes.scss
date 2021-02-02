@@ -1,6 +1,14 @@
 .quotes {
   .quotesMenu {
       text-align: right;
+      .addQuoteIcon {
+        height: 30px;
+        width: auto;
+        transition: transform 1s;
+        &.active {
+          transform: rotate(45deg);
+        }
+      }
   }
   .MuiPagination-ul {
     width: 100%;
