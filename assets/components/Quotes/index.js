@@ -11,8 +11,7 @@ import classNames from 'classnames';
 
 import './quotes.scss';
 import Pagination from '@material-ui/lab/Pagination';
-import addQuoteIcon from '../../images/addQuote-18dp.svg';
-import closeIcon from '../../images/close-30.png';
+import addQuoteIcon from '../../images/addQuote-36dp.svg';
 
 import Quote from './Quote';
 import Form from '../../containers/Quotes/Form';
@@ -64,8 +63,6 @@ const Quotes = ({
         <title>MyQuotes | Board</title>
       </Helmet>
       <div className="quotesMenu" ref={quotesMenuRef}>
-        {/* {!addQuoteFormStatus && <img src={addQuoteIcon} alt="add quote icon" onClick={onClickHandler} />}
-        {addQuoteFormStatus && <img src={closeIcon} alt="close form icon" onClick={onClickHandler} />} */}
         <img className={addQuoteIconClassName} src={addQuoteIcon} alt="add quote icon" onClick={onClickHandler} />
       </div>
       <div className="quotesList" ref={quotesListRef}>

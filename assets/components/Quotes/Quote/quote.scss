@@ -10,50 +10,67 @@
     }
     .copieIcon {
       align-self: center;
+      height: 24px;
+      width: auto;
+      &:hover, &:active {
+        filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(200deg) brightness(91%) contrast(135%);
+      }
     }
   }
   .quoteDetails {
     display: none;
     background-color: rgb(235, 235, 235);
     padding:0.5rem;
-    .quoteOptions {
-      text-align: right;
-      img {
-        height: 24px;
-        width: auto;
-        margin-left: 1rem;
-      }
-      .editIcon {
-        &:hover, &:active {
-          filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(200deg) brightness(91%) contrast(135%);
-        }
-      }
-      .binIcon {
-        &:hover, &:active {
-          filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(360deg) brightness(91%) contrast(135%);
-        }
-      }
-    }
-    p {
-      margin: 0;
-      padding-top: 0.25rem;
-      padding-bottom: 0.25rem;
-      .detailLabel {
-        font-weight: bold;
-      }
-    }
-    .quoteTags {
+    .quoteDetailsHeader {
       display: flex;
-      flex-wrap: wrap;
-      .quoteTag {
-        margin: 0rem 0.5rem 0rem 0.5rem;
-        padding: 0.1rem 0.2rem 0.1rem 0.2rem;
-        background-color: white;
-        border-radius: 5px;
-        width: min-content;
+      justify-content: space-between;
+      .detailsLabel {
+        display: block;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+      .quoteOptions {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        img {
+          height: 24px;
+          width: auto;
+          margin-left: 1rem;
+        }
+        .editIcon {
+          &:hover, &:active {
+            filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(200deg) brightness(91%) contrast(135%);
+          }
+        }
+        .binIcon {
+          &:hover, &:active {
+            filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(360deg) brightness(91%) contrast(135%);
+          }
+        }
+      }
+    }
+    .details {
+      p {
+        margin: 0;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        .detailLabel {
+          font-weight: bold;
+        }
+      }
+      .quoteTags {
+        display: flex;
+        flex-wrap: wrap;
+        .quoteTag {
+          margin: 0rem 0.5rem 0rem 0.5rem;
+          padding: 0.1rem 0.2rem 0.1rem 0.2rem;
+          background-color: white;
+          border-radius: 5px;
+          width: min-content;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
       }
     }
     &.active {

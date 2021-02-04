@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import './quote.scss';
-import copieIcon from '../../../images/copie-26.png';
+import copieIcon from '../../../images/copy.svg';
 import editIcon from '../../../images/edit.svg';
 import binIcon from '../../../images/bin.svg';
 
@@ -51,24 +51,29 @@ const Quote = forwardRef(({ quote }, ref) => {
         <img className="copieIcon" src={copieIcon} alt="copie icon" onClick={copyOnClickHandler} />
       </div>
       <div className={quoteDetailsCSS}>
-        <div className="quoteOptions">
-          <img className="editIcon" src={editIcon} alt="edit icon" />
-          <img className="binIcon" src={binIcon} alt="bin icon" />
-        </div>
-        {(!quote.authorFirstName && !quote.authorLastName && !quote.characterName && !quote.mediumTitle && quote.tags < 1) && <p>No details provided. <a href="/">Edit?</a></p>}
-        {(quote.authorFirstName || quote.authorLastName) && <p><span className="detailLabel">Author</span>: {quote.authorFirstName} {quote.authorLastName}</p>}
-        {quote.characterName && <p><span className="detailLabel">Character</span>: {quote.characterName}</p>}
-        {quote.mediumTitle && <p><span className="detailLabel">Medium</span>: {quote.mediumTitle}</p>}
-        {quote.tags.length > 0 && (
-          <div className="quoteTags">
-            {quote.tags.map((tag) => (
-              <div key={tag.id} className="quoteTag">
-                <span>{tag.name}</span>
-                {/* <img className="tagDelete" src={deleteTagIcon} alt="delete tag icon" /> */}
-              </div>
-            ))}
+        <div className="quoteDetailsHeader">
+          <span className="detailsLabel">Details</span>
+          <div className="quoteOptions">
+            <img className="editIcon" src={editIcon} alt="edit icon" />
+            <img className="binIcon" src={binIcon} alt="bin icon" />
           </div>
-        )}
+        </div>
+        <div className="details">
+          {(!quote.authorFirstName && !quote.authorLastName && !quote.characterName && !quote.mediumTitle && quote.tags < 1) && <p>No details provided. <a href="/">Edit?</a></p>}
+          {(quote.authorFirstName || quote.authorLastName) && <p><span className="detailLabel">Author</span>: {quote.authorFirstName} {quote.authorLastName}</p>}
+          {quote.characterName && <p><span className="detailLabel">Character</span>: {quote.characterName}</p>}
+          {quote.mediumTitle && <p><span className="detailLabel">Medium</span>: {quote.mediumTitle}</p>}
+          {quote.tags.length > 0 && (
+            <div className="quoteTags">
+              {quote.tags.map((tag) => (
+                <div key={tag.id} className="quoteTag">
+                  <span>{tag.name}</span>
+                  {/* <img className="tagDelete" src={deleteTagIcon} alt="delete tag icon" /> */}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
