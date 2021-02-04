@@ -1,4 +1,4 @@
-.addQuoteForm {
+.quoteForm {
   color: white;
   display: flex;
   flex-direction: column;
@@ -30,7 +30,7 @@
       display: block;
       width: 99%;
     }
-    .addQuoteFormInput {
+    .quoteFormInput {
       display: block;
       width: calc(100% - 1rem);
     }
@@ -61,7 +61,7 @@
       }
     }
   }
-  .addQuoteSubmitButton {
+  .quoteSubmitButton {
     margin-bottom: 0.5rem;
     align-self: center;
     color: #2f50aa;

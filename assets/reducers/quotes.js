@@ -2,23 +2,26 @@
 
 import {
   SAVE_QUOTES,
-  CHANGE_ADD_QUOTE_FORM_STATUS,
+  CHANGE_QUOTE_FORM_STATUS,
   SAVE_HEADER_HEIGHT,
   SAVE_FORM_HEIGHT,
-  CHANGE_ADD_QUOTE_FORM_FIELD,
+  CHANGE_QUOTE_FORM_FIELD,
   SAVE_TAG,
   DELETE_TAG,
-  CLEAR_ADD_QUOTE_FORM,
+  CLEAR_QUOTE_FORM,
   SAVE_PAGE_QUANTITY,
   SAVE_CURRENT_PAGE,
+  CHANGE_QUOTE_FORM_LABEL,
+  LOAD_QUOTE_DATA,
 } from '../actions/quotes';
 
 // == Initial state
 
 const initialState = {
   quotes: [],
-  addQuoteFormStatus: false,
-  addQuoteFormHeight: 1,
+  quoteFormLabel: 'Add a quote',
+  quoteFormStatus: false,
+  quoteFormHeight: 1,
   headerHeight: 0,
   quoteText: '',
   authorFirstName: '',
@@ -27,6 +30,7 @@ const initialState = {
   mediumTitle: '',
   tagInput: '',
   tags: [],
+  quoteId: '',
   pageQuantity: 0,
   currentPage: 1,
 };
@@ -40,10 +44,10 @@ const quotesReducer = (state = initialState, action = {}) => {
         ...state,
         quotes: action.quotes,
       };
-    case CHANGE_ADD_QUOTE_FORM_STATUS:
+    case CHANGE_QUOTE_FORM_STATUS:
       return {
         ...state,
-        addQuoteFormStatus: !state.addQuoteFormStatus,
+        quoteFormStatus: !state.quoteFormStatus,
       };
     case SAVE_HEADER_HEIGHT:
       return {
@@ -53,9 +57,9 @@ const quotesReducer = (state = initialState, action = {}) => {
     case SAVE_FORM_HEIGHT:
       return {
         ...state,
-        addQuoteFormHeight: action.height,
+        quoteFormHeight: action.height,
       };
-    case CHANGE_ADD_QUOTE_FORM_FIELD: {
+    case CHANGE_QUOTE_FORM_FIELD: {
       const target = action.fieldName;
       return {
         ...state,
@@ -80,7 +84,7 @@ const quotesReducer = (state = initialState, action = {}) => {
         tags: newTagsArray,
       };
     }
-    case CLEAR_ADD_QUOTE_FORM:
+    case CLEAR_QUOTE_FORM:
       return {
         ...state,
         quoteText: '',
@@ -90,6 +94,7 @@ const quotesReducer = (state = initialState, action = {}) => {
         mediumTitle: '',
         tagInput: '',
         tags: [],
+        quoteId: '',
       };
     case SAVE_PAGE_QUANTITY:
       return {
@@ -101,6 +106,24 @@ const quotesReducer = (state = initialState, action = {}) => {
         ...state,
         currentPage: action.pageNumber,
       };
+    case CHANGE_QUOTE_FORM_LABEL:
+      return {
+        ...state,
+        quoteFormLabel: action.newLabel,
+      };
+    case LOAD_QUOTE_DATA: {
+      const newTagsArray = action.tags.map((tag) => tag.name);
+      return {
+        ...state,
+        quoteText: action.text,
+        authorFirstName: action.authorFirstName,
+        authorLastName: action.authorLastName,
+        characterName: action.characterName,
+        mediumTitle: action.mediumTitle,
+        tags: newTagsArray,
+        quoteId: action.id,
+      };
+    }
     default: return state;
   }
 };

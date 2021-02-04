@@ -7,9 +7,9 @@ import {
   LOAD_QUOTES,
   saveQuotes,
   ADD_QUOTE,
-  clearAddQuoteForm,
+  clearQuoteForm,
   saveFormHeight,
-  changeAddQuoteFormStatus,
+  changeQuoteFormStatus,
   savePageQuantity,
 } from '../actions/quotes';
 
@@ -58,9 +58,9 @@ const quotesMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           store.dispatch(loadQuotes());
-          store.dispatch(clearAddQuoteForm());
+          store.dispatch(clearQuoteForm());
           store.dispatch(saveFormHeight(1));
-          store.dispatch(changeAddQuoteFormStatus());
+          store.dispatch(changeQuoteFormStatus());
         })
         .catch((error) => {
           console.warn(error);

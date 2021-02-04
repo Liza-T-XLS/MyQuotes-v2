@@ -4,15 +4,16 @@ import { connect } from 'react-redux';
 
 import Form from '../../../components/Quotes/Form';
 import {
-  changeAddQuoteFormField,
+  changeQuoteFormField,
   saveTag,
   deleteTag,
   addQuote,
 } from '../../../actions/quotes';
 
 const mapStateToProps = (state) => ({
-  addQuoteFormStatus: state.quotes.addQuoteFormStatus,
-  addQuoteFormHeight: state.quotes.addQuoteFormHeight,
+  quoteFormLabel: state.quotes.quoteFormLabel,
+  quoteFormStatus: state.quotes.quoteFormStatus,
+  quoteFormHeight: state.quotes.quoteFormHeight,
   quoteText: state.quotes.quoteText,
   authorFirstName: state.quotes.authorFirstName,
   authorLastName: state.quotes.authorLastName,
@@ -23,8 +24,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeAddQuoteFormField: (newValue, fieldName) => {
-    dispatch(changeAddQuoteFormField(newValue, fieldName));
+  changeQuoteFormField: (newValue, fieldName) => {
+    dispatch(changeQuoteFormField(newValue, fieldName));
   },
   saveTag: (tagName) => {
     dispatch(saveTag(tagName));

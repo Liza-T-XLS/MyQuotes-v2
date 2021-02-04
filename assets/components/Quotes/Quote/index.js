@@ -17,7 +17,7 @@ import binIcon from '../../../images/bin.svg';
 
 // == Component
 
-const Quote = forwardRef(({ quote }, ref) => {
+const Quote = forwardRef(({ quote, displayFormOnClickHandler, changeQuoteFormLabel, loadQuoteData }, ref) => {
   const copyOnClickHandler = (e) => {
     const quoteText = e.target.previousSibling.innerText;
     navigator.clipboard.writeText(quoteText);
@@ -44,6 +44,14 @@ const Quote = forwardRef(({ quote }, ref) => {
     quotesList.addEventListener('click', quotesListOnClickHandler);
   };
 
+  const editOnClickHandler = () => {
+    console.log('edit icon clicked');
+    console.log(quote.id);
+    changeQuoteFormLabel('Edit the quote');
+    loadQuoteData(quote.id, quote.text, quote.authorFirstName, quote.authorLastName, quote.characterName, quote.mediumTitle, quote.tags);
+    displayFormOnClickHandler();
+  };
+
   return (
     <div className="quote" ref={quoteRef} id={quote.id}>
       <div className="quoteMain">
@@ -54,7 +62,7 @@ const Quote = forwardRef(({ quote }, ref) => {
         <div className="quoteDetailsHeader">
           <span className="detailsLabel">Details</span>
           <div className="quoteOptions">
-            <img className="editIcon" src={editIcon} alt="edit icon" />
+            <img className="editIcon" src={editIcon} alt="edit icon" onClick={editOnClickHandler} />
             <img className="binIcon" src={binIcon} alt="bin icon" />
           </div>
         </div>
@@ -83,6 +91,9 @@ const Quote = forwardRef(({ quote }, ref) => {
 
 Quote.propTypes = {
   quote: PropTypes.object.isRequired,
+  displayFormOnClickHandler: PropTypes.func.isRequired,
+  changeQuoteFormLabel: PropTypes.func.isRequired,
+  loadQuoteData: PropTypes.func.isRequired,
 };
 
 // == Export

@@ -2,16 +2,18 @@
 
 export const LOAD_QUOTES = 'LOAD_QUOTES';
 export const SAVE_QUOTES = 'SAVE_QUOTES';
-export const CHANGE_ADD_QUOTE_FORM_STATUS = 'CHANGE_ADD_QUOTE_FORM_STATUS';
+export const CHANGE_QUOTE_FORM_STATUS = 'CHANGE_QUOTE_FORM_STATUS';
 export const SAVE_HEADER_HEIGHT = 'SAVE_HEADER_HEIGHT';
 export const SAVE_FORM_HEIGHT = 'SAVE_FORM_HEIGHT';
-export const CHANGE_ADD_QUOTE_FORM_FIELD = 'CHANGE_ADD_QUOTE_FORM_FIELD';
+export const CHANGE_QUOTE_FORM_FIELD = 'CHANGE_QUOTE_FORM_FIELD';
 export const SAVE_TAG = 'SAVE_TAG';
 export const DELETE_TAG = 'DELETE_TAG';
 export const ADD_QUOTE = 'ADD_QUOTE';
-export const CLEAR_ADD_QUOTE_FORM = 'CLEAR_ADD_QUOTE_FORM';
+export const CLEAR_QUOTE_FORM = 'CLEAR_QUOTE_FORM';
 export const SAVE_PAGE_QUANTITY = 'SAVE_PAGE_QUANTITY';
 export const SAVE_CURRENT_PAGE = 'SAVE_CURRENT_PAGE';
+export const CHANGE_QUOTE_FORM_LABEL = 'CHANGE_QUOTE_FORM_LABEL';
+export const LOAD_QUOTE_DATA = 'LOAD_QUOTE_DATA';
 
 // == Action creators
 
@@ -24,8 +26,8 @@ export const saveQuotes = (quotes) => ({
   quotes,
 });
 
-export const changeAddQuoteFormStatus = () => ({
-  type: CHANGE_ADD_QUOTE_FORM_STATUS,
+export const changeQuoteFormStatus = () => ({
+  type: CHANGE_QUOTE_FORM_STATUS,
 });
 
 export const saveHeaderHeight = (height) => ({
@@ -38,8 +40,8 @@ export const saveFormHeight = (height) => ({
   height,
 });
 
-export const changeAddQuoteFormField = (newValue, fieldName) => ({
-  type: CHANGE_ADD_QUOTE_FORM_FIELD,
+export const changeQuoteFormField = (newValue, fieldName) => ({
+  type: CHANGE_QUOTE_FORM_FIELD,
   newValue,
   fieldName,
 });
@@ -58,8 +60,8 @@ export const addQuote = () => ({
   type: ADD_QUOTE,
 });
 
-export const clearAddQuoteForm = () => ({
-  type: CLEAR_ADD_QUOTE_FORM,
+export const clearQuoteForm = () => ({
+  type: CLEAR_QUOTE_FORM,
 });
 
 export const savePageQuantity = (quantity) => ({
@@ -70,4 +72,28 @@ export const savePageQuantity = (quantity) => ({
 export const saveCurrentPage = (pageNumber) => ({
   type: SAVE_CURRENT_PAGE,
   pageNumber,
+});
+
+export const changeQuoteFormLabel = (newLabel) => ({
+  type: CHANGE_QUOTE_FORM_LABEL,
+  newLabel,
+});
+
+export const loadQuoteData = (
+  id,
+  text,
+  authorFirstName,
+  authorLastName,
+  characterName,
+  mediumTitle,
+  tags,
+) => ({
+  type: LOAD_QUOTE_DATA,
+  id,
+  text,
+  authorFirstName,
+  authorLastName,
+  characterName,
+  mediumTitle,
+  tags,
 });

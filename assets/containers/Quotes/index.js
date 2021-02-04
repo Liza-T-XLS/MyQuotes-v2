@@ -5,17 +5,18 @@ import { connect } from 'react-redux';
 import Quotes from '../../components/Quotes';
 import {
   loadQuotes,
-  changeAddQuoteFormStatus,
+  changeQuoteFormStatus,
   saveFormHeight,
-  changeAddQuoteFormField,
+  changeQuoteFormField,
   addQuote,
   saveCurrentPage,
+  clearQuoteForm,
 } from '../../actions/quotes';
 
 const mapStateToProps = (state) => ({
   quotes: state.quotes.quotes,
-  addQuoteFormStatus: state.quotes.addQuoteFormStatus,
-  addQuoteFormHeight: state.quotes.addQuoteFormHeight,
+  quoteFormStatus: state.quotes.quoteFormStatus,
+  quoteFormHeight: state.quotes.quoteFormHeight,
   headerHeight: state.quotes.headerHeight,
   quoteText: state.quotes.quoteText,
   authorFirstName: state.quotes.authorFirstName,
@@ -24,6 +25,7 @@ const mapStateToProps = (state) => ({
   mediumTitle: state.quotes.mediumTitle,
   tagInput: state.quotes.tagInput,
   tags: state.quotes.tags,
+  quoteId: state.quotes.quoteId,
   pageQuantity: state.quotes.pageQuantity,
   currentPage: state.quotes.currentPage,
 });
@@ -32,20 +34,23 @@ const mapDispatchToProps = (dispatch) => ({
   loadQuotes: () => {
     dispatch(loadQuotes());
   },
-  changeAddQuoteFormStatus: () => {
-    dispatch(changeAddQuoteFormStatus());
+  changeQuoteFormStatus: () => {
+    dispatch(changeQuoteFormStatus());
   },
   saveFormHeight: (height) => {
     dispatch(saveFormHeight(height));
   },
-  changeAddQuoteFormField: (newValue, fieldName) => {
-    dispatch(changeAddQuoteFormField(newValue, fieldName));
+  changeQuoteFormField: (newValue, fieldName) => {
+    dispatch(changeQuoteFormField(newValue, fieldName));
   },
   addQuote: () => {
     dispatch(addQuote());
   },
   saveCurrentPage: (pageNumber) => {
     dispatch(saveCurrentPage(pageNumber));
+  },
+  clearQuoteForm: () => {
+    dispatch(clearQuoteForm());
   },
 });
 

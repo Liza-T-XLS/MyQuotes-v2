@@ -13,7 +13,7 @@ import './quotes.scss';
 import Pagination from '@material-ui/lab/Pagination';
 import addQuoteIcon from '../../images/addQuote-36dp.svg';
 
-import Quote from './Quote';
+import Quote from '../../containers/Quotes/Quote';
 import Form from '../../containers/Quotes/Form';
 
 // == Component
@@ -21,10 +21,12 @@ import Form from '../../containers/Quotes/Form';
 const Quotes = ({
   loadQuotes,
   quotes,
-  addQuoteFormStatus,
-  changeAddQuoteFormStatus,
+  quoteFormStatus,
+  changeQuoteFormStatus,
   headerHeight,
   saveFormHeight,
+  clearQuoteForm,
+  quoteId,
   pageQuantity,
   currentPage,
   saveCurrentPage,
@@ -42,12 +44,15 @@ const Quotes = ({
   const onClickHandler = () => {
     console.log('addQuote icon clicked');
     const formHeight = window.innerHeight - headerHeight - quotesMenuRef.current.clientHeight;
-    if (!addQuoteFormStatus) {
+    if (!quoteFormStatus) {
       saveFormHeight(formHeight);
     } else {
       saveFormHeight(1);
+      if (quoteId) {
+        clearQuoteForm();
+      }
     }
-    changeAddQuoteFormStatus();
+    changeQuoteFormStatus();
   };
 
   const pageChangeHandler = (e, value) => {
@@ -55,7 +60,7 @@ const Quotes = ({
     loadQuotes();
   };
 
-  const addQuoteIconClassName = classNames('addQuoteIcon', { active: addQuoteFormStatus });
+  const addQuoteIconClassName = classNames('addQuoteIcon', { active: quoteFormStatus });
 
   return (
     <div className="quotes" ref={quotesDivRef}>
@@ -67,7 +72,7 @@ const Quotes = ({
       </div>
       <div className="quotesList" ref={quotesListRef}>
         {quotes.map((quote) => (
-          <Quote key={quote.id} quote={quote} ref={quotesListRef} />
+          <Quote key={quote.id} quote={quote} ref={quotesListRef} displayFormOnClickHandler={onClickHandler} />
         ))}
       </div>
       <Pagination size="small" count={pageQuantity} page={currentPage} showFirstButton showLastButton siblingCount={1} boundaryCount={1} onChange={pageChangeHandler} />
@@ -81,10 +86,12 @@ const Quotes = ({
 Quotes.propTypes = {
   loadQuotes: PropTypes.func.isRequired,
   quotes: PropTypes.array.isRequired,
-  addQuoteFormStatus: PropTypes.bool.isRequired,
-  changeAddQuoteFormStatus: PropTypes.func.isRequired,
+  quoteFormStatus: PropTypes.bool.isRequired,
+  changeQuoteFormStatus: PropTypes.func.isRequired,
   headerHeight: PropTypes.number.isRequired,
   saveFormHeight: PropTypes.func.isRequired,
+  clearQuoteForm: PropTypes.func.isRequired,
+  quoteId: PropTypes.number.isRequired,
   pageQuantity: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
   saveCurrentPage: PropTypes.func.isRequired,

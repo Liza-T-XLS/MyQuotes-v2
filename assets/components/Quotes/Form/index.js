@@ -1,6 +1,8 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/forbid-prop-types */
+
 // == Imports
 
 import React from 'react';
@@ -14,8 +16,9 @@ import deleteTagIcon from '../../../images/close-thin-18dp.svg';
 // == Component
 
 const Form = ({
-  addQuoteFormStatus,
-  addQuoteFormHeight,
+  quoteFormLabel,
+  quoteFormStatus,
+  quoteFormHeight,
   quoteText,
   authorFirstName,
   authorLastName,
@@ -25,16 +28,16 @@ const Form = ({
   tags,
   saveTag,
   deleteTag,
-  changeAddQuoteFormField,
+  changeQuoteFormField,
   addQuote,
 }) => {
-  const addQuoteFormClassName = classNames('addQuoteForm', { active: addQuoteFormStatus });
-  const addQuoteFormStyle = {
-    height: `${addQuoteFormHeight}px`,
+  const quoteFormClassName = classNames('quoteForm', { active: quoteFormStatus });
+  const quoteFormStyle = {
+    height: `${quoteFormHeight}px`,
   };
 
   const onChangeHandler = (e) => {
-    changeAddQuoteFormField(e.target.value, e.target.name);
+    changeQuoteFormField(e.target.value, e.target.name);
   };
 
   const tagOnKeyDownHandler = (e) => {
@@ -72,31 +75,31 @@ const Form = ({
   };
 
   return (
-    <form className={addQuoteFormClassName} style={addQuoteFormStyle} onKeyDown={formOnKeyDownHandler} onSubmit={onSubmitHandler}>
-      <h2>Add a quote</h2>
+    <form className={quoteFormClassName} style={quoteFormStyle} onKeyDown={formOnKeyDownHandler} onSubmit={onSubmitHandler}>
+      <h2>{quoteFormLabel}</h2>
       <label htmlFor="quoteText">
         <span>Text</span>
         <textarea name="quoteText" value={quoteText} onChange={onChangeHandler} id="quoteText" minLength="1" required />
       </label>
       <label htmlFor="authorFirstName">
         <span>Author's first name</span>
-        <input className="addQuoteFormInput" name="authorFirstName" value={authorFirstName} onChange={onChangeHandler} id="authorFirstName" minLength="1" />
+        <input className="quoteFormInput" name="authorFirstName" value={authorFirstName} onChange={onChangeHandler} id="authorFirstName" minLength="1" />
       </label>
       <label htmlFor="authorLastName">
         <span>Author's last name</span>
-        <input className="addQuoteFormInput" name="authorLastName" value={authorLastName} onChange={onChangeHandler} id="authorLastName" minLength="1" />
+        <input className="quoteFormInput" name="authorLastName" value={authorLastName} onChange={onChangeHandler} id="authorLastName" minLength="1" />
       </label>
       <label htmlFor="character's name">
         <span>Character's last name</span>
-        <input className="addQuoteFormInput" name="characterName" value={characterName} onChange={onChangeHandler} id="character's name" minLength="1" />
+        <input className="quoteFormInput" name="characterName" value={characterName} onChange={onChangeHandler} id="character's name" minLength="1" />
       </label>
       <label htmlFor="mediumTitle">
         <span>Medium's title</span>
-        <input className="addQuoteFormInput" name="mediumTitle" value={mediumTitle} onChange={onChangeHandler} id="mediumTitle" minLength="1" />
+        <input className="quoteFormInput" name="mediumTitle" value={mediumTitle} onChange={onChangeHandler} id="mediumTitle" minLength="1" />
       </label>
       <label htmlFor="tagInput">
         <span>Tags</span>
-        <input className="addQuoteFormInput" name="tagInput" value={tagInput} onChange={onChangeHandler} onKeyDown={tagOnKeyDownHandler} id="tags" minLength="1" />
+        <input className="quoteFormInput" name="tagInput" value={tagInput} onChange={onChangeHandler} onKeyDown={tagOnKeyDownHandler} id="tags" minLength="1" />
         <img className="addTag" src={addTagIcon} alt="add tag icon" onClick={tagOnClickHandler} />
       </label>
       {tags && (
@@ -109,7 +112,7 @@ const Form = ({
           ))}
         </div>
       )}
-      <button className="addQuoteSubmitButton" type="submit">Add</button>
+      <button className="quoteSubmitButton" type="submit">Add</button>
     </form>
   );
 };
@@ -117,8 +120,9 @@ const Form = ({
 // PropTypes
 
 Form.propTypes = {
-  addQuoteFormStatus: PropTypes.bool.isRequired,
-  addQuoteFormHeight: PropTypes.number.isRequired,
+  quoteFormLabel: PropTypes.string.isRequired,
+  quoteFormStatus: PropTypes.bool.isRequired,
+  quoteFormHeight: PropTypes.number.isRequired,
   quoteText: PropTypes.string.isRequired,
   authorFirstName: PropTypes.string.isRequired,
   authorLastName: PropTypes.string.isRequired,
@@ -128,7 +132,7 @@ Form.propTypes = {
   tags: PropTypes.array,
   saveTag: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired,
-  changeAddQuoteFormField: PropTypes.func.isRequired,
+  changeQuoteFormField: PropTypes.func.isRequired,
   addQuote: PropTypes.func.isRequired,
 };
 
