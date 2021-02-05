@@ -30,6 +30,8 @@ const Form = ({
   deleteTag,
   changeQuoteFormField,
   addQuote,
+  quoteId,
+  editQuote,
 }) => {
   const quoteFormClassName = classNames('quoteForm', { active: quoteFormStatus });
   const quoteFormStyle = {
@@ -71,7 +73,11 @@ const Form = ({
     console.log(e);
     e.preventDefault();
     console.log('submitted');
-    addQuote();
+    if(quoteId) {
+      editQuote();
+    } else {
+      addQuote();
+    }
   };
 
   return (
@@ -134,6 +140,8 @@ Form.propTypes = {
   deleteTag: PropTypes.func.isRequired,
   changeQuoteFormField: PropTypes.func.isRequired,
   addQuote: PropTypes.func.isRequired,
+  quoteId: PropTypes.number.isRequired,
+  editQuote: PropTypes.func.isRequired,
 };
 
 Form.defaultProps = {

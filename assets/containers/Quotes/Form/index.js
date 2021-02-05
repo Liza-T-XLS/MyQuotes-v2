@@ -8,6 +8,7 @@ import {
   saveTag,
   deleteTag,
   addQuote,
+  editQuote,
 } from '../../../actions/quotes';
 
 const mapStateToProps = (state) => ({
@@ -21,6 +22,7 @@ const mapStateToProps = (state) => ({
   mediumTitle: state.quotes.mediumTitle,
   tagInput: state.quotes.tagInput,
   tags: state.quotes.tags,
+  quoteId: state.quotes.quoteId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -35,6 +37,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addQuote: () => {
     dispatch(addQuote());
+  },
+  editQuote: () => {
+    dispatch(editQuote());
   },
 });
 

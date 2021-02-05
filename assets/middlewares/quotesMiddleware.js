@@ -11,6 +11,7 @@ import {
   saveFormHeight,
   changeQuoteFormStatus,
   savePageQuantity,
+  EDIT_QUOTE,
 } from '../actions/quotes';
 
 // == Middleware
@@ -66,6 +67,39 @@ const quotesMiddleware = (store) => (next) => (action) => {
           console.warn(error);
           console.log(error.response.data);
           console.log('quote add failed');
+        })
+        .finally(() => {
+          console.log('finally');
+        });
+      next(action);
+      break;
+    case EDIT_QUOTE:
+      axios({
+        method: 'put',
+        url: 'http://localhost:8000/api/quotes',
+        data: {
+          quote: {
+            id: store.getState().quotes.quoteId,
+            text: store.getState().quotes.quoteText,
+            authorFirstName: store.getState().quotes.authorFirstName,
+            authorLastName: store.getState().quotes.authorLastName,
+            characterName: store.getState().quotes.characterName,
+            mediumTitle: store.getState().quotes.mediumTitle,
+          },
+          tags: store.getState().quotes.tags,
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(loadQuotes());
+          store.dispatch(clearQuoteForm());
+          store.dispatch(saveFormHeight(1));
+          store.dispatch(changeQuoteFormStatus());
+        })
+        .catch((error) => {
+          console.warn(error);
+          console.log(error.response.data);
+          console.log('quote edit failed');
         })
         .finally(() => {
           console.log('finally');

@@ -14,6 +14,7 @@ export const SAVE_PAGE_QUANTITY = 'SAVE_PAGE_QUANTITY';
 export const SAVE_CURRENT_PAGE = 'SAVE_CURRENT_PAGE';
 export const CHANGE_QUOTE_FORM_LABEL = 'CHANGE_QUOTE_FORM_LABEL';
 export const LOAD_QUOTE_DATA = 'LOAD_QUOTE_DATA';
+export const EDIT_QUOTE = 'EDIT_QUOTE';
 
 // == Action creators
 
@@ -96,4 +97,8 @@ export const loadQuoteData = (
   characterName,
   mediumTitle,
   tags,
+});
+
+export const editQuote = () => ({
+  type: EDIT_QUOTE,
 });
