@@ -58,6 +58,12 @@
           font-weight: bold;
         }
       }
+      .editSpan {
+        text-decoration: underline;
+        &:hover {
+          cursor: pointer;
+        }
+      }
       .quoteTags {
         display: flex;
         flex-wrap: wrap;

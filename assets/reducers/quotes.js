@@ -11,7 +11,7 @@ import {
   CLEAR_QUOTE_FORM,
   SAVE_PAGE_QUANTITY,
   SAVE_CURRENT_PAGE,
-  CHANGE_QUOTE_FORM_LABEL,
+  CHANGE_QUOTE_FORM_LABELS,
   LOAD_QUOTE_DATA,
 } from '../actions/quotes';
 
@@ -19,7 +19,8 @@ import {
 
 const initialState = {
   quotes: [],
-  quoteFormLabel: 'Add a quote',
+  quoteFormTitleLabel: 'Add a quote',
+  quoteFormButtonLabel: 'Add',
   quoteFormStatus: false,
   quoteFormHeight: 1,
   headerHeight: 0,
@@ -87,6 +88,8 @@ const quotesReducer = (state = initialState, action = {}) => {
     case CLEAR_QUOTE_FORM:
       return {
         ...state,
+        quoteFormTitleLabel: 'Add a quote',
+        quoteFormButtonLabel: 'Add',
         quoteText: '',
         authorFirstName: '',
         authorLastName: '',
@@ -106,10 +109,11 @@ const quotesReducer = (state = initialState, action = {}) => {
         ...state,
         currentPage: action.pageNumber,
       };
-    case CHANGE_QUOTE_FORM_LABEL:
+    case CHANGE_QUOTE_FORM_LABELS:
       return {
         ...state,
-        quoteFormLabel: action.newLabel,
+        quoteFormTitleLabel: action.newTitleLabel,
+        quoteFormButtonLabel: action.newButtonLabel,
       };
     case LOAD_QUOTE_DATA: {
       const newTagsArray = action.tags.map((tag) => tag.name);

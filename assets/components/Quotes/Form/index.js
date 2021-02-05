@@ -16,7 +16,8 @@ import deleteTagIcon from '../../../images/close-thin-18dp.svg';
 // == Component
 
 const Form = ({
-  quoteFormLabel,
+  quoteFormTitleLabel,
+  quoteFormButtonLabel,
   quoteFormStatus,
   quoteFormHeight,
   quoteText,
@@ -82,7 +83,7 @@ const Form = ({
 
   return (
     <form className={quoteFormClassName} style={quoteFormStyle} onKeyDown={formOnKeyDownHandler} onSubmit={onSubmitHandler}>
-      <h2>{quoteFormLabel}</h2>
+      <h2>{quoteFormTitleLabel}</h2>
       <label htmlFor="quoteText">
         <span>Text</span>
         <textarea name="quoteText" value={quoteText} onChange={onChangeHandler} id="quoteText" minLength="1" required />
@@ -118,7 +119,7 @@ const Form = ({
           ))}
         </div>
       )}
-      <button className="quoteSubmitButton" type="submit">Add</button>
+      <button className="quoteSubmitButton" type="submit">{quoteFormButtonLabel}</button>
     </form>
   );
 };
@@ -126,7 +127,8 @@ const Form = ({
 // PropTypes
 
 Form.propTypes = {
-  quoteFormLabel: PropTypes.string.isRequired,
+  quoteFormTitleLabel: PropTypes.string.isRequired,
+  quoteFormButtonLabel: PropTypes.string.isRequired,
   quoteFormStatus: PropTypes.bool.isRequired,
   quoteFormHeight: PropTypes.number.isRequired,
   quoteText: PropTypes.string.isRequired,

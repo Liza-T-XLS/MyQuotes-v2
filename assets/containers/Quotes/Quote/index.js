@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Quote from '../../../components/Quotes/Quote';
 import {
-  changeQuoteFormLabel,
+  changeQuoteFormLabels,
   loadQuoteData,
 } from '../../../actions/quotes';
 
@@ -14,8 +14,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeQuoteFormLabel: (newLabel) => {
-    dispatch(changeQuoteFormLabel(newLabel));
+  changeQuoteFormLabels: (newTitleLabel, newButtonLabel) => {
+    dispatch(changeQuoteFormLabels(newTitleLabel, newButtonLabel));
   },
   loadQuoteData: (id, text, authorFirstName, authorLastName, characterName, mediumTitle, tags) => {
     dispatch(loadQuoteData(id, text, authorFirstName, authorLastName, characterName, mediumTitle, tags));

@@ -12,7 +12,8 @@ import {
 } from '../../../actions/quotes';
 
 const mapStateToProps = (state) => ({
-  quoteFormLabel: state.quotes.quoteFormLabel,
+  quoteFormTitleLabel: state.quotes.quoteFormTitleLabel,
+  quoteFormButtonLabel: state.quotes.quoteFormButtonLabel,
   quoteFormStatus: state.quotes.quoteFormStatus,
   quoteFormHeight: state.quotes.quoteFormHeight,
   quoteText: state.quotes.quoteText,

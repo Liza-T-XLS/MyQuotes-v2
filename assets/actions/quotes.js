@@ -12,7 +12,7 @@ export const ADD_QUOTE = 'ADD_QUOTE';
 export const CLEAR_QUOTE_FORM = 'CLEAR_QUOTE_FORM';
 export const SAVE_PAGE_QUANTITY = 'SAVE_PAGE_QUANTITY';
 export const SAVE_CURRENT_PAGE = 'SAVE_CURRENT_PAGE';
-export const CHANGE_QUOTE_FORM_LABEL = 'CHANGE_QUOTE_FORM_LABEL';
+export const CHANGE_QUOTE_FORM_LABELS = 'CHANGE_QUOTE_FORM_LABELS';
 export const LOAD_QUOTE_DATA = 'LOAD_QUOTE_DATA';
 export const EDIT_QUOTE = 'EDIT_QUOTE';
 
@@ -75,9 +75,10 @@ export const saveCurrentPage = (pageNumber) => ({
   pageNumber,
 });
 
-export const changeQuoteFormLabel = (newLabel) => ({
-  type: CHANGE_QUOTE_FORM_LABEL,
-  newLabel,
+export const changeQuoteFormLabels = (newTitleLabel, newButtonLabel) => ({
+  type: CHANGE_QUOTE_FORM_LABELS,
+  newTitleLabel,
+  newButtonLabel,
 });
 
 export const loadQuoteData = (
