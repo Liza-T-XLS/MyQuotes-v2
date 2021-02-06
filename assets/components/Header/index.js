@@ -5,6 +5,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Nav from './Nav';
 
 import './header.scss';
 
@@ -24,6 +25,7 @@ const Header = ({ saveHeaderHeight }) => {
       <h1 ref={titleRef}>
         <Link to="/">MyQuotes</Link>
       </h1>
+      <Nav />
     </header>
   );
 };
