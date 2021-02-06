@@ -1,9 +1,11 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
 // == Imports
 
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -12,14 +14,19 @@ import binIcon from '../../../images/bin.svg';
 
 // == Component
 
-export default function AlertDialog() {
-  const [open, setOpen] = React.useState(false);
+const AlertDialog = ({ quote, deleteQuote }) => {
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleCloseYes = () => {
+    setOpen(false);
+    deleteQuote(quote.id);
+  };
+
+  const handleCloseNo = () => {
     setOpen(false);
   };
 
@@ -28,20 +35,31 @@ export default function AlertDialog() {
       <img className="binIcon" src={binIcon} alt="bin icon" onClick={handleClickOpen} />
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseNo}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">Do you really want to delete this quote?</DialogTitle>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleCloseYes} color="primary">
             Yes
           </Button>
-          <Button onClick={handleClose} color="secondary" autoFocus>
+          <Button onClick={handleCloseNo} color="secondary" autoFocus>
             No
           </Button>
         </DialogActions>
       </Dialog>
     </>
   );
-}
+};
+
+// == PropTypes
+
+AlertDialog.propTypes = {
+  quote: PropTypes.object.isRequired,
+  deleteQuote: PropTypes.func.isRequired,
+};
+
+// == Export
+
+export default AlertDialog;

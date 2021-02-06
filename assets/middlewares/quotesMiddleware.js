@@ -12,6 +12,7 @@ import {
   changeQuoteFormStatus,
   savePageQuantity,
   EDIT_QUOTE,
+  DELETE_QUOTE,
 } from '../actions/quotes';
 
 // == Middleware
@@ -100,6 +101,30 @@ const quotesMiddleware = (store) => (next) => (action) => {
           console.warn(error);
           console.log(error.response.data);
           console.log('quote edit failed');
+        })
+        .finally(() => {
+          console.log('finally');
+        });
+      next(action);
+      break;
+    case DELETE_QUOTE:
+      axios({
+        method: 'delete',
+        url: 'http://localhost:8000/api/quotes',
+        data: {
+          quote: {
+            id: action.quoteId,
+          },
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(loadQuotes());
+        })
+        .catch((error) => {
+          console.warn(error);
+          console.log(error.response.data);
+          console.log('quote delete failed');
         })
         .finally(() => {
           console.log('finally');
