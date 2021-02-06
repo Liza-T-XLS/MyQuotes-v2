@@ -226,4 +226,41 @@ class QuoteController extends AbstractController
 
         return $this->json(['message' => 'Quote updated'], Response::HTTP_OK);
     }
+
+     /**
+     * @Route("/api/quotes", name="api_quotes_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, QuoteRepository $quoteRepository, EntityManagerInterface $entityManager): Response
+    {
+        /* 
+            expected data format:
+                {
+                "quote": {
+                    "id": 1,
+                }
+        */
+        $data = json_decode($request->getContent());
+
+        $quote = $quoteRepository->find($data->quote->id);
+       
+        if(!$quote) {
+            return $this->json(['message' => 'This quote does not exist.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $user = $this->getUser();
+
+        if(!$user) {
+            return $this->json(['message' => 'User not found. Must be connected in order to delete a quote.'], Response::HTTP_UNPROCESSABLE_ENTITY);
+        };
+
+        if($user != $quote->getUser()) {
+            return $this->json(['message' => 'You are not authorized to delete this quote.'], Response::HTTP_FORBIDDEN);
+        }
+
+        $entityManager->remove($quote);
+        $entityManager->flush();
+
+        return $this->json(['message' => 'Quote deleted'], Response::HTTP_OK);
+    }
+
 }
