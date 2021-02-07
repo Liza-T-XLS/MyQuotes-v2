@@ -1,8 +1,11 @@
 .nav {
   position: absolute;
-  top: 1rem;
+  top: 0rem;
   left: 0.5rem;
+  width: 42px;
+  transition: width 0.5s ease-in-out;
   .burger {
+    top: 1rem;
     width: 42px;
     height: 24px;
     cursor: pointer;
@@ -40,6 +43,29 @@
     }
     &.active span::after {
       transform: translateY(0px) rotateZ(-45deg);
+    }
+  }
+  .menu {
+    .options {
+      list-style: none;
+      padding: 0;
+      width: 0px;
+      overflow: hidden;
+      .option{
+        margin: 0.5rem;
+      }
+    }
+  }
+  &.active {
+    z-index: 10;
+    width: 70%;
+    height: 100%;
+    background-color: white;
+    border-right: gray 1px solid;
+    .menu {
+      .options {
+        width: 100%;
+      }
     }
   }
 }
