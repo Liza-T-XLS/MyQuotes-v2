@@ -10,6 +10,14 @@
     height: 24px;
     cursor: pointer;
     position: relative;
+    &:hover, &:active {
+      span {
+        background-color: dodgerblue;
+        &::before, &::after {
+          background-color: dodgerblue;
+        }
+      }
+    }
     span {
       width: 100%;
       height: 4px;
@@ -47,18 +55,32 @@
   }
   .menu {
     .options {
+      margin-top: 2rem;
       list-style: none;
       padding: 0;
       width: 0px;
       overflow: hidden;
-      .option{
+      .option {
         margin: 0.5rem;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        .menuIcon {
+          width: 18px;
+          height: auto;
+          margin-right: 1rem;
+        }
+        .link {
+          &:hover, &:active {
+            color: dodgerblue;
+          }
+        }
       }
     }
   }
   &.active {
     z-index: 10;
-    width: 70%;
+    width: 60%;
     height: 100%;
     background-color: white;
     border-right: gray 1px solid;

@@ -6,12 +6,18 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './nav.scss';
+import homeIcon from '../../../images/home.svg';
+import loginIcon from '../../../images/login-36dp.svg';
+import signupIcon from '../../../images/signup.svg';
+import aboutIcon from '../../../images/about-36dp.svg';
+import logoutIcon from '../../../images/logout-36dp.svg';
 
 // == Component
 
-const Nav = () => {
+const Nav = ({ isLogged, logOut }) => {
   const [open, setOpen] = useState(false);
 
   const burgerCSS = classNames('burger', { active: open });
@@ -21,8 +27,9 @@ const Nav = () => {
     setOpen(!open);
   };
 
-  const optionOnClickHandler = () => {
-    setOpen(!open);
+  const logOutOnClickHandler = () => {
+    burgerOnClickHandler();
+    logOut();
   };
 
   return (
@@ -32,14 +39,43 @@ const Nav = () => {
       </div>
       <div className="menu">
         <ul className="options">
-          <li className="option"><Link to="/" onClick={optionOnClickHandler}>Home</Link></li>
-          <li className="option"><Link to="/login" onClick={optionOnClickHandler}>Log in</Link></li>
-          <li className="option"><Link to="/signup" onClick={optionOnClickHandler}>Sign up</Link></li>
-          <li className="option">About</li>
+          <li className="option">
+            <img src={homeIcon} alt="menu home icon" className="menuIcon" />
+            <Link to="/" onClick={burgerOnClickHandler} className="link">Home</Link>
+          </li>
+          {!isLogged && (
+            <>
+              <li className="option">
+                <img src={loginIcon} alt="menu login icon" className="menuIcon" />
+                <Link to="/login" onClick={burgerOnClickHandler} className="link">Log in</Link>
+              </li>
+              <li className="option">
+                <img src={signupIcon} alt="menu signup icon" className="menuIcon" />
+                <Link to="/signup" onClick={burgerOnClickHandler} className="link">Sign up</Link>
+              </li>
+            </>
+          )}
+          <li className="option">
+            <img src={aboutIcon} alt="menu about icon" className="menuIcon" />
+            <a href="/">About</a>
+          </li>
+          {isLogged && (
+            <li className="option">
+              <img src={logoutIcon} alt="menu logout icon" className="menuIcon" />
+              <Link to="/" onClick={logOutOnClickHandler} className="link">Logout</Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
   );
+};
+
+// == PropTypes
+
+Nav.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
+  logOut: PropTypes.func.isRequired,
 };
 
 // == Export

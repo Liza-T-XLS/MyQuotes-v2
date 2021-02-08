@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import './app.scss';
 
@@ -16,7 +16,7 @@ import NotFound from '../NotFound';
 
 // == Component
 
-const App = ({ checkIsLogged }) => {
+const App = ({ checkIsLogged, isLogged }) => {
   useEffect(() => {
     console.log('useEffect: checkIsLogged');
     checkIsLogged();
@@ -49,7 +49,7 @@ const App = ({ checkIsLogged }) => {
             path="/quotes"
             exact
           >
-            <Quotes />
+            {!isLogged ? <Redirect to="/" /> : <Quotes />}
           </Route>
           <Route>
             <NotFound />
@@ -65,6 +65,7 @@ const App = ({ checkIsLogged }) => {
 
 App.propTypes = {
   checkIsLogged: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 // == Export

@@ -2,16 +2,16 @@
 
 import { connect } from 'react-redux';
 
-import App from '../../components/App';
-import { checkIsLogged } from '../../actions/authentication';
+import Nav from '../../../components/Header/Nav';
+import { logOut } from '../../../actions/authentication';
 
 const mapStateToProps = (state) => ({
   isLogged: state.authentication.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  checkIsLogged: () => {
-    dispatch(checkIsLogged());
+  logOut: () => {
+    dispatch(logOut());
   },
 });
 
@@ -20,4 +20,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App);
+)(Nav);
