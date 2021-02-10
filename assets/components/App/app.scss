@@ -1,0 +1,13 @@
+.app {
+  height: 100%;
+  main {
+      margin: 0.5rem;
+  }
+  .filter{
+      background-color: rgba(black, 0.5);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: 2;
+  }
+}

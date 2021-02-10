@@ -7,8 +7,13 @@ html {
 body {
     font-family: $mainFamilyFont;
     background-color: $backgroundColor;
+    margin: 0;
 }
 
 a {
     text-decoration: none;
+}
+
+#root {
+    height: 100vh;
 }

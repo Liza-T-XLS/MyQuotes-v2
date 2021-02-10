@@ -20,6 +20,7 @@ const Header = ({ saveHeaderHeight }) => {
     const totalHeaderHeight = headerHeight + parseInt(titleStyle.marginTop) + parseInt(titleStyle.marginBottom);
     saveHeaderHeight(totalHeaderHeight);
   }, []);
+
   return (
     <header ref={headerRef} className="header">
       <h1 ref={titleRef}>

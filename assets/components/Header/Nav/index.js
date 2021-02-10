@@ -3,7 +3,7 @@
 
 // == Imports
 
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -17,9 +17,12 @@ import logoutIcon from '../../../images/logout-36dp.svg';
 
 // == Component
 
-const Nav = ({ isLogged, logOut }) => {
-  const [open, setOpen] = useState(false);
-
+const Nav = ({
+  open,
+  setOpen,
+  isLogged,
+  logOut,
+}) => {
   const burgerCSS = classNames('burger', { active: open });
   const navCSS = classNames('nav', { active: open });
 
@@ -74,6 +77,8 @@ const Nav = ({ isLogged, logOut }) => {
 // == PropTypes
 
 Nav.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
   logOut: PropTypes.func.isRequired,
 };

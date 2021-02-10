@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
 // == Imports
 
 import React, { useEffect } from 'react';
@@ -16,14 +19,27 @@ import NotFound from '../NotFound';
 
 // == Component
 
-const App = ({ checkIsLogged, isLogged }) => {
+const App = ({
+  checkIsLogged,
+  isLogged,
+  open,
+  setOpen,
+}) => {
   useEffect(() => {
     console.log('useEffect: checkIsLogged');
     checkIsLogged();
   },
   []);
+
+  const filterOnClickHandler = () => {
+    setOpen(false);
+  };
+
   return (
     <div className="app">
+      {open && (
+        <div className="filter" onClick={filterOnClickHandler} />
+      )}
       <Header />
       <main>
         <Switch>
@@ -66,6 +82,8 @@ const App = ({ checkIsLogged, isLogged }) => {
 App.propTypes = {
   checkIsLogged: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
 };
 
 // == Export
