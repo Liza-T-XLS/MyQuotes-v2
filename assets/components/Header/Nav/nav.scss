@@ -57,6 +57,7 @@
   .menu {
     .options {
       margin-top: 2rem;
+      margin-left: 0.5rem;
       list-style: none;
       padding: 0;
       width: 0px;
@@ -84,7 +85,6 @@
     width: 60%;
     height: 100%;
     background-color: white;
-    border-right: gray 1px solid;
     .menu {
       .options {
         width: 100%;

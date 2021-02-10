@@ -15,6 +15,7 @@ import addQuoteIcon from '../../images/addQuote-36dp.svg';
 
 import Quote from '../../containers/Quotes/Quote';
 import Form from '../../containers/Quotes/Form';
+import Search from './Search';
 
 // == Component
 
@@ -68,6 +69,7 @@ const Quotes = ({
         <title>MyQuotes | Board</title>
       </Helmet>
       <div className="quotesMenu" ref={quotesMenuRef}>
+        <Search />
         <img className={addQuoteIconClassName} src={addQuoteIcon} alt="add quote icon" onClick={onClickHandler} />
       </div>
       <div className="quotesList" ref={quotesListRef}>

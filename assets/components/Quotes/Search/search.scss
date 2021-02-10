@@ -1,0 +1,22 @@
+label {
+  fieldset {
+    padding-left: 0.5rem;
+    padding-right: 0rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0rem;
+    border-radius: 5px;
+    legend {
+      font-weight: bold;
+    }
+    .searchInput {
+      display: block;
+      border: none;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .searchInputSpan {
+    display: block;
+  }
+}

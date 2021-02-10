@@ -1,6 +1,8 @@
 .quotes {
   .quotesMenu {
-      text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
       .addQuoteIcon {
         position: relative;
         right: -7px;
