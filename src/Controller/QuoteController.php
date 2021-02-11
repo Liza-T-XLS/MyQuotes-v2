@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Quote;
 use App\Entity\Tag;
 use App\Repository\QuoteRepository;
+use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +19,7 @@ class QuoteController extends AbstractController
     /**
      * @Route("/api/quotes", name="api_quotes_add", methods={"POST"})
      */
-    public function add(Request $request, DenormalizerInterface $denormalizer, ValidatorInterface $validator, EntityManagerInterface $entityManager): Response
+    public function add(Request $request, DenormalizerInterface $denormalizer, ValidatorInterface $validator, EntityManagerInterface $entityManager, TagRepository $tagRepository): Response
     {
         /* 
             expected data format:
@@ -58,6 +59,15 @@ class QuoteController extends AbstractController
 
         $tags = $data->tags;
         foreach($tags as $tag) {
+            // checking if tag already exists
+            $existingTag = $tagRepository->findBy(['name' => $tag]);
+            // if the tag already exists, the existing tag is added to the quote
+            if ($existingTag) {
+                $existingTag = $existingTag[0];
+                $quote->addTag($existingTag);
+            }
+            // if not it is created
+            if (!$existingTag) {
             $newTag = new Tag();
             $newTag->setName($tag);
             $errors = $validator->validate($newTag);
@@ -77,9 +87,10 @@ class QuoteController extends AbstractController
                 return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
             }
             $entityManager->persist($newTag);
+            // and added to the quote
             $quote->addTag($newTag);
+            }
         }
-        
         $user = $this->getUser();
 
         if($user) {

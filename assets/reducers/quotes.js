@@ -1,5 +1,7 @@
 // == Imports
 
+import slugify from 'slugify';
+
 import {
   SAVE_QUOTES,
   CHANGE_QUOTE_FORM_STATUS,
@@ -72,7 +74,7 @@ const quotesReducer = (state = initialState, action = {}) => {
     case SAVE_TAG: {
       const newTagsArray = [
         ...state.tags,
-        action.tagName,
+        slugify(action.tagName, { lower: true }),
       ];
       return {
         ...state,
