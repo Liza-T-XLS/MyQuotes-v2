@@ -19,6 +19,17 @@ class TagRepository extends ServiceEntityRepository
         parent::__construct($registry, Tag::class);
     }
 
+    // SQL query: 
+    // SELECT DISTINCT tag.id, tag.name FROM tag INNER JOIN quote_tag ON quote_tag.tag_id = tag.id INNER JOIN quote ON quote_tag.quote_id = quote.id WHERE quote.user_id = 3
+    public function findAllTagsByUser($userId) {
+        $conn = $this->getEntityManager()
+        ->getConnection();
+        $sql = 'SELECT DISTINCT tag.id, tag.name FROM tag INNER JOIN quote_tag ON quote_tag.tag_id = tag.id INNER JOIN quote ON quote_tag.quote_id = quote.id WHERE quote.user_id = :userId';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array('userId' => $userId));
+        return $stmt->fetchAllAssociative();
+    }
+
     // /**
     //  * @return Tag[] Returns an array of Tag objects
     //  */

@@ -36,7 +36,7 @@ const Tags = ({ loadTags, userTags }) => {
       <img className="leftButton" src={navLeftButton} alt="tag navigation left button" onClick={buttonOnClickHandler} />
       <div className="tagsList" ref={tagsListRef}>
         {userTags.map((userTag) => (
-          <span key={userTag} className="tag">{userTag}</span>
+          <span key={userTag.id} className="tag">{userTag.name}</span>
         ))}
       </div>
       <img className="rightButton" src={navRightButton} alt="tag navigation left button" onClick={buttonOnClickHandler} />

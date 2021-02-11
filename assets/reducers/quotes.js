@@ -135,7 +135,7 @@ const quotesReducer = (state = initialState, action = {}) => {
     case SAVE_USER_TAGS:
       return {
         ...state,
-        userTags: Object.values(action.tags),
+        userTags: action.tags,
       };
     default: return state;
   }
