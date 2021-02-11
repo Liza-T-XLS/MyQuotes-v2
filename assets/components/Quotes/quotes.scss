@@ -1,8 +1,9 @@
 .quotes {
   .quotesMenu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    .firstLevel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       .addQuoteIcon {
         position: relative;
         right: -7px;
@@ -16,6 +17,7 @@
           transform: rotate(45deg);
         }
       }
+    }
   }
   .MuiPagination-ul {
     width: 100%;

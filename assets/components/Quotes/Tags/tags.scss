@@ -1,0 +1,30 @@
+.tags {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .tagsList {
+    box-shadow: 5px 0 5px -5px #2f50aa, -5px 0 5px -5px #2f50aa, inset 5px 0 5px -5px #2f50aa, inset -5px 0 5px -5px #2f50aa;
+    border-radius: 3px;
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    overflow: auto;
+    white-space: nowrap;
+    -ms-overflow-style: none;  /* IE and Edge - to be tested */
+    scrollbar-width: none;  /* Firefox */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari and Opera - to be tested */
+    }
+    .tag {
+        display: inline-block;
+        margin: 0rem 0.25rem 0rem 0.25rem;
+        padding: 0.1rem 0.2rem 0.1rem 0.2rem;
+        background-color: #2f50aa;
+        color: white;
+        border-radius: 5px;
+        width: min-content;
+    }
+  }
+  .leftButton, .rightButton {
+    width: 24px;
+    height: auto;
+  }
+}

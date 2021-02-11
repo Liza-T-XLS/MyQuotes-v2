@@ -3,6 +3,7 @@
   top: 0rem;
   left: 0rem;
   width: 42px;
+  height: 42px;
   transition: width 0.5s ease-in-out;
   .burger {
     top: 1rem;
@@ -55,6 +56,7 @@
     }
   }
   .menu {
+    width: 0px;
     .options {
       margin-top: 2rem;
       margin-left: 0.5rem;
@@ -86,6 +88,7 @@
     height: 100%;
     background-color: white;
     .menu {
+      width: 100%;
       .options {
         width: 100%;
       }
