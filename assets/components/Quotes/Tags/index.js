@@ -18,13 +18,16 @@ const Tags = ({ loadTags, userTags }) => {
     console.log('useEffect: tags');
     loadTags();
   }, []);
+
   const tagsListRef = useRef(null);
+
   const buttonOnClickHandler = (e) => {
+    const tagsListRefWidth = tagsListRef.current.offsetWidth;
     if (e.target.className === 'leftButton') {
-      tagsListRef.current.scrollLeft -= 30;
+      tagsListRef.current.scrollLeft -= tagsListRefWidth;
     }
     if (e.target.className === 'rightButton') {
-      tagsListRef.current.scrollLeft += 30;
+      tagsListRef.current.scrollLeft += tagsListRefWidth;
     }
   };
 
@@ -33,7 +36,7 @@ const Tags = ({ loadTags, userTags }) => {
       <img className="leftButton" src={navLeftButton} alt="tag navigation left button" onClick={buttonOnClickHandler} />
       <div className="tagsList" ref={tagsListRef}>
         {userTags.map((userTag) => (
-          <span className="tag">{userTag}</span>
+          <span key={userTag} className="tag">{userTag}</span>
         ))}
       </div>
       <img className="rightButton" src={navRightButton} alt="tag navigation left button" onClick={buttonOnClickHandler} />
