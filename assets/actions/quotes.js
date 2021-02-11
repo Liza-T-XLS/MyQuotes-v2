@@ -16,6 +16,8 @@ export const CHANGE_QUOTE_FORM_LABELS = 'CHANGE_QUOTE_FORM_LABELS';
 export const LOAD_QUOTE_DATA = 'LOAD_QUOTE_DATA';
 export const EDIT_QUOTE = 'EDIT_QUOTE';
 export const DELETE_QUOTE = 'DELETE_QUOTE';
+export const LOAD_TAGS = 'LOAD_TAGS';
+export const SAVE_USER_TAGS = 'SAVE_USER_TAGS';
 
 // == Action creators
 
@@ -108,4 +110,13 @@ export const editQuote = () => ({
 export const deleteQuote = (quoteId) => ({
   type: DELETE_QUOTE,
   quoteId,
+});
+
+export const loadTags = () => ({
+  type: LOAD_TAGS,
+});
+
+export const saveUserTags = (tags) => ({
+  type: SAVE_USER_TAGS,
+  tags,
 });

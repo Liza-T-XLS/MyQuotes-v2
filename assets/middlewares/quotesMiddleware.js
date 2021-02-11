@@ -13,6 +13,9 @@ import {
   savePageQuantity,
   EDIT_QUOTE,
   DELETE_QUOTE,
+  LOAD_TAGS,
+  saveUserTags,
+  loadTags,
 } from '../actions/quotes';
 
 // == Middleware
@@ -60,6 +63,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           store.dispatch(loadQuotes());
+          store.dispatch(loadTags());
           store.dispatch(clearQuoteForm());
           store.dispatch(saveFormHeight(1));
           store.dispatch(changeQuoteFormStatus());
@@ -125,6 +129,25 @@ const quotesMiddleware = (store) => (next) => (action) => {
           console.warn(error);
           console.log(error.response.data);
           console.log('quote delete failed');
+        })
+        .finally(() => {
+          console.log('finally');
+        });
+      next(action);
+      break;
+    case LOAD_TAGS:
+      axios({
+        method: 'get',
+        url: 'http://localhost:8000/api/tags',
+      })
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(saveUserTags(response.data));
+        })
+        .catch((error) => {
+          console.warn(error);
+          console.log(error.response.data);
+          console.log('load tags failed');
         })
         .finally(() => {
           console.log('finally');

@@ -16,7 +16,7 @@ import addQuoteIcon from '../../images/addQuote-36dp.svg';
 import Quote from '../../containers/Quotes/Quote';
 import Form from '../../containers/Quotes/Form';
 import Search from './Search';
-import Tags from './Tags';
+import Tags from '../../containers/Quotes/Tags';
 
 // == Component
 
