@@ -42,10 +42,11 @@ const Quotes = ({
 
   const quotesDivRef = useRef(null);
   const quotesMenuRef = useRef(null);
+  const quotesMenuFirstLevelRef = useRef(null);
 
   const onClickHandler = () => {
     console.log('addQuote icon clicked');
-    const formHeight = window.innerHeight - headerHeight - quotesMenuRef.current.clientHeight;
+    const formHeight = window.innerHeight - headerHeight - quotesMenuRef.current.clientHeight + (quotesMenuRef.current.clientHeight - quotesMenuFirstLevelRef.current.clientHeight);
     if (!quoteFormStatus) {
       saveFormHeight(formHeight);
     } else {
@@ -70,7 +71,7 @@ const Quotes = ({
         <title>MyQuotes | Board</title>
       </Helmet>
       <div className="quotesMenu" ref={quotesMenuRef}>
-        <div className="firstLevel">
+        <div className="firstLevel" ref={quotesMenuFirstLevelRef}>
           <Search />
           <img className={addQuoteIconClassName} src={addQuoteIcon} alt="add quote icon" onClick={onClickHandler} />
         </div>
