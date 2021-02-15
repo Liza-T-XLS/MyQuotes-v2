@@ -1,5 +1,11 @@
 /* eslint-disable import/prefer-default-export */
 
+// == Imports
+
+import { saveFormHeight, changeQuoteFormStatus } from '../actions/quotes';
+
+// == Exports
+
 // onClickHandler to toggle the visibility of passwords
 export const passwordVisibilityOnClickHandler = (e) => {
   const passwordField = e.target.previousSibling;

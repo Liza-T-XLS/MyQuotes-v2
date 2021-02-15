@@ -34,6 +34,17 @@ class QuoteRepository extends ServiceEntityRepository
         return $query->getSingleScalarResult();
     }
 
+    // SQL query:
+    // SELECT COUNT(*) FROM `quote` INNER JOIN quote_tag ON quote_tag.quote_id = quote.id WHERE `user_id` = 24 AND quote_tag.tag_id = 1 
+    public function loadUserQuoteNumberByTag($userId, $tag) {
+        $conn = $this->getEntityManager()
+        ->getConnection();
+        $sql = 'SELECT COUNT(*) FROM `quote` INNER JOIN quote_tag ON quote_tag.quote_id = quote.id WHERE `user_id` = :userId AND quote_tag.tag_id = :tag ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array('userId' => $userId, 'tag' => $tag));
+        return $stmt->fetchOne();
+    }
+
     // SQL query: 
     // SELECT * FROM `quote` WHERE `user_id` = 24 LIMIT 5, 5
     public function loadQuotesByUserAndPagination($userId, $maxResults, $offset) {
@@ -49,6 +60,18 @@ class QuoteRepository extends ServiceEntityRepository
         $query->setFirstResult($offset);
 
         return $query->getResult();
+    }
+
+    // SQL query:
+    // SELECT * FROM quote INNER JOIN quote_tag ON quote_tag.quote_id = quote.id WHERE quote.user_id = 3 AND quote_tag.tag_id = 1 LIMIT 5 OFFSET 5
+    public function loadQuotesByUserAndPaginationAndTag($userId, $tag, $maxResults, $offset) {
+
+        $conn = $this->getEntityManager()
+        ->getConnection();
+        $sql = 'SELECT * FROM quote INNER JOIN quote_tag ON quote_tag.quote_id = quote.id WHERE quote.user_id = :userId AND quote_tag.tag_id = :tag LIMIT ' .$maxResults . ' OFFSET ' .$offset;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array('userId' => $userId, 'tag' => $tag));
+        return $stmt->fetchAllAssociative();
     }
 
     // /**

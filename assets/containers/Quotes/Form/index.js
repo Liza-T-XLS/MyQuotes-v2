@@ -9,6 +9,8 @@ import {
   deleteTag,
   addQuote,
   editQuote,
+  changeQuoteFormStatus,
+  saveFormHeight,
 } from '../../../actions/quotes';
 
 const mapStateToProps = (state) => ({

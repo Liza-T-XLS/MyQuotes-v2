@@ -28,6 +28,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
         url: 'http://localhost:8000/api/quotes/show',
         data: {
           currentPage: store.getState().quotes.currentPage,
+          tag: '',
         },
       })
         .then((response) => {

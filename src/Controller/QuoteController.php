@@ -122,15 +122,28 @@ class QuoteController extends AbstractController
 
         // maximum number of quotes per page
         $maxResults = 5;
-        // aggregate number of quotes the user has saved
-        $totalQuoteNumber = $quoteRepository->loadUserQuoteNumber($userId);
-        // aggregate number of quotes divided by number of quotes per page to obtain the number of pages (pagination purposes)
-        $pageQuantity = ceil($totalQuoteNumber/$maxResults);
+
         $currentPage = $data->currentPage;
         // the current page allows to determine the index from which the SQL request should start retrieving results
         $offset = ($maxResults * $currentPage) - $maxResults;
 
-        $quotes = $quoteRepository->loadQuotesByUserAndPagination($userId, $maxResults, $offset);
+        // optional
+        $tag = $data->tag;
+
+        // if there is no tag, all the user's quotes are retrieved (limit per page), else only the quotes that have the tag are retrieved
+        if(!$tag) {
+            // aggregate number of quotes the user has saved
+            $totalQuoteNumber = $quoteRepository->loadUserQuoteNumber($userId);
+            // aggregate number of quotes divided by number of quotes per page to obtain the number of pages (pagination purposes)
+            $pageQuantity = ceil($totalQuoteNumber/$maxResults);
+            $quotes = $quoteRepository->loadQuotesByUserAndPagination($userId, $maxResults, $offset);
+        } else {
+            // aggregate number of quotes the user has saved with the tag
+            $totalQuoteNumber = $quoteRepository->loadUserQuoteNumberByTag($userId, $tag);
+            // aggregate number of quotes divided by number of quotes per page to obtain the number of pages (pagination purposes)
+            $pageQuantity = ceil($totalQuoteNumber/$maxResults);
+            $quotes = $quoteRepository->loadQuotesByUserAndPaginationAndTag($userId, $tag, $maxResults, $offset);
+        }
 
         return $this->json(['pageQuantity' => $pageQuantity, 'quotes' => $quotes], 200, [], ['groups' => 'quotes_get']);
     }
