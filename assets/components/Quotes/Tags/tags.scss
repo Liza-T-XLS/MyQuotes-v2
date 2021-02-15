@@ -22,6 +22,11 @@
         color: white;
         border-radius: 5px;
         width: min-content;
+        &.active {
+          color: #2f50aa;
+          background-color: white;
+          border: #2f50aa solid 1px;
+        }
     }
   }
   .leftButton, .rightButton {

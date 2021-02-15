@@ -11,6 +11,7 @@ import {
 
 const mapStateToProps = (state) => ({
   userTags: state.quotes.userTags,
+  selectedTag: state.quotes.selectedTag,
 });
 
 const mapDispatchToProps = (dispatch) => ({
