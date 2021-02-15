@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import Tags from '../../../components/Quotes/Tags';
 import {
   loadTags,
+  saveSelectedTag,
+  loadQuotes,
 } from '../../../actions/quotes';
 
 const mapStateToProps = (state) => ({
@@ -14,6 +16,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   loadTags: () => {
     dispatch(loadTags());
+  },
+  saveSelectedTag: (tagId) => {
+    dispatch(saveSelectedTag(tagId));
+  },
+  loadQuotes: () => {
+    dispatch(loadQuotes());
   },
 });
 

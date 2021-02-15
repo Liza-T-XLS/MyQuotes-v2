@@ -142,7 +142,14 @@ class QuoteController extends AbstractController
             $totalQuoteNumber = $quoteRepository->loadUserQuoteNumberByTag($userId, $tag);
             // aggregate number of quotes divided by number of quotes per page to obtain the number of pages (pagination purposes)
             $pageQuantity = ceil($totalQuoteNumber/$maxResults);
-            $quotes = $quoteRepository->loadQuotesByUserAndPaginationAndTag($userId, $tag, $maxResults, $offset);
+            
+            $SQLquotes = $quoteRepository->loadQuotesByUserAndPaginationAndTag($userId, $tag, $maxResults, $offset);
+            // by using native SQL in the repository, the quotes returned do not have their array collection of tags but only the tag that has been selected which not only is not accurate but also causes problems in the display, therefore, below, the quote's id is used to retrieve a proper quote object with all its properties, then stored in an array before being returned
+            $quotes = [];
+            foreach($SQLquotes as $quote) {
+                $quoteObject = $quoteRepository->find($quote['id']);
+                $quotes[] = $quoteObject;
+            }
         }
 
         return $this->json(['pageQuantity' => $pageQuantity, 'quotes' => $quotes], 200, [], ['groups' => 'quotes_get']);

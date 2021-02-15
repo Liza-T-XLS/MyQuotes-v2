@@ -18,6 +18,7 @@ export const EDIT_QUOTE = 'EDIT_QUOTE';
 export const DELETE_QUOTE = 'DELETE_QUOTE';
 export const LOAD_TAGS = 'LOAD_TAGS';
 export const SAVE_USER_TAGS = 'SAVE_USER_TAGS';
+export const SAVE_SELECTED_TAG = 'SAVE_SELECTED_TAG';
 
 // == Action creators
 
@@ -119,4 +120,9 @@ export const loadTags = () => ({
 export const saveUserTags = (tags) => ({
   type: SAVE_USER_TAGS,
   tags,
+});
+
+export const saveSelectedTag = (tagId) => ({
+  type: SAVE_SELECTED_TAG,
+  tagId,
 });

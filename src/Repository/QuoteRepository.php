@@ -68,7 +68,7 @@ class QuoteRepository extends ServiceEntityRepository
 
         $conn = $this->getEntityManager()
         ->getConnection();
-        $sql = 'SELECT * FROM quote INNER JOIN quote_tag ON quote_tag.quote_id = quote.id WHERE quote.user_id = :userId AND quote_tag.tag_id = :tag LIMIT ' .$maxResults . ' OFFSET ' .$offset;
+        $sql = 'SELECT quote.id FROM quote INNER JOIN quote_tag ON quote_tag.quote_id = quote.id WHERE quote.user_id = :userId AND quote_tag.tag_id = :tag LIMIT ' .$maxResults . ' OFFSET ' .$offset;
         $stmt = $conn->prepare($sql);
         $stmt->execute(array('userId' => $userId, 'tag' => $tag));
         return $stmt->fetchAllAssociative();

@@ -10,10 +10,11 @@ import PropTypes from 'prop-types';
 import './tags.scss';
 import navLeftButton from '../../../images/navigate_before-36dp.svg';
 import navRightButton from '../../../images/navigate_next-36dp.svg';
+import { loadQuotes } from '../../../actions/quotes';
 
 // == Component
 
-const Tags = ({ loadTags, userTags }) => {
+const Tags = ({ loadTags, userTags, saveSelectedTag, loadQuotes }) => {
   useEffect(() => {
     console.log('useEffect: tags');
     loadTags();
@@ -31,12 +32,18 @@ const Tags = ({ loadTags, userTags }) => {
     }
   };
 
+  const tagOnClickHandler = (e) => {
+    console.log(e.target.id);
+    saveSelectedTag(e.target.id);
+    loadQuotes();
+  };
+
   return (
     <div className="tags">
       <img className="leftButton" src={navLeftButton} alt="tag navigation left button" onClick={buttonOnClickHandler} />
       <div className="tagsList" ref={tagsListRef}>
         {userTags.map((userTag) => (
-          <span key={userTag.id} className="tag">{userTag.name}</span>
+          <span key={userTag.id} id={userTag.id} className="tag" onClick={tagOnClickHandler} role="button" tabIndex="0">{userTag.name}</span>
         ))}
       </div>
       <img className="rightButton" src={navRightButton} alt="tag navigation left button" onClick={buttonOnClickHandler} />
@@ -49,6 +56,8 @@ const Tags = ({ loadTags, userTags }) => {
 Tags.propTypes = {
   loadTags: PropTypes.func.isRequired,
   userTags: PropTypes.array.isRequired,
+  saveSelectedTag: PropTypes.func.isRequired,
+  loadQuotes: PropTypes.func.isRequired,
 };
 
 // == Export

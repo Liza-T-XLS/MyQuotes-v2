@@ -16,6 +16,7 @@ import {
   CHANGE_QUOTE_FORM_LABELS,
   LOAD_QUOTE_DATA,
   SAVE_USER_TAGS,
+  SAVE_SELECTED_TAG,
 } from '../actions/quotes';
 
 // == Initial state
@@ -38,6 +39,7 @@ const initialState = {
   pageQuantity: 0,
   currentPage: 1,
   userTags: [],
+  selectedTag: '',
 };
 
 // == Reducer
@@ -136,6 +138,11 @@ const quotesReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         userTags: action.tags,
+      };
+    case SAVE_SELECTED_TAG:
+      return {
+        ...state,
+        selectedTag: action.tagId,
       };
     default: return state;
   }
