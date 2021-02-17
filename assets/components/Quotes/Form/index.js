@@ -74,7 +74,7 @@ const Form = ({
     console.log(e);
     e.preventDefault();
     console.log('submitted');
-    if(quoteId) {
+    if (quoteId) {
       editQuote();
     } else {
       addQuote();

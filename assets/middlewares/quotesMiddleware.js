@@ -97,6 +97,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           store.dispatch(loadQuotes());
+          store.dispatch(loadTags());
           store.dispatch(clearQuoteForm());
           store.dispatch(saveFormHeight(1));
           store.dispatch(changeQuoteFormStatus());

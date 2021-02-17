@@ -158,7 +158,7 @@ class QuoteController extends AbstractController
     /**
      * @Route("/api/quotes", name="api_quotes_edit", methods={"PUT"})
      */
-    public function edit(Request $request, DenormalizerInterface $denormalizer, ValidatorInterface $validator, QuoteRepository $quoteRepository, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, DenormalizerInterface $denormalizer, ValidatorInterface $validator, QuoteRepository $quoteRepository, TagRepository $tagRepository, EntityManagerInterface $entityManager): Response
     {
          /* 
             expected data format:
@@ -230,6 +230,15 @@ class QuoteController extends AbstractController
 
         $tags = $data->tags;
         foreach($tags as $tag) {
+            // checking if tag already exists
+            $existingTag = $tagRepository->findBy(['name' => $tag]);
+            // if the tag already exists, the existing tag is added to the quote
+            if ($existingTag) {
+                $existingTag = $existingTag[0];
+                $quote->addTag($existingTag);
+            }
+            // if not it is created
+            if (!$existingTag) {
             $newTag = new Tag();
             $newTag->setName($tag);
             $errors = $validator->validate($newTag);
@@ -251,6 +260,7 @@ class QuoteController extends AbstractController
             
             $entityManager->persist($newTag);
             $quote->addTag($newTag);
+            }
         }
         
         $entityManager->flush();
