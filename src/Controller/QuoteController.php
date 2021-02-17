@@ -19,7 +19,7 @@ class QuoteController extends AbstractController
     /**
      * @Route("/api/quotes", name="api_quotes_add", methods={"POST"})
      */
-    public function add(Request $request, DenormalizerInterface $denormalizer, ValidatorInterface $validator, EntityManagerInterface $entityManager, TagRepository $tagRepository): Response
+    public function add(Request $request, DenormalizerInterface $denormalizer, ValidatorInterface $validator, EntityManagerInterface $entityManager, TagRepository $tagRepository, QuoteRepository $quoteRepository): Response
     {
         /* 
             expected data format:
@@ -102,7 +102,15 @@ class QuoteController extends AbstractController
         $entityManager->persist($quote);
         $entityManager->flush();
 
-        return $this->json(['message' => 'Quote created'], Response::HTTP_CREATED);
+        // after the quote is created, gets the pageQuantity so that the last page of quotes (where the new quote is) is displayed
+        // maximum number of quotes per page
+        $maxResults = 5;
+        // aggregate number of quotes the user has saved
+        $totalQuoteNumber = $quoteRepository->loadUserQuoteNumber($user->getId());
+        // aggregate number of quotes divided by number of quotes per page to obtain the number of pages (pagination purposes)
+        $pageQuantity = ceil($totalQuoteNumber/$maxResults);
+
+        return $this->json(['message' => 'Quote created', 'pageQuantity' => $pageQuantity], Response::HTTP_CREATED);
     }
 
     /**

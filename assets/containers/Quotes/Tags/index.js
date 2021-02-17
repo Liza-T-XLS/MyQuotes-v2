@@ -7,6 +7,7 @@ import {
   loadTags,
   saveSelectedTag,
   loadQuotes,
+  saveCurrentPage,
 } from '../../../actions/quotes';
 
 const mapStateToProps = (state) => ({
@@ -23,6 +24,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadQuotes: () => {
     dispatch(loadQuotes());
+  },
+  saveCurrentPage: (pageNumber) => {
+    dispatch(saveCurrentPage(pageNumber));
   },
 });
 

@@ -16,6 +16,8 @@ import {
   LOAD_TAGS,
   saveUserTags,
   loadTags,
+  saveCurrentPage,
+  saveSelectedTag,
 } from '../actions/quotes';
 
 // == Middleware
@@ -62,6 +64,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response.data);
+          store.dispatch(saveCurrentPage(response.data.pageQuantity));
           store.dispatch(loadQuotes());
           store.dispatch(loadTags());
           store.dispatch(clearQuoteForm());
@@ -125,6 +128,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           store.dispatch(loadQuotes());
+          store.dispatch(loadTags());
         })
         .catch((error) => {
           console.warn(error);

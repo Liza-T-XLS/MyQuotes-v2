@@ -21,6 +21,7 @@ const Tags = ({
   saveSelectedTag,
   loadQuotes,
   selectedTag,
+  saveCurrentPage,
 }) => {
   useEffect(() => {
     console.log('useEffect: tags');
@@ -42,6 +43,7 @@ const Tags = ({
   const tagOnClickHandler = (e) => {
     console.log(e.target);
     saveSelectedTag(e.target.id);
+    saveCurrentPage(1);
     loadQuotes();
   };
 
@@ -80,6 +82,7 @@ Tags.propTypes = {
   saveSelectedTag: PropTypes.func.isRequired,
   loadQuotes: PropTypes.func.isRequired,
   selectedTag: PropTypes.number.isRequired,
+  saveCurrentPage: PropTypes.func.isRequired,
 };
 
 // == Export
