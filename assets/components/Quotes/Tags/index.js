@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import './tags.scss';
 import navLeftButton from '../../../images/navigate_before-36dp.svg';
 import navRightButton from '../../../images/navigate_next-36dp.svg';
+import unselectTagIcon from '../../../images/close-thin-18dp.svg';
 
 // == Component
 
@@ -39,8 +40,14 @@ const Tags = ({
   };
 
   const tagOnClickHandler = (e) => {
-    console.log(e.target.id);
+    console.log(e.target);
     saveSelectedTag(e.target.id);
+    loadQuotes();
+  };
+
+  const tagUnselectOnClickHandler = () => {
+    console.log('tag unselected');
+    saveSelectedTag('');
     loadQuotes();
   };
 
@@ -51,7 +58,12 @@ const Tags = ({
         {userTags.map((userTag) => {
           const tagCSS = classNames('tag', { active: userTag.id === selectedTag });
           return (
-            <span key={userTag.id} id={userTag.id} className={tagCSS} onClick={tagOnClickHandler} role="button" tabIndex="0">{userTag.name}</span>
+            <div key={userTag.id} className={tagCSS}>
+              <span id={userTag.id} role="button" tabIndex="0" onClick={tagOnClickHandler}>{userTag.name}</span>
+              {selectedTag === userTag.id && (
+                <img className="tagUnselect" src={unselectTagIcon} alt="unselect tag icon" onClick={tagUnselectOnClickHandler} />
+              )}
+            </div>
           );
         })}
       </div>

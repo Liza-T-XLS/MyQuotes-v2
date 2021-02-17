@@ -62,7 +62,6 @@ const Quote = forwardRef(({ quote, displayFormOnClickHandler, changeQuoteFormLab
           <span className="detailsLabel">Details</span>
           <div className="quoteOptions">
             <img className="editIcon" src={editIcon} alt="edit icon" onClick={editOnClickHandler} />
-            {/* <img className="binIcon" src={binIcon} alt="bin icon" onClick={binOnClickHandler} /> */}
             <Dialog quote={quote} />
           </div>
         </div>
