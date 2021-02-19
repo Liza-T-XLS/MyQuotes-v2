@@ -127,6 +127,12 @@ const quotesMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response.data);
+          console.log(store.getState().quotes.selectedTag);
+          console.log(response.data.oldTags);
+          console.log(response.data.oldTags.find((tag) => tag == store.getState().quotes.selectedTag));
+          if (response.data.oldTags.find((tag) => tag == store.getState().quotes.selectedTag)) {
+            store.dispatch(saveSelectedTag(''));
+          }
           store.dispatch(loadQuotes());
           store.dispatch(loadTags());
         })

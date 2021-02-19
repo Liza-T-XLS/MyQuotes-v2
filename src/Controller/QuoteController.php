@@ -279,7 +279,7 @@ class QuoteController extends AbstractController
      /**
      * @Route("/api/quotes", name="api_quotes_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, QuoteRepository $quoteRepository, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, QuoteRepository $quoteRepository, TagRepository $tagRepository, EntityManagerInterface $entityManager): Response
     {
         /* 
             expected data format:
@@ -306,10 +306,33 @@ class QuoteController extends AbstractController
             return $this->json(['message' => 'You are not authorized to delete this quote.'], Response::HTTP_FORBIDDEN);
         }
 
+        // gets the quote's tags and stores their IDs in an array so they can be used even after the quote is deleted
+        $tags = $quote->getTags();
+        $tagsId = [];
+        foreach($tags as $tag) {
+            $tagsId[] = $tag->getId();
+        }
+        // deletes quotes
         $entityManager->remove($quote);
         $entityManager->flush();
+        
+        $oldTags = [];
 
-        return $this->json(['message' => 'Quote deleted'], Response::HTTP_OK);
+        // retrieves all the user's tags and stores their IDs in an array
+        $userTags = $tagRepository->findAllTagsByUser($user->getId());
+        $userTagsId = [];
+        foreach($userTags as $userTag) {
+            $userTagsId[] = $userTag['id'];
+        }
+
+        // if a tag of the deleted quote is not found in the user's current tags, it means that the tag no longer exists (if the deleted quote was the last one linked to this tag, the tag is removed (orphan removal true)). If so, it is added to the $oldTag array (display purposes).
+        foreach($tagsId as $tagId) {
+            if(array_search($tagId, $userTagsId) === false) {
+                $oldTags[] = $tagId;
+            }
+        }
+
+        return $this->json(['message' => 'Quote deleted', 'oldTags' => $oldTags], Response::HTTP_OK);
     }
 
 }
