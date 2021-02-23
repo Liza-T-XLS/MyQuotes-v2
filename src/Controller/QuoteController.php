@@ -118,6 +118,14 @@ class QuoteController extends AbstractController
      */
     public function show(Request $request, QuoteRepository $quoteRepository, EntityManagerInterface $entityManager): Response
     {
+        /* 
+            expected data format:
+            {
+                "currentPage": 2,
+                "tag": "1",
+                "search": "blabla"
+            }
+        */
         $data = json_decode($request->getContent());
 
         $user = $this->getUser();
@@ -137,27 +145,61 @@ class QuoteController extends AbstractController
 
         // optional
         $tag = $data->tag;
+        // optional
+        $search = $data->search;
 
-        // if there is no tag, all the user's quotes are retrieved (limit per page), else only the quotes that have the tag are retrieved
+        // if there is no tag and no search, all the user's quotes are retrieved (limit per page)
         if(!$tag) {
+            if(!$search) {
             // aggregate number of quotes the user has saved
             $totalQuoteNumber = $quoteRepository->loadUserQuoteNumber($userId);
             // aggregate number of quotes divided by number of quotes per page to obtain the number of pages (pagination purposes)
             $pageQuantity = ceil($totalQuoteNumber/$maxResults);
             $quotes = $quoteRepository->loadQuotesByUserAndPagination($userId, $maxResults, $offset);
-        } else {
-            // aggregate number of quotes the user has saved with the tag
-            $totalQuoteNumber = $quoteRepository->loadUserQuoteNumberByTag($userId, $tag);
-            // aggregate number of quotes divided by number of quotes per page to obtain the number of pages (pagination purposes)
-            $pageQuantity = ceil($totalQuoteNumber/$maxResults);
-            
-            $SQLquotes = $quoteRepository->loadQuotesByUserAndPaginationAndTag($userId, $tag, $maxResults, $offset);
-            // by using native SQL in the repository, the quotes returned do not have their array collection of tags but only the tag that has been selected which not only is not accurate but also causes problems in the display, therefore, below, the quote's id is used to retrieve a proper quote object with all its properties, then stored in an array before being returned
-            $quotes = [];
-            foreach($SQLquotes as $quote) {
-                $quoteObject = $quoteRepository->find($quote['id']);
-                $quotes[] = $quoteObject;
+            // else if there is no tag but a search string, all the user's quotes that match $search are retrieved (limit per page)
+            } else {
+                // aggregate number of quotes the user has saved that match $search
+                $totalQuoteNumber = $quoteRepository->loadUserQuoteNumberBySearch($userId, $search);
+                $pageQuantity = ceil($totalQuoteNumber/$maxResults);
+                $SQLquotes = $quoteRepository->loadQuotesByUserAndPaginationAndSearch($userId, $search, $maxResults, $offset);
+                // by using native SQL in the repository, the quotes returned do not have their array collection of tags but only the tag that has been selected which not only is not accurate but also causes problems in the display, therefore, below, the quote's id is used to retrieve a proper quote object with all its properties, then stored in an array before being returned
+                $quotes = [];
+                foreach($SQLquotes as $quote) {
+                    $quoteObject = $quoteRepository->find($quote['id']);
+                    $quotes[] = $quoteObject;
+                }
             }
+        } else {
+            // if there is a tag and no search string, all the user's quotes are that have the tag are retrieved
+            if(!$search) {
+                // aggregate number of quotes the user has saved with the tag
+                $totalQuoteNumber = $quoteRepository->loadUserQuoteNumberByTag($userId, $tag);
+
+                $pageQuantity = ceil($totalQuoteNumber/$maxResults);
+                
+                $SQLquotes = $quoteRepository->loadQuotesByUserAndPaginationAndTag($userId, $tag, $maxResults, $offset);
+
+                $quotes = [];
+                foreach($SQLquotes as $quote) {
+                    $quoteObject = $quoteRepository->find($quote['id']);
+                    $quotes[] = $quoteObject;
+                }
+                // else if there is a tag and a search string, all the user's quotes that have the tag and which details match $search are retrieved
+            } else {
+                // aggregate number of quotes the user has saved with the tag and which details match $search
+                $totalQuoteNumber = $quoteRepository->loadUserQuoteNumberByTagAndSearch($userId, $tag, $search);
+
+                $pageQuantity = ceil($totalQuoteNumber/$maxResults);
+
+                $SQLquotes = $quoteRepository->loadQuotesByUserAndPaginationAndTagAndSearch($userId, $tag, $search, $maxResults, $offset);
+
+                $quotes = [];
+                foreach($SQLquotes as $quote) {
+                    $quoteObject = $quoteRepository->find($quote['id']);
+                    $quotes[] = $quoteObject;
+                }
+            }
+
         }
 
         return $this->json(['pageQuantity' => $pageQuantity, 'quotes' => $quotes], 200, [], ['groups' => 'quotes_get']);

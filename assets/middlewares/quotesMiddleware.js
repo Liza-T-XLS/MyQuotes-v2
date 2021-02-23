@@ -31,6 +31,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
         data: {
           currentPage: store.getState().quotes.currentPage,
           tag: store.getState().quotes.selectedTag,
+          search: store.getState().quotes.search,
         },
       })
         .then((response) => {

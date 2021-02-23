@@ -40,6 +40,7 @@ const initialState = {
   currentPage: 1,
   userTags: [],
   selectedTag: '',
+  search: '',
 };
 
 // == Reducer
