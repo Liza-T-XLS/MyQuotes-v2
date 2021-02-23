@@ -161,7 +161,8 @@ class QuoteController extends AbstractController
                 // aggregate number of quotes the user has saved that match $search
                 $totalQuoteNumber = $quoteRepository->loadUserQuoteNumberBySearch($userId, $search);
                 $pageQuantity = ceil($totalQuoteNumber/$maxResults);
-                $SQLquotes = $quoteRepository->loadQuotesByUserAndPaginationAndSearch($userId, $search, $maxResults, $offset);
+                // array_unique used to remove duplicates, which can happen if a quote has more than one tag
+                $SQLquotes = array_unique($quoteRepository->loadQuotesByUserAndPaginationAndSearch($userId, $search, $maxResults, $offset), SORT_REGULAR);
                 // by using native SQL in the repository, the quotes returned do not have their array collection of tags but only the tag that has been selected which not only is not accurate but also causes problems in the display, therefore, below, the quote's id is used to retrieve a proper quote object with all its properties, then stored in an array before being returned
                 $quotes = [];
                 foreach($SQLquotes as $quote) {
@@ -177,7 +178,7 @@ class QuoteController extends AbstractController
 
                 $pageQuantity = ceil($totalQuoteNumber/$maxResults);
                 
-                $SQLquotes = $quoteRepository->loadQuotesByUserAndPaginationAndTag($userId, $tag, $maxResults, $offset);
+                $SQLquotes = array_unique($quoteRepository->loadQuotesByUserAndPaginationAndTag($userId, $tag, $maxResults, $offset), SORT_REGULAR);
 
                 $quotes = [];
                 foreach($SQLquotes as $quote) {
@@ -191,7 +192,7 @@ class QuoteController extends AbstractController
 
                 $pageQuantity = ceil($totalQuoteNumber/$maxResults);
 
-                $SQLquotes = $quoteRepository->loadQuotesByUserAndPaginationAndTagAndSearch($userId, $tag, $search, $maxResults, $offset);
+                $SQLquotes = array_unique($quoteRepository->loadQuotesByUserAndPaginationAndTagAndSearch($userId, $tag, $search, $maxResults, $offset), SORT_REGULAR);
 
                 $quotes = [];
                 foreach($SQLquotes as $quote) {
