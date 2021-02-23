@@ -7,11 +7,12 @@ import './search.scss';
 
 // == Component
 
-const Search = ({ searchInput, saveSearchInput }) => {
+const Search = ({ searchInput, saveSearchInput, loadQuotes }) => {
   const onChangeHandler = (e) => {
     console.log('searchOnChangeHandler');
     console.log(e.target.value);
     saveSearchInput(e.target.value);
+    loadQuotes();
   };
 
   return (
@@ -31,6 +32,7 @@ const Search = ({ searchInput, saveSearchInput }) => {
 Search.propTypes = {
   searchInput: PropTypes.string.isRequired,
   saveSearchInput: PropTypes.func.isRequired,
+  loadQuotes: PropTypes.func.isRequired,
 };
 
 // == Export

@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 import Search from '../../../components/Quotes/Search';
 import {
-  saveSearchInput
+  saveSearchInput,
+  loadQuotes,
 } from '../../../actions/quotes';
 
 const mapStateToProps = (state) => ({
@@ -14,6 +15,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   saveSearchInput: (searchInput) => {
     dispatch(saveSearchInput(searchInput));
+  },
+  loadQuotes: () => {
+    dispatch(loadQuotes());
   },
 });
 

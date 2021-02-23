@@ -20,6 +20,7 @@ export const LOAD_TAGS = 'LOAD_TAGS';
 export const SAVE_USER_TAGS = 'SAVE_USER_TAGS';
 export const SAVE_SELECTED_TAG = 'SAVE_SELECTED_TAG';
 export const SAVE_SEARCH_INPUT = 'SAVE_SEARCH_INPUT';
+export const CLEAR_SEARCH_INPUT = 'CLEAR_SEARCH_INPUT';
 
 // == Action creators
 
@@ -131,4 +132,8 @@ export const saveSelectedTag = (tagId) => ({
 export const saveSearchInput = (searchInput) => ({
   type: SAVE_SEARCH_INPUT,
   searchInput,
+});
+
+export const clearSearchInput = () => ({
+  type: CLEAR_SEARCH_INPUT,
 });
