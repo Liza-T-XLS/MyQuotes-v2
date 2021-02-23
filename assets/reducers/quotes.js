@@ -17,6 +17,7 @@ import {
   LOAD_QUOTE_DATA,
   SAVE_USER_TAGS,
   SAVE_SELECTED_TAG,
+  SAVE_SEARCH_INPUT,
 } from '../actions/quotes';
 
 // == Initial state
@@ -144,6 +145,11 @@ const quotesReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         selectedTag: action.tagId,
+      };
+    case SAVE_SEARCH_INPUT:
+      return {
+        ...state,
+        search: action.searchInput,
       };
     default: return state;
   }
