@@ -16,8 +16,9 @@ const Header = ({ saveHeaderHeight }) => {
   const titleRef = useRef(null);
   useEffect(() => {
     const headerHeight = headerRef.current.clientHeight;
+    const headerStyle = getComputedStyle(headerRef.current);
     const titleStyle = getComputedStyle(titleRef.current);
-    const totalHeaderHeight = headerHeight + parseInt(titleStyle.marginTop) + parseInt(titleStyle.marginBottom);
+    const totalHeaderHeight = headerHeight + parseInt(headerStyle.marginBottom) + parseInt(titleStyle.marginTop) + parseInt(titleStyle.marginBottom);
     saveHeaderHeight(totalHeaderHeight);
   }, []);
 

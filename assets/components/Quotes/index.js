@@ -46,7 +46,7 @@ const Quotes = ({
 
   const onClickHandler = () => {
     console.log('addQuote icon clicked');
-    const formHeight = window.innerHeight - headerHeight - quotesMenuRef.current.clientHeight + (quotesMenuRef.current.clientHeight - quotesMenuFirstLevelRef.current.clientHeight);
+    const formHeight = window.innerHeight - headerHeight - quotesMenuFirstLevelRef.current.clientHeight;
     if (!quoteFormStatus) {
       saveFormHeight(formHeight);
     } else {

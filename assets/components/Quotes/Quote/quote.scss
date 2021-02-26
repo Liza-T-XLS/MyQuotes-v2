@@ -1,15 +1,17 @@
 .quote {
   border-bottom: solid 1px grey;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   .quoteMain {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     .quoteText {
       &::first-letter {
         font-weight: bold;
       }
     }
     .copieIcon {
-      align-self: center;
       height: 24px;
       width: auto;
       &:hover, &:active {
@@ -20,10 +22,12 @@
   .quoteDetails {
     display: none;
     background-color: rgb(235, 235, 235);
-    padding:0.5rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
     .quoteDetailsHeader {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       .detailsLabel {
         display: block;
         font-weight: bold;
