@@ -73,7 +73,7 @@ const Login = ({
               <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
             </label>
             <div className="errorMsg">{[formErrors.error].length > 0 && <span>{formErrors.error}</span>}</div>
-            <button type="submit">Log in</button>
+            <button className="logInButton" type="submit">Log in</button>
           </form>
         </div>
       )}

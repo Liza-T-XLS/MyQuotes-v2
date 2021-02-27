@@ -1,3 +1,5 @@
+@import '../../styles/vars';
+
 .signup {
   display: flex;
   justify-content: center;
@@ -49,8 +51,8 @@
       .signUpButton {
         border: none;
         margin: 0.5rem;
-        background-color:#34aa2f;
-        color: white;
+        background-color: $mainColor;
+        color: $secondaryColor;
         border-radius: 2rem;
         padding: 0.5rem 1.5rem 0.5rem 1.5rem;
         font-weight: bold;
@@ -58,6 +60,11 @@
         display: block;
         &:hover {
           cursor: pointer;
+        }
+        &:hover, &:active {
+          background-color: $secondaryColor;
+          color: $mainColor;
+          border: solid 1px $mainColor;
         }
       }
     }

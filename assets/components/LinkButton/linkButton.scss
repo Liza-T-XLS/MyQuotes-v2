@@ -3,9 +3,9 @@
 .linkButton {
     border: none;
     padding: 0;
-    margin: 0;
+    margin: 1rem;
     background-color: $mainColor;
-    color: white;
+    color: $secondaryColor;
     border-radius: 2rem;
     padding: 0.5rem;
     font-weight: bold;
@@ -14,5 +14,13 @@
         display: block;
         padding: 0rem 1rem 0rem 1rem;
         color: $secondaryColor;
+    }
+    &:hover, &:active {
+        background-color: $secondaryColor;
+        color: $mainColor;
+        border: solid $mainColor 1px;
+        a {
+            color: $mainColor;
+        }
     }
 }

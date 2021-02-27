@@ -1,3 +1,5 @@
+@import '../../styles/vars';
+
 .login {
     display: flex;
     justify-content: center;
@@ -45,20 +47,45 @@
           font-size: 0.9rem;
           line-height: 1rem;
         }
+        .logInButton {
+          border: none;
+          padding: 0;
+          margin: 0.5rem;
+          background-color: $mainColor;
+          color: $secondaryColor;
+          border-radius: 2rem;
+          padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+          font-weight: bold;
+          width: max-content;
+          display: block;
+          &:hover {
+            cursor: pointer;
+          }
+          &:hover, &:active {
+            background-color: $secondaryColor;
+            color: $mainColor;
+            border: solid 1px $mainColor;
+          }
+        }
       }
   }
-  .logOutButton {
-    border: none;
-    padding: 0;
-    margin: 0.5rem;
-    background-color: #34aa2f;
-    color: white;
-    border-radius: 2rem;
-    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-    font-weight: bold;
-    width: max-content;
-    display: block;
-    &:hover {
-      cursor: pointer;
-    }
+.logOutButton {
+  border: none;
+  padding: 0;
+  margin: 0.5rem;
+  background-color: $mainColor;
+  color: $secondaryColor;
+  border-radius: 2rem;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  font-weight: bold;
+  width: max-content;
+  display: block;
+  &:hover {
+    cursor: pointer;
   }
+  &:hover, &:active {
+    background-color: $secondaryColor;
+    color: $mainColor;
+    border: solid 1px $mainColor;
+  }
+}

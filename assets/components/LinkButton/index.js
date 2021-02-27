@@ -14,9 +14,9 @@ const LinkButton = ({ buttonLabel, buttonLink }) => {
   const link = `/${slugifiedLink}`;
 
   return (
-    <button className="linkButton" type="button">
+    <div className="linkButton">
       <Link to={link}>{buttonLabel}</Link>
-    </button>
+    </div>
   );
 };
 
