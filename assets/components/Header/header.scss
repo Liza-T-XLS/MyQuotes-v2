@@ -1,11 +1,18 @@
+@import '../../styles/vars';
+
 .header {
     text-align: center;
     margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    background-color: $mainColor;
     h1 {
         margin-top: 0;
         padding-top: 1rem;
     }
     a {
-        color: black;
+        color: $secondaryColor;
+        &:hover, &:active {
+            color: $mainOnHoverColor;
+        }
     }
 }

@@ -1,3 +1,5 @@
+@import '../../../styles/vars';
+
 .nav {
   position: absolute;
   top: 0rem;
@@ -14,16 +16,16 @@
     position: relative;
     &:hover, &:active {
       span {
-        background-color: dodgerblue;
+        background-color: $mainOnHoverColor;
         &::before, &::after {
-          background-color: dodgerblue;
+          background-color: $mainOnHoverColor;
         }
       }
     }
     span {
       width: 100%;
       height: 4px;
-      background-color: black;
+      background-color: $secondaryColor;
       display: block;
       position: absolute;
       top: 50%;
@@ -33,7 +35,7 @@
         position: absolute;
         width: 100%;
         height: 4px;
-        background-color: black;
+        background-color: $secondaryColor;
         transition: transform 0.5s ease-in-out;
         }
       &::before {
@@ -50,9 +52,20 @@
     }
     &.active span::before {
       transform: translateY(0px) rotateZ(45deg);
+      background-color: $mainColor;
     }
     &.active span::after {
       transform: translateY(0px) rotateZ(-45deg);
+      background-color: $mainColor;
+    }
+    &.active {
+      &:hover, &:active {
+      span {
+        &::before, &::after {
+          background-color: $mainOnHoverColor;
+          }
+        }
+      }
     }
   }
   .menu {
@@ -76,7 +89,7 @@
         }
         .link {
           &:hover, &:active {
-            color: dodgerblue;
+            color: $mainOnHoverColor;
           }
         }
       }
@@ -91,6 +104,11 @@
       width: 100%;
       .options {
         width: 100%;
+        .option {
+          a {
+            color: $mainColor;
+          }
+        }
       }
     }
   }
