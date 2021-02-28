@@ -55,18 +55,18 @@ const Quote = forwardRef(({ quote, displayFormOnClickHandler, changeQuoteFormLab
     <div className="quote" ref={quoteRef} id={quote.id}>
       <div className="quoteMain">
         <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text}</p>
-        <img className="copieIcon" src={copieIcon} alt="copie icon" onClick={copyOnClickHandler} />
+        <img className="copieIcon" src={copieIcon} alt="copie icon" title="Copy the quote to clipboard" onClick={copyOnClickHandler} />
       </div>
       <div className={quoteDetailsCSS}>
         <div className="quoteDetailsHeader">
           <span className="detailsLabel">Details</span>
           <div className="quoteOptions">
-            <img className="editIcon" src={editIcon} alt="edit icon" onClick={editOnClickHandler} />
+            <img className="editIcon" src={editIcon} alt="edit icon" title="Edit the quote" onClick={editOnClickHandler} />
             <Dialog quote={quote} />
           </div>
         </div>
         <div className="details">
-          {(!quote.authorFirstName && !quote.authorLastName && !quote.characterName && !quote.mediumTitle && quote.tags < 1) && <p>No details provided. <span className="editSpan" onClick={editOnClickHandler} role="button" tabIndex="0">Edit?</span></p>}
+          {(!quote.authorFirstName && !quote.authorLastName && !quote.characterName && !quote.mediumTitle && quote.tags < 1) && <p>No details provided. <span className="editSpan" onClick={editOnClickHandler} role="button" tabIndex="0">Edit</span>?</p>}
           {(quote.authorFirstName || quote.authorLastName) && <p><span className="detailLabel">Author</span>: {quote.authorFirstName} {quote.authorLastName}</p>}
           {quote.characterName && <p><span className="detailLabel">Character</span>: {quote.characterName}</p>}
           {quote.mediumTitle && <p><span className="detailLabel">Medium</span>: {quote.mediumTitle}</p>}

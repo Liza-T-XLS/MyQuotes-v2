@@ -1,10 +1,12 @@
+@import '../../../styles/vars';
+
 .quoteForm {
-  color: white;
+  color: $secondaryColor;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   padding: 0.5rem;
-  background-color: rgba( #2f50aa, 0);
+  background-color: rgba($mainColor, 0);
   box-sizing: border-box;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -36,8 +38,13 @@
     }
     .addTag {
       position: absolute;
-      right: 5px;
-      top: 40%;
+      right: 2px;
+      top: 36%;
+      height: 32px;
+      width: auto;
+      &:hover, &:active {
+        filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(200deg) brightness(91%) contrast(135%);
+      }
     }
   }
   .tagsToSave {
@@ -47,8 +54,8 @@
     .tag {
       margin: 0rem 0.5rem 0rem 0.5rem;
       padding: 0.1rem 0.1rem 0.1rem 0.2rem;
-      background-color: white;
-      color: #2f50aa;
+      background-color: $secondaryColor;
+      color: $mainColor;
       border-radius: 5px;
       width: min-content;
       display: flex;
@@ -64,20 +71,19 @@
   .quoteSubmitButton {
     margin-bottom: 0.5rem;
     align-self: center;
-    color: #2f50aa;
-    background-color: white;
-    border: solid 2px #2f50aa;
+    color: $mainColor;
+    background-color: $secondaryColor;
     border-radius: 2rem;
     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
     font-weight: bold;
     &:hover {
-      color: white;
-      background-color: #2f50aa;
-      border: solid 2px white;
+      color: $secondaryColor;
+      background-color: $mainColor;
+      border: solid 1px $secondaryColor;
     }
   }
   &.active {
-    background-color: rgba( #2f50aa, 1);
+    background-color: rgba($mainColor, 1);
     overflow: auto;
   }
 }

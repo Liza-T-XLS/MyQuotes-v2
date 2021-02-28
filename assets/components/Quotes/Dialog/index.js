@@ -32,7 +32,7 @@ const AlertDialog = ({ quote, deleteQuote }) => {
 
   return (
     <>
-      <img className="binIcon" src={binIcon} alt="bin icon" onClick={handleClickOpen} />
+      <img className="binIcon" src={binIcon} alt="bin icon" title="Delete the quote" onClick={handleClickOpen} />
       <Dialog
         open={open}
         onClose={handleCloseNo}

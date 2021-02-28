@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import './form.scss';
-import addTagIcon from '../../../images/addTag-32.png';
+import addTagIcon from '../../../images/addTag-36dp.svg';
 import deleteTagIcon from '../../../images/close-thin-18dp.svg';
 
 // == Component
@@ -107,7 +107,7 @@ const Form = ({
       <label htmlFor="tagInput">
         <span>Tags</span>
         <input className="quoteFormInput" name="tagInput" value={tagInput} onChange={onChangeHandler} onKeyDown={tagOnKeyDownHandler} id="tags" minLength="1" />
-        <img className="addTag" src={addTagIcon} alt="add tag icon" onClick={tagOnClickHandler} />
+        <img className="addTag" src={addTagIcon} alt="add tag icon" title="add tag" onClick={tagOnClickHandler} />
       </label>
       {tags && (
         <div className="tagsToSave">
