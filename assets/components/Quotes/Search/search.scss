@@ -1,3 +1,5 @@
+@import '../../../styles/vars';
+
 label {
   fieldset {
     padding-left: 0.5rem;
@@ -12,15 +14,24 @@ label {
       padding-left: 0.2rem;
       padding-right: 0.2rem;
     }
-    .searchInput {
-      display: block;
-      border: none;
-      &:focus {
-        outline: none;
+    .inputDiv {
+      display: flex;
+      justify-content: space-between;
+      .searchInput {
+        display: block;
+        border: none;
+        &:focus {
+          outline: none;
+        }
+      }
+      .resetSearch {
+        height: 28px;
+        width: auto;
+        filter: invert(72%) sepia(0%) saturate(1897%) hue-rotate(257deg) brightness(101%) contrast(73%);
+        &:hover, &:active {
+          filter: $secondaryOnHoverFilter;
+        }
       }
     }
-  }
-  .searchInputSpan {
-    display: block;
   }
 }

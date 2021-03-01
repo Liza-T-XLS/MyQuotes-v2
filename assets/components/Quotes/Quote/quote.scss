@@ -1,3 +1,5 @@
+@import '../../../styles/vars';
+
 .quote {
   border-bottom: solid 1px grey;
   padding-top: 0.5rem;
@@ -15,7 +17,7 @@
       height: 24px;
       width: auto;
       &:hover, &:active {
-        filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(200deg) brightness(91%) contrast(135%);
+        filter: $mainOnHoverFilter;
       }
     }
   }
@@ -43,12 +45,12 @@
         }
         .editIcon {
           &:hover, &:active {
-            filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(200deg) brightness(91%) contrast(135%);
+            filter: $mainOnHoverFilter;
           }
         }
         .binIcon {
           &:hover, &:active {
-            filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(360deg) brightness(91%) contrast(135%);
+            filter: $secondaryOnHoverFilter;
           }
         }
       }

@@ -1,3 +1,5 @@
+@import '../../styles/vars';
+
 .quotes {
   .quotesMenu {
     .firstLevel {
@@ -11,10 +13,13 @@
         width: auto;
         transition: transform 1s;
         &:hover, &:active {
-          filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(200deg) brightness(91%) contrast(135%);
+          filter: $mainOnHoverFilter;
         }
         &.active {
           transform: rotate(45deg);
+          &:hover, &:active {
+            filter: $secondaryOnHoverFilter;
+          }
         }
       }
     }
