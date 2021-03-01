@@ -7,6 +7,7 @@ import {
   saveSearchInput,
   loadQuotes,
   saveCurrentPage,
+  clearSearchInput,
 } from '../../../actions/quotes';
 
 const mapStateToProps = (state) => ({
@@ -22,6 +23,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   saveCurrentPage: (pageNumber) => {
     dispatch(saveCurrentPage(pageNumber));
+  },
+  clearSearchInput: () => {
+    dispatch(clearSearchInput());
   },
 });
 

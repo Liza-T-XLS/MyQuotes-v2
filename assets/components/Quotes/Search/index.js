@@ -10,7 +10,13 @@ import resetSearchIcon from '../../../images/close-thin-18dp.svg';
 
 // == Component
 
-const Search = ({ searchInput, saveSearchInput, loadQuotes, saveCurrentPage }) => {
+const Search = ({
+  searchInput,
+  saveSearchInput,
+  loadQuotes,
+  saveCurrentPage,
+  clearSearchInput,
+}) => {
   const onChangeHandler = (e) => {
     console.log('searchOnChangeHandler');
     console.log(e.target.value);
@@ -19,8 +25,13 @@ const Search = ({ searchInput, saveSearchInput, loadQuotes, saveCurrentPage }) =
     loadQuotes();
   };
 
-  const resetSearchOnClickHandler = () => {
+  const resetSearchOnClickHandler = (e) => {
     console.log('resetSearchOnChangeHandler');
+    if (e.target.previousSibling.value !== '') {
+      clearSearchInput();
+      saveCurrentPage(1);
+      loadQuotes();
+    }
   };
 
   return (
@@ -45,6 +56,7 @@ Search.propTypes = {
   saveSearchInput: PropTypes.func.isRequired,
   loadQuotes: PropTypes.func.isRequired,
   saveCurrentPage: PropTypes.func.isRequired,
+  clearSearchInput: PropTypes.func.isRequired,
 };
 
 // == Export
