@@ -10,6 +10,8 @@ import Helmet from 'react-helmet';
 
 import './login.scss';
 import visibleIcon from '../../images/visible-24.png';
+import logInImg from '../../images/authentication.svg';
+import logInConfirmationImg from '../../images/taking_notes.svg';
 
 import LinkButton from '../LinkButton';
 import Loader from '../Loader';
@@ -75,6 +77,7 @@ const Login = ({
             <div className="errorMsg">{[formErrors.error].length > 0 && <span>{formErrors.error}</span>}</div>
             <button className="logInButton" type="submit">Log in</button>
           </form>
+          <img className="logInImg" src={logInImg} alt="" />
         </div>
       )}
       {isLogged && (
@@ -85,6 +88,7 @@ const Login = ({
           </p>
           <LinkButton buttonLabel="Quotes" buttonLink="quotes" />
           <button className="logOutButton" type="button" onClick={logOutOnClickHandler}>Log out</button>
+          <img className="logInConfirmationImg" src={logInConfirmationImg} alt="" />
         </div>
       )}
     </>

@@ -13,6 +13,8 @@ import visibleIcon from '../../images/visible-24.png';
 
 import Loader from '../Loader';
 import LinkButton from '../LinkButton';
+import signUpImg from '../../images/fill_forms.svg';
+import signInConfirmationImg from '../../images/taking_notes.svg';
 
 import { passwordVisibilityOnClickHandler } from '../../utils/handlers';
 
@@ -96,15 +98,17 @@ const Signup = ({
           </label>
           <button className="signUpButton" type="submit">Sign up</button>
         </form>
+        <img className="signUpImg" src={signUpImg} alt="" />
       </div>
       )}
       {registrationComplete && (
         <div className="confirmationMsg">
           <h2>Thank you for signing up!</h2>
           <p>
-            You can now access your personal space by logging in.
+            You can now access your personal board by logging in.
           </p>
           <LinkButton buttonLabel="Log in" buttonLink="login" />
+          <img className="signInConfirmationImg" src={signInConfirmationImg} alt="" /> 
         </div>
       )}
     </>

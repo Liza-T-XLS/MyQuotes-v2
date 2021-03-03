@@ -5,19 +5,11 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  .footerImg {
-    height: auto;
-    width: 90%;
-    position: relative;
-    z-index: -1;
-    opacity: 0.5;
-  }
+  background-color: $mainColor;
+  color: $secondaryColor;
   p {
-    padding: 1rem;
-    background-color: $mainColor;
-    color: $secondaryColor;
     text-align: center;
-    margin-top: -5px;
+    padding: 1.5rem;
   }
   a {
     color: $secondaryColor;

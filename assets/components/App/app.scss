@@ -1,7 +1,8 @@
 .app {
   min-height: 100vh;
   position: relative;
-  padding-bottom: 1rem;
+  // height of footer
+  padding-bottom: 96px;
   overflow: hidden;
   box-sizing: border-box;
   main {

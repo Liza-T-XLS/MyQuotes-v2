@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import './home.scss';
+import homeImg from '../../images/work_chat.svg';
 
 import LinkButton from '../LinkButton';
 
@@ -22,7 +23,7 @@ const Home = ({ isLogged }) => (
     <p>
       Any group of words, short or long, can be a quote. Some quotes are popular, some aren't. But they got <strong>your</strong> attention!<br />
       <br />
-      MyQuotes enables you to save any quote to your personal space. They are <strong>your</strong> quotes!
+      MyQuotes enables you to save any quote to your personal board. They are <strong>your</strong> quotes!
     </p>
     <div className="access">
       {!isLogged && (
@@ -38,6 +39,7 @@ const Home = ({ isLogged }) => (
       </>
       )}
     </div>
+    <img className="homeImg" src={homeImg} alt="" />
   </div>
 );
 

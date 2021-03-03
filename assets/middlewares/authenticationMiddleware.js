@@ -9,6 +9,7 @@ import {
   setIsLogged,
   LOG_OUT,
   CHECK_IS_LOGGED,
+  clearLogInForm,
 } from '../actions/authentication';
 
 // == Middleware
@@ -30,6 +31,7 @@ const authenticationMiddleware = (store) => (next) => (action) => {
           console.log('logged');
           store.dispatch(setLoginLoader(false));
           store.dispatch(setIsLogged(true));
+          store.dispatch(clearLogInForm());
         })
         .catch((error) => {
           console.warn(error);
