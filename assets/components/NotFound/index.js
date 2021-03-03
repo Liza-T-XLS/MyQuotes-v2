@@ -4,6 +4,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 import './notFound.scss';
+import notFoundImg from '../../images/lost.svg';
 
 import LinkButton from '../LinkButton';
 
@@ -15,10 +16,11 @@ const NotFound = () => (
       <title>MyQuotes | 404</title>
     </Helmet>
     <p className="notFoundText">
-      Oops! The page you are looking for doesn't exist.
+      Oops! The page you are looking for doesn&apos;t exist.
       <br />
     </p>
     <LinkButton buttonLabel="Home" buttonLink="" />
+    <img className="notFoundImg" src={notFoundImg} alt="" />
   </div>
 );
 
