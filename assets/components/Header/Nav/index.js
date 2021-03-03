@@ -60,7 +60,7 @@ const Nav = ({
           )}
           <li className="option">
             <img src={aboutIcon} alt="menu about icon" className="menuIcon" />
-            <a href="/">About</a>
+            <Link to="/about" onClick={burgerOnClickHandler} className="link">About</Link>
           </li>
           {isLogged && (
             <li className="option">
