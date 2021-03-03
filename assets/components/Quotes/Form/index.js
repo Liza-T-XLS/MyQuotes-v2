@@ -35,8 +35,19 @@ const Form = ({
   editQuote,
 }) => {
   const quoteFormClassName = classNames('quoteForm', { active: quoteFormStatus });
+
+  // custom z-index required despite form being closed, else (white) inputs are still displayed above (black) footer
+  let quoteFormZindex;
+  if (quoteFormHeight > 1) {
+    quoteFormZindex = 2;
+  } else {
+    quoteFormZindex = 0;
+  }
+
+  // adapting form height and z-index depending on the form being displayed or not
   const quoteFormStyle = {
     height: `${quoteFormHeight}px`,
+    zIndex: quoteFormZindex,
   };
 
   const onChangeHandler = (e) => {
