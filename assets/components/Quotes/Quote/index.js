@@ -13,17 +13,26 @@ import classNames from 'classnames';
 import './quote.scss';
 import copieIcon from '../../../images/copy.svg';
 import editIcon from '../../../images/edit.svg';
+import expandIcon from '../../../images/expand_more-36dp.svg';
+import unexpandIcon from '../../../images/expand_less-36dp.svg';
 import Dialog from '../../../containers/Quotes/Dialog';
 
 // == Component
 
-const Quote = forwardRef(({ quote, displayFormOnClickHandler, changeQuoteFormLabels, loadQuoteData }, ref) => {
-  const copyOnClickHandler = (e) => {
-    const quoteText = e.target.previousSibling.innerText;
+const Quote = forwardRef(({
+  quote,
+  displayFormOnClickHandler,
+  changeQuoteFormLabels,
+  loadQuoteData,
+}, ref) => {
+  const copyOnClickHandler = () => {
+    const quoteText = quote.text;
     navigator.clipboard.writeText(quoteText);
   };
 
   const [isActive, setActive] = useState(false);
+
+  const [isTruncated, setTruncated] = useState(true);
 
   const quoteDetailsCSS = classNames('quoteDetails', { active: isActive });
 
@@ -34,6 +43,7 @@ const Quote = forwardRef(({ quote, displayFormOnClickHandler, changeQuoteFormLab
   const quotesListOnClickHandler = (e) => {
     // if a click on another quote is detected, it opens the details of said quote and closes the quote's ones
     if (e.target.closest('.quote').id !== quoteRef.current.id) {
+      setTruncated(true);
       setActive(false);
       quotesList.removeEventListener('click', quotesListOnClickHandler);
     }
@@ -51,10 +61,21 @@ const Quote = forwardRef(({ quote, displayFormOnClickHandler, changeQuoteFormLab
     displayFormOnClickHandler();
   };
 
+  const expandOnClickHandler = () => {
+    setTruncated(false);
+  };
+  const unexpandOnClickHandler = () => {
+    setTruncated(true);
+  };
+
   return (
     <div className="quote" ref={quoteRef} id={quote.id}>
       <div className="quoteMain">
-        <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text}</p>
+        {quote.text.length <= 200 && <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text}</p>}
+        {quote.text.length > 200 && isTruncated && (
+          <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text.substr(0, 200)} ... <img className="expandIcon" src={expandIcon} alt="expand icon" title="show full text" onClick={expandOnClickHandler} /></p>
+        )}
+        {quote.text.length > 200 && !isTruncated && <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text} <img className="unexpandIcon" src={unexpandIcon} alt="unexpand icon" title="hide text" onClick={unexpandOnClickHandler} /></p>}
         <img className="copieIcon" src={copieIcon} alt="copie icon" title="Copy the quote to clipboard" onClick={copyOnClickHandler} />
       </div>
       <div className={quoteDetailsCSS}>

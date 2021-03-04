@@ -2,8 +2,6 @@
 
 // == Imports
 
-import { saveFormHeight, changeQuoteFormStatus } from '../actions/quotes';
-
 // == Exports
 
 // onClickHandler to toggle the visibility of passwords
