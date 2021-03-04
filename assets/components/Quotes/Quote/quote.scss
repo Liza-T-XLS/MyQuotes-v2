@@ -12,13 +12,13 @@
       &::first-letter {
         font-weight: bold;
       }
-      .expandIcon, .unexpandIcon {
-        height: 1.5rem;
-        width: auto;
-        vertical-align: middle;
-        &:hover, &:active {
-          filter: $mainOnHoverFilter;
-        }
+    }
+    .expandIcon, .unexpandIcon {
+      height: 1.5rem;
+      width: auto;
+      align-self: flex-end;
+      &:hover, &:active {
+        filter: $mainOnHoverFilter;
       }
     }
     .copieIcon {

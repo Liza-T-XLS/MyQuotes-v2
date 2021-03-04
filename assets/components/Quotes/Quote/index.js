@@ -73,9 +73,17 @@ const Quote = forwardRef(({
       <div className="quoteMain">
         {quote.text.length <= 200 && <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text}</p>}
         {quote.text.length > 200 && isTruncated && (
-          <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text.substr(0, 200)} ... <img className="expandIcon" src={expandIcon} alt="expand icon" title="show full text" onClick={expandOnClickHandler} /></p>
+          <>
+            <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text.substr(0, 200)} ... </p>
+            <img className="expandIcon" src={expandIcon} alt="expand icon" title="show full text" onClick={expandOnClickHandler} />
+          </>
         )}
-        {quote.text.length > 200 && !isTruncated && <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text} <img className="unexpandIcon" src={unexpandIcon} alt="unexpand icon" title="hide text" onClick={unexpandOnClickHandler} /></p>}
+        {quote.text.length > 200 && !isTruncated && (
+          <>
+            <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text} </p>
+            <img className="unexpandIcon" src={unexpandIcon} alt="unexpand icon" title="hide text" onClick={unexpandOnClickHandler} />
+          </>
+        )}
         <img className="copieIcon" src={copieIcon} alt="copie icon" title="Copy the quote to clipboard" onClick={copyOnClickHandler} />
       </div>
       <div className={quoteDetailsCSS}>
