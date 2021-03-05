@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 
 import './nav.scss';
 import homeIcon from '../../../images/home.svg';
+import quoteIcon from '../../../images/quote-36dp.svg';
 import loginIcon from '../../../images/login-36dp.svg';
 import signupIcon from '../../../images/signup.svg';
 import aboutIcon from '../../../images/about-36dp.svg';
@@ -46,6 +47,12 @@ const Nav = ({
             <img src={homeIcon} alt="menu home icon" className="menuIcon" />
             <Link to="/" onClick={burgerOnClickHandler} className="link">Home</Link>
           </li>
+          {isLogged && (
+            <li className="option">
+              <img src={quoteIcon} alt="menu quote icon" className="menuIcon" />
+              <Link to="/quotes" onClick={burgerOnClickHandler} className="link">My quotes</Link>
+            </li>
+          )}
           {!isLogged && (
             <>
               <li className="option">
