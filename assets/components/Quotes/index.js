@@ -4,7 +4,7 @@
 
 // ==  Imports
 
-import React, { useEffect, useRef } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -20,7 +20,7 @@ import Tags from '../../containers/Quotes/Tags';
 
 // == Component
 
-const Quotes = ({
+const Quotes = forwardRef(({
   loadQuotes,
   quotes,
   quoteFormStatus,
@@ -32,7 +32,7 @@ const Quotes = ({
   pageQuantity,
   currentPage,
   saveCurrentPage,
-}) => {
+}, ref) => {
   useEffect(() => {
     console.log('useEffect: quotes');
     loadQuotes();
@@ -44,9 +44,12 @@ const Quotes = ({
   const quotesMenuRef = useRef(null);
   const quotesMenuFirstLevelRef = useRef(null);
 
+  const app = ref.current;
+
   const onClickHandler = () => {
     console.log('addQuote icon clicked');
-    const formHeight = window.innerHeight - headerHeight - quotesMenuFirstLevelRef.current.clientHeight;
+    console.log(window.innerHeight);
+    const formHeight = app.clientHeight - headerHeight - quotesMenuFirstLevelRef.current.clientHeight;
     if (!quoteFormStatus) {
       saveFormHeight(formHeight);
     } else {
@@ -86,7 +89,7 @@ const Quotes = ({
       <Form />
     </div>
   );
-};
+});
 
 // == PropTypes
 

@@ -3,7 +3,7 @@
 
 // == Imports
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
@@ -32,12 +32,14 @@ const App = ({
   },
   []);
 
+  const appRef = useRef(null);
+
   const filterOnClickHandler = () => {
     setOpen(false);
   };
 
   return (
-    <div className="app">
+    <div className="app" ref={appRef}>
       {open && (
         <div className="filter" onClick={filterOnClickHandler} />
       )}
@@ -66,7 +68,7 @@ const App = ({
             path="/quotes"
             exact
           >
-            {!isLogged ? <Redirect to="/" /> : <Quotes />}
+            {!isLogged ? <Redirect to="/" /> : <Quotes ref={appRef} />}
           </Route>
           <Route
             path="/about"
