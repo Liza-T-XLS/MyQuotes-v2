@@ -22,6 +22,7 @@ class User implements UserInterface
     {
         $this->createdAt = new DateTime();
         $this->quotes = new ArrayCollection();
+        $this->active = false;
     }
     
     /**

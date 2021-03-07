@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MyQuotes{% endblock %}
+
+{% block body %}
+    <h1>Thank you for signing up!</h1>
+    <p>{{pseudonym}},<br />
+        One last thing before you can enjoy MyQuotes:<br />
+        Please click on the link below to activate your account:<br />
+        <a href={{activationLink}} title="activation link" target="_blank" rel="noopener noreferrer">{{activationLink}}</a>
+    </p>
+{% endblock %}

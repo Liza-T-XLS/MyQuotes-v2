@@ -16,7 +16,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/api/registration", name="api_registration", methods={"POST"})
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, DenormalizerInterface $denormalizer, ValidatorInterface $validator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, DenormalizerInterface $denormalizer, ValidatorInterface $validator, \Swift_Mailer $mailer): Response
     {
         /* 
             expected data format:
@@ -48,9 +48,34 @@ class RegistrationController extends AbstractController
 
         $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
 
+        // generates random string for email verification purposes
+        $hash = md5(random_bytes(10));
+        $user->setHash($hash);
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
+
+        // creates activation link to verify the user's email
+        $baseUrl = 'http://localhost:8000/';
+        $email = $user->getEmail();
+        $link = $baseUrl . 'verify?email=' . $email . '&hash=' . $hash;
+
+        // sends an email with the above link to the user
+        $message = (new \Swift_Message('MyQuotes - Thank you for signing up! Please verify your email'))
+        ->setFrom('send@example.com')
+        ->setTo($user->getEmail())
+        ->setBody(
+            $this->renderView(
+                // templates/emails/registration.html.twig
+                'emails/registration.html.twig',
+                ['pseudonym' => $user->getPseudonym(),
+                'activationLink' => $link]
+            ),
+            'text/html'
+        );
+
+        $mailer->send($message);
 
         return $this->json(['message' => 'Registration complete, user created'], Response::HTTP_CREATED);
     }
