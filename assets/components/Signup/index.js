@@ -91,7 +91,7 @@ const Signup = ({
             <div className="errorMsg">{[formErrors.password].length > 0 && <span>{formErrors.password}</span>}</div>
           </label>
           <label htmlFor="confirmedPassword">
-            <span>Confirm your Password</span>
+            <span>Confirm your password</span>
             <input type="password" name="confirmedPassword" id="confirmedPassword" value={confirmedPassword} onChange={onChangeHandler} required className={confirmedPasswordClassName} />
             <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
             <div className="errorMsg">{[formErrors.confirmedPassword].length > 0 && <span>{formErrors.confirmedPassword}</span>}</div>
@@ -108,7 +108,7 @@ const Signup = ({
             You can now access your personal board by logging in.
           </p>
           <LinkButton buttonLabel="Log in" buttonLink="login" />
-          <img className="signInConfirmationImg" src={signInConfirmationImg} alt="" /> 
+          <img className="signInConfirmationImg" src={signInConfirmationImg} alt="" />
         </div>
       )}
     </>
