@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -78,5 +79,38 @@ class RegistrationController extends AbstractController
         $mailer->send($message);
 
         return $this->json(['message' => 'Registration complete, user created'], Response::HTTP_CREATED);
+    }
+
+    /**
+     * @Route("/api/activation", name="api_activation", methods={"POST"})
+     */
+    public function activation(Request $request, UserRepository $userRepository)
+    {
+        /* 
+        expected data format:
+            {
+                "email": "sha@sha.com",
+                "hash": "x16sd3s3q",
+            }
+        */
+        $data = json_decode($request->getContent());
+        $email = $data->email;
+        $hash = $data->hash;
+
+        // finds user which email and hash match the received data
+        $user = $userRepository->findOneBy([
+            'email' => $email,
+            'hash' => $hash,
+        ]);
+        // if $user does not exist, returns an error message, else it sets the user's active status to true allowing them to log in with their credentials
+        if(!$user) {
+            return $this->json(['message' => 'Activation failed'], Response::HTTP_BAD_REQUEST);
+        } else {
+            $user->setActive(true);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+        }
+
+        return $this->json(['message' => 'Activation complete'], Response::HTTP_OK);
     }
 }

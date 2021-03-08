@@ -105,7 +105,7 @@ const Signup = ({
         <div className="confirmationMsg">
           <h2>Thank you for signing up!</h2>
           <p>
-            You can now access your personal board by logging in.
+            You will now receive an email to confirm your registration.
           </p>
           <LinkButton buttonLabel="Log in" buttonLink="login" />
           <img className="signInConfirmationImg" src={signInConfirmationImg} alt="" />

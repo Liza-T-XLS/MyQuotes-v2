@@ -7,6 +7,9 @@ import {
   CONFIRM_SIGN_UP,
   CLEAR_SIGN_UP_FORM,
   ADD_SERVER_ERRORS,
+  SET_ACTIVATION_LOADER,
+  CONFIRM_ACTIVATION,
+  CLEAR_ACTIVATION,
 } from '../actions/registration';
 
 import { validEmailRegex } from '../utils/regex';
@@ -26,6 +29,8 @@ const initialState = {
   },
   loader: false,
   registrationComplete: false,
+  activationLoader: true,
+  activationComplete: false,
 };
 
 // == Reducer
@@ -148,6 +153,22 @@ const registrationReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         ...initialState,
+      };
+    case SET_ACTIVATION_LOADER:
+      return {
+        ...state,
+        activationLoader: false,
+      };
+    case CONFIRM_ACTIVATION:
+      return {
+        ...state,
+        activationComplete: action.boolean,
+      };
+    case CLEAR_ACTIVATION:
+      return {
+        ...state,
+        activationLoader: true,
+        activationComplete: false,
       };
     default: return state;
   }

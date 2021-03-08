@@ -7,6 +7,9 @@ import {
   setLoader,
   confirmSignUp,
   addServerErrors,
+  ACTIVATE_USER,
+  setActivationLoader,
+  confirmActivation,
 } from '../actions/registration';
 
 // == Middleware
@@ -40,7 +43,36 @@ const registrationMiddleware = (store) => (next) => (action) => {
         });
       next(action);
       break;
-
+    case ACTIVATE_USER: {
+      // email is everything in the URL between "?email="" and "&""
+      const email = window.location.search.match('\\?email=(.*)&')[1];
+      // hash is everything in the URL after "&hash="
+      const hash = window.location.search.match('&hash=(.*)')[1];
+      axios({
+        method: 'post',
+        url: 'http://localhost:8000/api/activation',
+        data: {
+          email,
+          hash,
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(confirmActivation(true));
+          store.dispatch(setActivationLoader(false));
+        })
+        .catch((error) => {
+          console.warn(error);
+          console.log(error.response.data);
+          store.dispatch(setActivationLoader(false));
+        })
+        .finally(() => {
+          console.log('finally');
+          store.dispatch(setActivationLoader(false));
+        });
+      next(action);
+      break;
+    }
     default:
       next(action);
   }

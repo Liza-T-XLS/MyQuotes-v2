@@ -7,6 +7,10 @@ export const SET_LOADER = 'SET_LOADER';
 export const CONFIRM_SIGN_UP = 'CONFIRM_SIGN_UP';
 export const CLEAR_SIGN_UP_FORM = 'CLEAR_SIGN_UP_FORM';
 export const ADD_SERVER_ERRORS = 'ADD_SERVER_ERRORS';
+export const ACTIVATE_USER = 'ACTIVATE_USER';
+export const SET_ACTIVATION_LOADER = 'SET_ACTIVATION_LOADER';
+export const CONFIRM_ACTIVATION = 'CONFIRM_ACTIVATION';
+export const CLEAR_ACTIVATION = 'CLEAR_ACTIVATION';
 
 // == Action creators
 
@@ -42,4 +46,22 @@ export const clearSignUpForm = () => ({
 export const addServerErrors = (errors) => ({
   type: ADD_SERVER_ERRORS,
   errors,
+});
+
+export const activateUser = () => ({
+  type: ACTIVATE_USER,
+});
+
+export const setActivationLoader = (boolean) => ({
+  type: SET_ACTIVATION_LOADER,
+  boolean,
+});
+
+export const confirmActivation = (boolean) => ({
+  type: CONFIRM_ACTIVATION,
+  boolean,
+});
+
+export const clearActivation = () => ({
+  type: CLEAR_ACTIVATION,
 });

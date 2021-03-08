@@ -13,6 +13,7 @@ import Header from '../../containers/Header';
 import Home from '../../containers/Home';
 import Footer from '../Footer';
 import Signup from '../../containers/Signup';
+import Activation from '../../containers/Activation';
 import Login from '../../containers/Login';
 import Quotes from '../../containers/Quotes';
 import NotFound from '../NotFound';
@@ -57,6 +58,11 @@ const App = ({
             exact
           >
             <Signup />
+          </Route>
+          <Route
+            path="/verify"
+          >
+            <Activation />
           </Route>
           <Route
             path="/login"

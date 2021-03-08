@@ -32,7 +32,7 @@ const authenticationReducer = (state = initialState, action = {}) => {
     case SHOW_SERVER_ERROR: {
       const newFormErrors = {
         ...state.formErrors,
-        error: 'Invalid credentials',
+        error: action.errorMsg,
       };
       return {
         ...state,

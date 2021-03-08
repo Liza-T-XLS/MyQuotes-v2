@@ -35,10 +35,14 @@ const authenticationMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
-          console.log(error.response.data);
+          console.log(error.response.data.error);
           console.log('login failed');
           store.dispatch(setLoginLoader(false));
-          store.dispatch(showServerError());
+          if (error.response.data.error === 'Your account has not been activated yet. Please click on the link that was sent to you upon registration.') {
+            store.dispatch(showServerError(error.response.data.error));
+          } else {
+            store.dispatch(showServerError('Invalid credentials'));
+          }
         })
         .finally(() => {
           console.log('finally');

@@ -23,8 +23,9 @@ export const logIn = (email, password) => ({
   password,
 });
 
-export const showServerError = () => ({
+export const showServerError = (errorMsg) => ({
   type: SHOW_SERVER_ERROR,
+  errorMsg,
 });
 
 export const clearLogInForm = () => ({

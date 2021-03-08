@@ -81,12 +81,12 @@ class User implements UserInterface
     private $quotes;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $active;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $hash;
 
