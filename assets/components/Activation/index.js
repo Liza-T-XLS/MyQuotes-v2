@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import './activation.scss';
 
-// import LinkButton from '../LinkButton';
+import LinkButton from '../LinkButton';
 import Loader from '../Loader';
 
 // == Component
@@ -25,7 +25,21 @@ const Activation = ({ activationLoader, activateUser, activationComplete, clearA
       </Helmet>
       {activationLoader && <Loader />}
       {!activationLoader && activationComplete && (
-        <p>Congratulations! Your account has been activated. You can now access your personal board by logging in.</p>
+        <>
+          <h2>Congratulations!</h2>
+          <p className="activationMsg">
+            Your account has been activated. You can now access your personal board by logging in.
+          </p>
+          <LinkButton buttonLabel="Log in" buttonLink="login" />
+        </>
+      )}
+      {!activationLoader && !activationComplete && (
+        <>
+          <h2>Sorry!</h2>
+          <p className="activationMsg">
+            The activation failed. If you pasted your activation link to your browser please check that there is no error in it.
+          </p>
+        </>
       )}
     </div>
   );
