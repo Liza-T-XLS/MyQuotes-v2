@@ -34,12 +34,14 @@
     }
     .quoteFormInput {
       display: block;
-      width: calc(100% - 1rem);
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 2rem;
     }
     .addTag {
       position: absolute;
       right: 2px;
-      top: 43%;
+      top: 42%;
       height: 32px;
       width: auto;
       &:hover, &:active {
