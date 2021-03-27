@@ -12,7 +12,7 @@ import {
   CLEAR_ACTIVATION,
 } from '../actions/registration';
 
-import { validEmailRegex } from '../utils/regex';
+import { validEmailRegex, invalidPasswordRegex } from '../utils/regex';
 
 // == Initial State
 
@@ -76,8 +76,8 @@ const registrationReducer = (state = initialState, action = {}) => {
         }
         case 'password': {
           let passwordMsg = '';
-          if (state.password.length < 4) {
-            passwordMsg = 'Your password must be at least 4 characters long.';
+          if (invalidPasswordRegex.test(state.password)) {
+            passwordMsg = 'Your password must be at least 8 characters long, contain at least a number, an upper and a lower case letter and a special character.';
           }
           const newFormErrors = {
             ...state.formErrors,

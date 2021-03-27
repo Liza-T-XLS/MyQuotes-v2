@@ -42,6 +42,7 @@ const Signup = ({
   const pseudonymClassName = classNames('pseudonym', { invalid: formErrors.pseudonym.length > 0 });
   const emailClassName = classNames('email', { invalid: formErrors.email.length > 0 });
   const passwordClassName = classNames('password', { invalid: formErrors.password.length > 0 });
+  const passwordLabelClassName = classNames('', { passwordLabel: formErrors.password.length > 0 });
   const confirmedPasswordClassName = classNames('confirmedPassword', { invalid: formErrors.confirmedPassword.length > 0 });
 
   const onChangeHandler = (e) => {
@@ -84,7 +85,7 @@ const Signup = ({
             <input type="email" name="email" id="email" value={email} onChange={onChangeHandler} required className={emailClassName} />
             <div className="errorMsg">{[formErrors.email].length > 0 && <span>{formErrors.email}</span>}</div>
           </label>
-          <label htmlFor="password">
+          <label className={passwordLabelClassName} htmlFor="password">
             <span>Enter a password</span>
             <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} minLength="4" required className={passwordClassName} />
             <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />

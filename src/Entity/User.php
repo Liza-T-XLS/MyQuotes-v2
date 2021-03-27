@@ -34,6 +34,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      minMessage = "The pseudonym must be at least {{ limit }} characters long"
