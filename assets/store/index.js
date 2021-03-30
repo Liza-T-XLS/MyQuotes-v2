@@ -8,6 +8,7 @@ import reducer from '../reducers';
 import registrationMiddleware from '../middlewares/registrationMiddleware';
 import authenticationMiddleware from '../middlewares/authenticationMiddleware';
 import quotesMiddleware from '../middlewares/quotesMiddleware';
+import settingsMiddleware from '../middlewares/settingsMiddleware';
 
 // == Components
 
@@ -16,6 +17,7 @@ const enhancers = composeWithDevTools(
     registrationMiddleware,
     authenticationMiddleware,
     quotesMiddleware,
+    settingsMiddleware,
     // ... other middlewares
   ),
 );

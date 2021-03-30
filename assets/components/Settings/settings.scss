@@ -1,0 +1,102 @@
+@import '../../styles/vars';
+
+.settings {
+  h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .userEditForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    .passwordLabel {
+      margin-bottom: 4rem;
+    }
+    label {
+      position: relative;
+      margin-bottom: 2rem;
+      width: calc(100% / 3 * 2);
+      span {
+        display: block;
+        width: 100%;
+      }
+      input {
+        display: inline-block;
+        height: 34px;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 0.3rem;
+        border: solid 1px lightgray;
+        border-radius: 5px;
+        &.invalid {
+          border: solid 1px red;
+          border-radius: 5px;
+        }
+      }
+      .editIcon {
+        height: 24px;
+        width: auto;
+        position: absolute;
+        right: 4px;
+        top: 50%;
+        z-index: 1;
+        &.active {
+          filter: $mainOnHoverFilter;
+        }
+        &:hover, &:active {
+          filter: $mainOnHoverFilter;
+        }
+      }
+      .passwordToggle {
+        position: absolute;
+        right: 2px;
+        top: 50%;
+        z-index: 1;
+      }
+      .errorMsg {
+        position: absolute;
+        color: darkslategrey;
+        font-size: 0.9rem;
+        line-height: 1rem;
+      }
+    }
+    .displayPasswordInputs {
+      border: none;
+      margin: 0.5rem;
+      color: $mainColor;
+      background-color: #e0e0e0;
+      height: 34px;
+      width: calc(100% / 3 * 2);
+      border-radius: 5px;
+      margin-bottom: 2rem;
+      &:hover {
+        cursor: pointer;
+      }
+      &:hover, &:active {
+        color: $secondaryColor;
+        background-color: $mainOnHoverColor;
+      }
+    }
+    .submitChangesButton, .cancelChangesButton {
+      border: none;
+      margin: 0.5rem;
+      background-color: $mainColor;
+      color: $secondaryColor;
+      border-radius: 2rem;
+      padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+      font-weight: bold;
+      width: max-content;
+      display: block;
+      &:hover {
+        cursor: pointer;
+      }
+      &:hover, &:active {
+        background-color: $secondaryColor;
+        color: $mainColor;
+        border: solid 1px $mainColor;
+      }
+    }
+  }
+}

@@ -16,6 +16,7 @@ import Signup from '../../containers/Signup';
 import Activation from '../../containers/Activation';
 import Login from '../../containers/Login';
 import Quotes from '../../containers/Quotes';
+import Settings from '../../containers/Settings';
 import NotFound from '../NotFound';
 import About from '../About';
 
@@ -75,6 +76,12 @@ const App = ({
             exact
           >
             {!isLogged ? <Redirect to="/" /> : <Quotes ref={appRef} />}
+          </Route>
+          <Route
+            path="/settings"
+            exact
+          >
+            {!isLogged ? <Redirect to="/" /> : <Settings />}
           </Route>
           <Route
             path="/about"
