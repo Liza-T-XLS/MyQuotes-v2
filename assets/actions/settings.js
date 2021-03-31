@@ -5,7 +5,6 @@ export const SET_USER_DATA = 'SET_USER_DATA';
 export const CHANGE_USER_DATA_FIELD = 'CHANGE_USER_DATA_FIELD';
 export const CHECK_EDIT_ERRORS = 'CHECK_EDIT_ERRORS';
 export const SET_EDIT_STATUS = 'SET_EDIT_STATUS';
-export const SET_DISPLAY_EDIT_PASSWORD = 'SET_DISPLAY_EDIT_PASSWORD';
 export const SET_SETTINGS_LOADER = 'SET_SETTINGS_LOADER';
 export const SUBMIT_CHANGES = 'SUBMIT_CHANGES';
 export const CLEAR_USER_DATA_CHANGES = 'CLEAR_USER_DATA_CHANGES';
@@ -36,11 +35,6 @@ export const checkEditErrors = (fieldName) => ({
 export const setEditStatus = (fieldName, boolean) => ({
   type: SET_EDIT_STATUS,
   fieldName,
-  boolean,
-});
-
-export const setDisplayEditPassword = (boolean) => ({
-  type: SET_DISPLAY_EDIT_PASSWORD,
   boolean,
 });
 
