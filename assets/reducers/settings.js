@@ -7,6 +7,7 @@ import {
   CLEAR_USER_DATA_CHANGES,
   SET_SETTINGS_LOADER,
   SET_EDIT_STATUS,
+  SET_SETTINGS_FLASH,
 } from '../actions/settings';
 
 import { validEmailRegex, invalidPasswordRegex } from '../utils/regex';
@@ -30,6 +31,7 @@ const initialState = {
     currentPassword: '',
   },
   loader: false,
+  flash: false,
 };
 
 const settingsReducer = (state = initialState, action = {}) => {
@@ -138,6 +140,11 @@ const settingsReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         ...initialState,
+      };
+    case SET_SETTINGS_FLASH:
+      return {
+        ...state,
+        flash: action.boolean,
       };
     default: return state;
   }

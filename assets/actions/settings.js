@@ -8,6 +8,7 @@ export const SET_EDIT_STATUS = 'SET_EDIT_STATUS';
 export const SET_SETTINGS_LOADER = 'SET_SETTINGS_LOADER';
 export const SUBMIT_CHANGES = 'SUBMIT_CHANGES';
 export const CLEAR_USER_DATA_CHANGES = 'CLEAR_USER_DATA_CHANGES';
+export const SET_SETTINGS_FLASH = 'SET_SETTINGS_FLASH';
 
 // == Action creators
 
@@ -49,4 +50,9 @@ export const submitChanges = () => ({
 
 export const clearUserDataChanges = () => ({
   type: CLEAR_USER_DATA_CHANGES,
+});
+
+export const setSettingsFlash = (boolean) => ({
+  type: SET_SETTINGS_FLASH,
+  boolean,
 });

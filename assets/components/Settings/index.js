@@ -10,6 +10,8 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import classNames from 'classnames';
+import Fade from '@material-ui/core/Fade';
+import Alert from '@material-ui/lab/Alert';
 
 import './settings.scss';
 import editIcon from '../../images/edit.svg';
@@ -39,6 +41,7 @@ const Settings = ({
   loader,
   setSettingsLoader,
   submitChanges,
+  flash,
 }) => {
   useEffect(() => {
     clearUserDataChanges();
@@ -108,6 +111,9 @@ const Settings = ({
       </Helmet>
       {loader && <Loader />}
       <h2>Settings</h2>
+      <Fade in={flash} timeout={{ enter: 300, exit: 1000 }}>
+        <Alert severity="success">Your changes have been saved!</Alert>
+      </Fade>
       <form className="userEditForm" onSubmit={onSubmitHandler} noValidate>
         <label htmlFor="pseudonym">
           <span>Pseudonym</span>
@@ -177,6 +183,7 @@ Settings.propTypes = {
   loader: PropTypes.bool.isRequired,
   setSettingsLoader: PropTypes.func.isRequired,
   submitChanges: PropTypes.func.isRequired,
+  flash: PropTypes.bool.isRequired,
 };
 
 // == Export

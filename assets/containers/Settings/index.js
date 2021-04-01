@@ -8,10 +8,10 @@ import {
   changeUserDataField,
   checkEditErrors,
   setEditStatus,
-  setDisplayEditPassword,
   setSettingsLoader,
   submitChanges,
   clearUserDataChanges,
+  setSettingsFlash,
 } from '../../actions/settings';
 
 const mapStateToProps = (state) => ({
@@ -25,6 +25,7 @@ const mapStateToProps = (state) => ({
   passwordEditStatus: state.settings.passwordEditStatus,
   formErrors: state.settings.formErrors,
   loader: state.settings.loader,
+  flash: state.settings.flash,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -40,9 +41,6 @@ const mapDispatchToProps = (dispatch) => ({
   setEditStatus: (fieldName, boolean) => {
     dispatch(setEditStatus(fieldName, boolean));
   },
-  setDisplayEditPassword: (boolean) => {
-    dispatch(setDisplayEditPassword(boolean));
-  },
   setSettingsLoader: (boolean) => {
     dispatch(setSettingsLoader(boolean));
   },
@@ -51,6 +49,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   clearUserDataChanges: () => {
     dispatch(clearUserDataChanges());
+  },
+  setSettingsFlash: (boolean) => {
+    dispatch(setSettingsFlash(boolean));
   },
 });
 

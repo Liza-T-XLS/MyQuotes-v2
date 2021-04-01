@@ -9,6 +9,7 @@ import {
   setSettingsLoader,
   clearUserDataChanges,
   loadUserData,
+  setSettingsFlash,
 } from '../actions/settings';
 
 // == Middleware
@@ -54,6 +55,10 @@ const settingsMiddleware = (store) => (next) => (action) => {
           store.dispatch(clearUserDataChanges());
           store.dispatch(loadUserData());
           store.dispatch(setSettingsLoader(false));
+          store.dispatch(setSettingsFlash(true));
+          setTimeout(() => {
+            store.dispatch(setSettingsFlash(false));
+          }, 5000);
         })
         .catch((error) => {
           console.warn(error);

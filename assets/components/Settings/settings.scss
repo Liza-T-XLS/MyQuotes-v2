@@ -3,7 +3,6 @@
 .settings {
   h2 {
     text-align: center;
-    margin-bottom: 1rem;
   }
   .userEditForm {
     display: flex;
@@ -96,6 +95,18 @@
         background-color: $secondaryColor;
         color: $mainColor;
         border: solid 1px $mainColor;
+      }
+    }
+  }
+}
+
+@media (max-width: $tabletBreakPoint) {
+  .settings {
+    .userEditForm {
+      label {
+        .passwordToggle {
+          top: 63%;
+        }
       }
     }
   }
