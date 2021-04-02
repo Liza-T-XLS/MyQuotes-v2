@@ -10,6 +10,7 @@ import {
   clearUserDataChanges,
   loadUserData,
   setSettingsFlash,
+  addServerEditErrors,
 } from '../actions/settings';
 
 // == Middleware
@@ -62,8 +63,9 @@ const settingsMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
-          console.log(error.response.data.error);
+          console.log(error.response.data);
           console.log('userdata update failed');
+          store.dispatch(addServerEditErrors(error.response.data));
           store.dispatch(setSettingsLoader(false));
         })
         .finally(() => {

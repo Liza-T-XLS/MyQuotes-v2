@@ -8,6 +8,7 @@ import {
   SET_SETTINGS_LOADER,
   SET_EDIT_STATUS,
   SET_SETTINGS_FLASH,
+  ADD_SERVER_EDIT_ERRORS,
 } from '../actions/settings';
 
 import { validEmailRegex, invalidPasswordRegex } from '../utils/regex';
@@ -123,6 +124,44 @@ const settingsReducer = (state = initialState, action = {}) => {
         }
         default: return state;
       }
+    }
+    case ADD_SERVER_EDIT_ERRORS: {
+      let newFormErrors = {
+        ...state.formErrors,
+      };
+      console.log(action.errors.message);
+      if (action.errors.message === 'Invalid password') {
+        newFormErrors = {
+          ...newFormErrors,
+          currentPassword: action.errors.message,
+        };
+      } else {
+        action.errors.map((error) => {
+          if (error.field === 'pseudonym') {
+            newFormErrors = {
+              ...newFormErrors,
+              pseudonym: error.message,
+            };
+          }
+          if (error.field === 'email') {
+            newFormErrors = {
+              ...newFormErrors,
+              email: error.message,
+            };
+          }
+          if (error.field === 'password') {
+            newFormErrors = {
+              ...newFormErrors,
+              password: error.message,
+            };
+          }
+          return newFormErrors;
+        });
+      }
+      return {
+        ...state,
+        formErrors: newFormErrors,
+      };
     }
     case SET_EDIT_STATUS: {
       const target = `${action.fieldName}EditStatus`;

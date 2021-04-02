@@ -9,6 +9,7 @@ export const SET_SETTINGS_LOADER = 'SET_SETTINGS_LOADER';
 export const SUBMIT_CHANGES = 'SUBMIT_CHANGES';
 export const CLEAR_USER_DATA_CHANGES = 'CLEAR_USER_DATA_CHANGES';
 export const SET_SETTINGS_FLASH = 'SET_SETTINGS_FLASH';
+export const ADD_SERVER_EDIT_ERRORS = 'ADD_SERVER_EDIT_ERRORS';
 
 // == Action creators
 
@@ -55,4 +56,9 @@ export const clearUserDataChanges = () => ({
 export const setSettingsFlash = (boolean) => ({
   type: SET_SETTINGS_FLASH,
   boolean,
+});
+
+export const addServerEditErrors = (errors) => ({
+  type: ADD_SERVER_EDIT_ERRORS,
+  errors,
 });
