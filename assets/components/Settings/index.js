@@ -74,7 +74,7 @@ const Settings = ({
 
   const onChangeHandler = (e) => {
     changeUserDataField(e.target.value, e.target.name);
-    // checkEditErrors(e.target.name);
+    checkEditErrors(e.target.name);
   };
 
   const editPasswordOnClickHandler = () => {
