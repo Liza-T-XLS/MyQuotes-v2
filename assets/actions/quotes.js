@@ -21,6 +21,8 @@ export const SAVE_USER_TAGS = 'SAVE_USER_TAGS';
 export const SAVE_SELECTED_TAG = 'SAVE_SELECTED_TAG';
 export const SAVE_SEARCH_INPUT = 'SAVE_SEARCH_INPUT';
 export const CLEAR_SEARCH_INPUT = 'CLEAR_SEARCH_INPUT';
+export const SET_QUOTES_FLASH = 'SET_QUOTES_FLASH';
+export const SET_QUOTES_FLASH_MSG = 'SET_QUOTES_FLASH_MSG';
 
 // == Action creators
 
@@ -136,4 +138,14 @@ export const saveSearchInput = (searchInput) => ({
 
 export const clearSearchInput = () => ({
   type: CLEAR_SEARCH_INPUT,
+});
+
+export const setQuotesFlash = (boolean) => ({
+  type: SET_QUOTES_FLASH,
+  boolean,
+});
+
+export const setQuotesFlashMsg = (msg) => ({
+  type: SET_QUOTES_FLASH_MSG,
+  msg,
 });

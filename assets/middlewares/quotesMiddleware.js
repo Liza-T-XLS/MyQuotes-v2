@@ -18,6 +18,8 @@ import {
   loadTags,
   saveCurrentPage,
   saveSelectedTag,
+  setQuotesFlash,
+  setQuotesFlashMsg,
 } from '../actions/quotes';
 
 // == Middleware
@@ -76,6 +78,13 @@ const quotesMiddleware = (store) => (next) => (action) => {
           console.warn(error);
           console.log(error.response.data);
           console.log('quote add failed');
+          if (error.response.data.message === 'User not found. Must be connected in order to create a quote.') {
+            store.dispatch(setQuotesFlashMsg(error.response.data.message));
+            store.dispatch(setQuotesFlash(true));
+            setTimeout(() => {
+              store.dispatch(setQuotesFlash(false));
+            }, 5000);
+          }
         })
         .finally(() => {
           console.log('finally');

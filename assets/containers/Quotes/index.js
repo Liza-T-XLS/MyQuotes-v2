@@ -28,6 +28,8 @@ const mapStateToProps = (state) => ({
   quoteId: state.quotes.quoteId,
   pageQuantity: state.quotes.pageQuantity,
   currentPage: state.quotes.currentPage,
+  flash: state.quotes.flash,
+  flashMsg: state.quotes.flashMsg,
 });
 
 const mapDispatchToProps = (dispatch) => ({

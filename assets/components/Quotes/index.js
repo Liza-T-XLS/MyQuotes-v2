@@ -8,6 +8,8 @@ import React, { forwardRef, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Fade from '@material-ui/core/Fade';
+import Alert from '@material-ui/lab/Alert';
 
 import './quotes.scss';
 import Pagination from '@material-ui/lab/Pagination';
@@ -32,6 +34,8 @@ const Quotes = forwardRef(({
   pageQuantity,
   currentPage,
   saveCurrentPage,
+  flash,
+  flashMsg,
 }, ref) => {
   useEffect(() => {
     console.log('useEffect: quotes');
@@ -73,6 +77,9 @@ const Quotes = forwardRef(({
       <Helmet>
         <title>MyQuotes | Board</title>
       </Helmet>
+      <Fade className="quoteAlert" in={flash} timeout={{ enter: 300, exit: 1000 }}>
+        <Alert severity="error">{flashMsg}</Alert>
+      </Fade>
       <div className="quotesMenu" ref={quotesMenuRef}>
         <div className="firstLevel" ref={quotesMenuFirstLevelRef}>
           <Search />
@@ -105,6 +112,8 @@ Quotes.propTypes = {
   pageQuantity: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
   saveCurrentPage: PropTypes.func.isRequired,
+  flash: PropTypes.bool.isRequired,
+  flashMsg: PropTypes.string.isRequired,
 };
 
 // == Export

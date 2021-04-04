@@ -19,6 +19,8 @@ import {
   SAVE_SELECTED_TAG,
   SAVE_SEARCH_INPUT,
   CLEAR_SEARCH_INPUT,
+  SET_QUOTES_FLASH,
+  SET_QUOTES_FLASH_MSG,
 } from '../actions/quotes';
 
 // == Initial state
@@ -43,6 +45,8 @@ const initialState = {
   userTags: [],
   selectedTag: '',
   search: '',
+  flash: false,
+  flashMsg: '',
 };
 
 // == Reducer
@@ -156,6 +160,16 @@ const quotesReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         search: '',
+      };
+    case SET_QUOTES_FLASH:
+      return {
+        ...state,
+        flash: action.boolean,
+      };
+    case SET_QUOTES_FLASH_MSG:
+      return {
+        ...state,
+        flashMsg: action.msg,
       };
     default: return state;
   }
