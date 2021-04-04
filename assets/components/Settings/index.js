@@ -43,13 +43,29 @@ const Settings = ({
   submitChanges,
   flash,
 }) => {
+  const pseudonymInput = useRef(null);
+  const emailInput = useRef(null);
+
   useEffect(() => {
     clearUserDataChanges();
     loadUserData();
   }, []);
 
-  const pseudonymInput = useRef(null);
-  const emailInput = useRef(null);
+  useEffect(() => {
+    if (pseudonymEditStatus === true) {
+      pseudonymInput.current.removeAttribute('disabled');
+    } else if (pseudonymEditStatus === false) {
+      pseudonymInput.current.setAttribute('disabled', true);
+    }
+  }, [pseudonymEditStatus]);
+
+  useEffect(() => {
+    if (emailEditStatus === true) {
+      emailInput.current.removeAttribute('disabled');
+    } else if (emailEditStatus === false) {
+      emailInput.current.setAttribute('disabled', true);
+    }
+  }, [emailEditStatus]);
 
   const pseudonymClassName = classNames('pseudonym', { invalid: formErrors.pseudonym.length > 0 });
   const pseudonymEditIconClassName = classNames('editIcon', { active: pseudonymEditStatus });
@@ -64,10 +80,8 @@ const Settings = ({
     const inputField = e.target.previousSibling;
     const disabled = inputField.getAttribute('disabled');
     if (disabled === null) {
-      inputField.setAttribute('disabled', true);
       setEditStatus(inputField.name, false);
     } else {
-      inputField.removeAttribute('disabled');
       setEditStatus(inputField.name, true);
     }
   };
@@ -100,8 +114,6 @@ const Settings = ({
   const cancelChangesOnClickHandler = () => {
     clearUserDataChanges();
     loadUserData();
-    pseudonymInput.current.setAttribute('disabled', true);
-    emailInput.current.setAttribute('disabled', true);
   };
 
   return (
