@@ -38,8 +38,17 @@ class QuoteController extends AbstractController
                 }
         */
         $data = json_decode($request->getContent());
+        $trimmedData = [];
+        foreach($data->quote as $key => $datum) {
+            $trimmedDatum = trim($datum, " ");
+            $trimmedData['quote'][$key] = $trimmedDatum;
+        }
+        foreach($data->tags as $key => $datum) {
+            $trimmedDatum = trim($datum, " ");
+            $trimmedData['tags'][$key] = $trimmedDatum;
+        }
 
-        $quote = $denormalizer->denormalize($data->quote, Quote::class);
+        $quote = $denormalizer->denormalize($trimmedData['quote'], Quote::class);
         $errors = $validator->validate($quote);
 
         $jsonErrors = [];
@@ -57,38 +66,40 @@ class QuoteController extends AbstractController
             return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $tags = $data->tags;
-        foreach($tags as $tag) {
-            // checking if tag already exists
-            $existingTag = $tagRepository->findBy(['name' => $tag]);
-            // if the tag already exists, the existing tag is added to the quote
-            if ($existingTag) {
-                $existingTag = $existingTag[0];
-                $quote->addTag($existingTag);
-            }
-            // if not it is created
-            if (!$existingTag) {
-            $newTag = new Tag();
-            $newTag->setName($tag);
-            $errors = $validator->validate($newTag);
-
-            $jsonErrors = [];
-
-            if (count($errors) !== 0) {
-                foreach ($errors as $error) {
-                    $jsonErrors[] = [
-                        'field' => $error->getPropertyPath(),
-                        'message' => $error->getMessage(),
-                    ];
+        if(array_key_exists('tags', $trimmedData)) {
+            $tags = $trimmedData['tags'];
+            foreach($tags as $tag) {
+                // checking if tag already exists
+                $existingTag = $tagRepository->findBy(['name' => $tag]);
+                // if the tag already exists, the existing tag is added to the quote
+                if ($existingTag) {
+                    $existingTag = $existingTag[0];
+                    $quote->addTag($existingTag);
                 }
-            }
+                // if not it is created
+                if (!$existingTag) {
+                $newTag = new Tag();
+                $newTag->setName($tag);
+                $errors = $validator->validate($newTag);
 
-            if(!empty($jsonErrors)){
-                return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
-            }
-            $entityManager->persist($newTag);
-            // and added to the quote
-            $quote->addTag($newTag);
+                $jsonErrors = [];
+
+                if (count($errors) !== 0) {
+                    foreach ($errors as $error) {
+                        $jsonErrors[] = [
+                            'field' => $error->getPropertyPath(),
+                            'message' => $error->getMessage(),
+                        ];
+                    }
+                }
+
+                if(!empty($jsonErrors)){
+                    return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
+                }
+                $entityManager->persist($newTag);
+                // and added to the quote
+                $quote->addTag($newTag);
+                }
             }
         }
         $user = $this->getUser();
@@ -243,11 +254,25 @@ class QuoteController extends AbstractController
         };
 
         if($user != $quote->getUser()) {
-            return $this->json(['message' => 'You are not authorized to modify a quote.'], Response::HTTP_FORBIDDEN);
+            return $this->json(['message' => 'You are not authorized to modify this quote.'], Response::HTTP_FORBIDDEN);
         }
 
         // if the quote exists according to the id, we check for errors in the received data
-        $updatedQuote = $denormalizer->denormalize($data->quote, Quote::class);
+        $trimmedData = [];
+        foreach($data->quote as $key => $datum) {
+            if(is_int($datum)) {
+                $trimmedData['quote'][$key] = $datum;
+            } else {
+                $trimmedDatum = trim($datum, " ");
+                $trimmedData['quote'][$key] = $trimmedDatum;
+            }
+        }
+        foreach($data->tags as $key => $datum) {
+            $trimmedDatum = trim($datum, " ");
+            $trimmedData['tags'][$key] = $trimmedDatum;
+        }
+
+        $updatedQuote = $denormalizer->denormalize($trimmedData['quote'], Quote::class);
         $errors = $validator->validate($updatedQuote);
 
         $jsonErrors = [];
@@ -266,11 +291,11 @@ class QuoteController extends AbstractController
         }
 
         // if there are no errors the quote is updated
-        $quote->setText($data->quote->text)
-        ->setAuthorFirstName($data->quote->authorFirstName)
-        ->setAuthorLastName($data->quote->authorLastName)
-        ->setCharacterName($data->quote->characterName)
-        ->setMediumTitle($data->quote->mediumTitle);
+        $quote->setText($trimmedData['quote']['text'])
+        ->setAuthorFirstName($trimmedData['quote']['authorFirstName'])
+        ->setAuthorLastName($trimmedData['quote']['authorLastName'])
+        ->setCharacterName($trimmedData['quote']['characterName'])
+        ->setMediumTitle($trimmedData['quote']['mediumTitle']);
         
         // old tags are removed in order to add new ones
         $oldTags = $quote->getTags();
@@ -279,41 +304,43 @@ class QuoteController extends AbstractController
             $quote->removeTag($tag);
         }
 
-        $tags = $data->tags;
-        foreach($tags as $tag) {
-            // checking if tag already exists
-            $existingTag = $tagRepository->findBy(['name' => $tag]);
-            // if the tag already exists, the existing tag is added to the quote
-            if ($existingTag) {
-                $existingTag = $existingTag[0];
-                $quote->addTag($existingTag);
-            }
-            // if not it is created
-            if (!$existingTag) {
-            $newTag = new Tag();
-            $newTag->setName($tag);
-            $errors = $validator->validate($newTag);
+        // $tags = $data->tags;
+        if(array_key_exists('tags', $trimmedData)) {
+            $tags = $trimmedData['tags'];
+            foreach($tags as $tag) {
+                // checking if tag already exists
+                $existingTag = $tagRepository->findBy(['name' => $tag]);
+                // if the tag already exists, the existing tag is added to the quote
+                if ($existingTag) {
+                    $existingTag = $existingTag[0];
+                    $quote->addTag($existingTag);
+                }
+                // if not it is created
+                if (!$existingTag) {
+                $newTag = new Tag();
+                $newTag->setName($tag);
+                $errors = $validator->validate($newTag);
 
-            $jsonErrors = [];
+                $jsonErrors = [];
 
-            if (count($errors) !== 0) {
-                foreach ($errors as $error) {
-                    $jsonErrors[] = [
-                        'field' => $error->getPropertyPath(),
-                        'message' => $error->getMessage(),
-                    ];
+                if (count($errors) !== 0) {
+                    foreach ($errors as $error) {
+                        $jsonErrors[] = [
+                            'field' => $error->getPropertyPath(),
+                            'message' => $error->getMessage(),
+                        ];
+                    }
+                }
+
+                if(!empty($jsonErrors)){
+                    return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
+                }
+                
+                $entityManager->persist($newTag);
+                $quote->addTag($newTag);
                 }
             }
-
-            if(!empty($jsonErrors)){
-                return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
-            }
-            
-            $entityManager->persist($newTag);
-            $quote->addTag($newTag);
-            }
         }
-        
         $entityManager->flush();
 
         return $this->json(['message' => 'Quote updated'], Response::HTTP_OK);
