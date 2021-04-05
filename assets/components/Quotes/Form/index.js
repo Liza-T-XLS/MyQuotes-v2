@@ -76,7 +76,7 @@ const Form = ({
   };
 
   const formOnKeyDownHandler = (e) => {
-    if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+    if ((e.code === 'Enter' || e.code === 'NumpadEnter') && e.target.type !== 'textarea') {
       e.preventDefault();
     }
   };
