@@ -182,7 +182,7 @@ class QuoteController extends AbstractController
                 }
             }
         } else {
-            // if there is a tag and no search string, all the user's quotes are that have the tag are retrieved
+            // if there is a tag and no search string, all the user's quotes that have the tag are retrieved
             if(!$search) {
                 // aggregate number of quotes the user has saved with the tag
                 $totalQuoteNumber = $quoteRepository->loadUserQuoteNumberByTag($userId, $tag);
