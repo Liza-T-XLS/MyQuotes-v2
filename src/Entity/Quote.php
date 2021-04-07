@@ -26,32 +26,54 @@ class Quote
     /**
      * @ORM\Column(type="string", length=1000)
      * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 1000,
+     *      minMessage = "The text must be at least {{ limit }} character long",
+     *      maxMessage = "The text cannot be longer than {{ limit }} characters"
+     * )
      * @Groups({"quotes_get"})
      */
     private $text;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "The author's first name cannot be longer than {{ limit }} characters"
+     * )
      * @Groups({"quotes_get"})
      */
     private $authorFirstName;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"quotes_get"})
-     */
+    * @ORM\Column(type="string", length=255, nullable=true)
+    * @Assert\Length(
+    *      max = 255,
+    *      maxMessage = "The author's last name cannot be longer than {{ limit }} characters"
+    * )
+    * @Groups({"quotes_get"})
+    */
     private $authorLastName;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"quotes_get"})
-     */
+    * @ORM\Column(type="string", length=255, nullable=true)
+    * @Assert\Length(
+    *      max = 255,
+    *      maxMessage = "The character's name cannot be longer than {{ limit }} characters"
+    * )
+    * @Groups({"quotes_get"})
+    */
     private $characterName;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"quotes_get"})
-     */
+    * @ORM\Column(type="string", length=255, nullable=true)
+    *     @Assert\Length(
+    *      max = 255,
+    *      maxMessage = "The medium's title cannot be longer than {{ limit }} characters"
+    * )
+    * @Groups({"quotes_get"})
+    */
     private $mediumTitle;
 
     /**
