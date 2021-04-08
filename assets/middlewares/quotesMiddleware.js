@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+
 // == Imports
 
 import axios from 'axios';
@@ -20,6 +22,7 @@ import {
   saveSelectedTag,
   setQuotesFlash,
   setQuotesFlashMsg,
+  addServerQuoteErrors,
 } from '../actions/quotes';
 
 // == Middleware
@@ -84,6 +87,8 @@ const quotesMiddleware = (store) => (next) => (action) => {
             setTimeout(() => {
               store.dispatch(setQuotesFlash(false));
             }, 5000);
+          } else {
+            store.dispatch(addServerQuoteErrors(error.response.data));
           }
         })
         .finally(() => {

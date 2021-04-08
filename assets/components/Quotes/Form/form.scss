@@ -77,6 +77,12 @@
         }
       }
     }
+    .errorMsg {
+      color: $mainOnHoverColor;
+      font-size: 0.9rem;
+      line-height: 1rem;
+      margin-bottom: 0.5rem;
+    }
   }
   .quoteSubmitButton {
     margin-bottom: 0.5rem;

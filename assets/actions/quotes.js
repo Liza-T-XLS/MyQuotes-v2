@@ -10,6 +10,7 @@ export const SAVE_TAG = 'SAVE_TAG';
 export const DELETE_TAG = 'DELETE_TAG';
 export const ADD_QUOTE = 'ADD_QUOTE';
 export const CHECK_QUOTE_FORM_ERRORS = 'CHECK_QUOTE_FORM_ERRORS';
+export const ADD_SERVER_QUOTE_ERRORS = 'ADD_SERVER_QUOTE_ERRORS';
 export const CLEAR_TAG_INPUT = 'CLEAR_TAG_INPUT';
 export const CLEAR_QUOTE_FORM = 'CLEAR_QUOTE_FORM';
 export const SAVE_PAGE_QUANTITY = 'SAVE_PAGE_QUANTITY';
@@ -74,6 +75,11 @@ export const addQuote = () => ({
 export const checkQuoteFormErrors = (fieldName) => ({
   type: CHECK_QUOTE_FORM_ERRORS,
   fieldName,
+});
+
+export const addServerQuoteErrors = (errors) => ({
+  type: ADD_SERVER_QUOTE_ERRORS,
+  errors,
 });
 
 export const clearTagInput = () => ({

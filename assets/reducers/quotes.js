@@ -11,6 +11,7 @@ import {
   SAVE_TAG,
   DELETE_TAG,
   CHECK_QUOTE_FORM_ERRORS,
+  ADD_SERVER_QUOTE_ERRORS,
   CLEAR_TAG_INPUT,
   CLEAR_QUOTE_FORM,
   SAVE_PAGE_QUANTITY,
@@ -200,6 +201,54 @@ const quotesReducer = (state = initialState, action = {}) => {
         }
         default: return state;
       }
+    case ADD_SERVER_QUOTE_ERRORS: {
+      let newFormErrors = {
+        ...state.formErrors,
+      };
+      action.errors.map((error) => {
+        if (error.field === 'text') {
+          newFormErrors = {
+            ...newFormErrors,
+            quoteText: error.message,
+          };
+        }
+        if (error.field === 'authorFirstName') {
+          newFormErrors = {
+            ...newFormErrors,
+            authorFirstName: error.message,
+          };
+        }
+        if (error.field === 'authorLastName') {
+          newFormErrors = {
+            ...newFormErrors,
+            authorLastName: error.message,
+          };
+        }
+        if (error.field === 'characterName') {
+          newFormErrors = {
+            ...newFormErrors,
+            characterName: error.message,
+          };
+        }
+        if (error.field === 'mediumTitle') {
+          newFormErrors = {
+            ...newFormErrors,
+            mediumTitle: error.message,
+          };
+        }
+        if (error.field === 'name') {
+          newFormErrors = {
+            ...newFormErrors,
+            tags: error.message,
+          };
+        }
+        return newFormErrors;
+      });
+      return {
+        ...state,
+        formErrors: newFormErrors,
+      };
+    }
     case CLEAR_TAG_INPUT: {
       const newFormErrors = {
         ...state.formErrors,

@@ -160,6 +160,7 @@ const Form = ({
               <img className="tagDelete" src={deleteTagIcon} alt="delete tag icon" onClick={tagDeleteOnClickHandler} />
             </div>
           ))}
+          <div className="errorMsg">{formErrors.tags.length > 0 && <span>{formErrors.tags}</span>}</div>
         </div>
       )}
       <button className="quoteSubmitButton" type="submit">{quoteFormButtonLabel}</button>
@@ -194,6 +195,7 @@ Form.propTypes = {
     characterName: PropTypes.string.isRequired,
     mediumTitle: PropTypes.string.isRequired,
     tagInput: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired,
   }).isRequired,
   checkQuoteFormErrors: PropTypes.func.isRequired,
   clearTagInput: PropTypes.func.isRequired,

@@ -26,10 +26,14 @@ class Tag
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank()
-     * @Groups({"quotes_get"})
-     */
+    * @ORM\Column(type="string", length=255, unique=true)
+    * @Assert\NotBlank()
+    * @Assert\Length(
+    *      max = 255,
+    *      maxMessage = "Tags' names cannot be longer than {{ limit }} characters"
+    * )
+    * @Groups({"quotes_get"})
+    */
     private $name;
 
     /**
