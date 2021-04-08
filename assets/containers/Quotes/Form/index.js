@@ -9,8 +9,8 @@ import {
   deleteTag,
   addQuote,
   editQuote,
-  changeQuoteFormStatus,
-  saveFormHeight,
+  checkQuoteFormErrors,
+  clearTagInput,
 } from '../../../actions/quotes';
 
 const mapStateToProps = (state) => ({
@@ -26,6 +26,7 @@ const mapStateToProps = (state) => ({
   tagInput: state.quotes.tagInput,
   tags: state.quotes.tags,
   quoteId: state.quotes.quoteId,
+  formErrors: state.quotes.formErrors,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -43,6 +44,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   editQuote: () => {
     dispatch(editQuote());
+  },
+  checkQuoteFormErrors: (fieldName) => {
+    dispatch(checkQuoteFormErrors(fieldName));
+  },
+  clearTagInput: () => {
+    dispatch(clearTagInput());
   },
 });
 

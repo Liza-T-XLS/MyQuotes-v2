@@ -33,8 +33,17 @@ const Form = ({
   addQuote,
   quoteId,
   editQuote,
+  formErrors,
+  checkQuoteFormErrors,
+  clearTagInput,
 }) => {
   const quoteFormClassName = classNames('quoteForm', { active: quoteFormStatus });
+
+  const authorFirstNameLabelClassName = classNames('', { authorFirstNameLabel: formErrors.authorFirstName.length > 0 && quoteFormHeight < 700 });
+  const authorLastNameLabelClassName = classNames('', { authorLastNameLabel: formErrors.authorLastName.length > 0 && quoteFormHeight < 700 });
+  const characterNameLabelClassName = classNames('', { characterNameLabel: formErrors.characterName.length > 0 && quoteFormHeight < 700 });
+  const mediumTitleLabelClassName = classNames('', { mediumTitleLabel: formErrors.mediumTitle.length > 0 && quoteFormHeight < 700 });
+  const tagInputLabelClassName = classNames('', { tagInputLabel: formErrors.tagInput.length > 0 && quoteFormHeight < 700 });
 
   // custom z-index required despite form being closed, else (white) inputs are still displayed above (black) footer
   let quoteFormZindex;
@@ -52,19 +61,27 @@ const Form = ({
 
   const onChangeHandler = (e) => {
     changeQuoteFormField(e.target.value, e.target.name);
+    checkQuoteFormErrors(e.target.name);
+  };
+
+  const createTag = () => {
+    checkQuoteFormErrors('tagInput');
+    const error = formErrors.tagInput;
+    if (error === '') {
+      saveTag(tagInput.trim());
+    }
   };
 
   const tagOnKeyDownHandler = (e) => {
-    if ((e.code === 'Enter' || e.code === 'NumpadEnter') && tagInput.length > 0) {
-      console.log(e.code);
-      saveTag(tagInput);
+    if ((e.code === 'Enter' || e.code === 'NumpadEnter') && tagInput.trim().length > 0) {
+      createTag();
     }
   };
 
   const tagOnClickHandler = () => {
     console.log('onClickHandler');
-    if (tagInput.length > 0) {
-      saveTag(tagInput);
+    if (tagInput.trim().length > 0) {
+      createTag();
     }
   };
 
@@ -85,10 +102,19 @@ const Form = ({
     console.log(e);
     e.preventDefault();
     console.log('submitted');
-    if (quoteId) {
-      editQuote();
-    } else {
-      addQuote();
+    clearTagInput();
+    checkQuoteFormErrors('quoteText');
+    checkQuoteFormErrors('authorFirstName');
+    checkQuoteFormErrors('authorLastName');
+    checkQuoteFormErrors('characterName');
+    checkQuoteFormErrors('mediumTitle');
+    const errors = Object.values(formErrors).find((value) => value.length > 0);
+    if (errors === undefined && quoteText !== '') {
+      if (quoteId) {
+        editQuote();
+      } else {
+        addQuote();
+      }
     }
   };
 
@@ -98,27 +124,33 @@ const Form = ({
       <label htmlFor="quoteText">
         <span>Text</span>
         <textarea name="quoteText" value={quoteText} onChange={onChangeHandler} id="quoteText" minLength="1" required />
+        <div className="errorMsg">{formErrors.quoteText.length > 0 && <span>{formErrors.quoteText}</span>}</div>
       </label>
-      <label htmlFor="authorFirstName">
+      <label className={authorFirstNameLabelClassName} htmlFor="authorFirstName">
         <span>Author's first name</span>
         <input className="quoteFormInput" name="authorFirstName" value={authorFirstName} onChange={onChangeHandler} id="authorFirstName" minLength="1" />
+        <div className="errorMsg">{formErrors.authorFirstName.length > 0 && <span>{formErrors.authorFirstName}</span>}</div>
       </label>
-      <label htmlFor="authorLastName">
+      <label className={authorLastNameLabelClassName} htmlFor="authorLastName">
         <span>Author's last name</span>
         <input className="quoteFormInput" name="authorLastName" value={authorLastName} onChange={onChangeHandler} id="authorLastName" minLength="1" />
+        <div className="errorMsg">{formErrors.authorLastName.length > 0 && <span>{formErrors.authorLastName}</span>}</div>
       </label>
-      <label htmlFor="character's name">
+      <label className={characterNameLabelClassName} htmlFor="character's name">
         <span>Character's last name</span>
         <input className="quoteFormInput" name="characterName" value={characterName} onChange={onChangeHandler} id="character's name" minLength="1" />
+        <div className="errorMsg">{formErrors.characterName.length > 0 && <span>{formErrors.characterName}</span>}</div>
       </label>
-      <label htmlFor="mediumTitle">
+      <label className={mediumTitleLabelClassName} htmlFor="mediumTitle">
         <span>Medium's title</span>
         <input className="quoteFormInput" name="mediumTitle" value={mediumTitle} onChange={onChangeHandler} id="mediumTitle" minLength="1" />
+        <div className="errorMsg">{formErrors.mediumTitle.length > 0 && <span>{formErrors.mediumTitle}</span>}</div>
       </label>
-      <label htmlFor="tagInput">
+      <label className={tagInputLabelClassName} htmlFor="tagInput">
         <span>Tags</span>
         <input className="quoteFormInput" name="tagInput" value={tagInput} onChange={onChangeHandler} onKeyDown={tagOnKeyDownHandler} id="tags" minLength="1" />
         <img className="addTag" src={addTagIcon} alt="add tag icon" title="add tag" onClick={tagOnClickHandler} />
+        <div className="errorMsg">{formErrors.tagInput.length > 0 && <span>{formErrors.tagInput}</span>}</div>
       </label>
       {tags && (
         <div className="tagsToSave">
@@ -155,6 +187,16 @@ Form.propTypes = {
   addQuote: PropTypes.func.isRequired,
   quoteId: PropTypes.number.isRequired,
   editQuote: PropTypes.func.isRequired,
+  formErrors: PropTypes.shape({
+    quoteText: PropTypes.string.isRequired,
+    authorFirstName: PropTypes.string.isRequired,
+    authorLastName: PropTypes.string.isRequired,
+    characterName: PropTypes.string.isRequired,
+    mediumTitle: PropTypes.string.isRequired,
+    tagInput: PropTypes.string.isRequired,
+  }).isRequired,
+  checkQuoteFormErrors: PropTypes.func.isRequired,
+  clearTagInput: PropTypes.func.isRequired,
 };
 
 Form.defaultProps = {

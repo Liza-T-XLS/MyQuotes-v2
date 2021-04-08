@@ -78,24 +78,24 @@ const Signup = ({
           <label htmlFor="pseudonym">
             <span>Pseudonym</span>
             <input type="text" name="pseudonym" id="pseudonym" value={pseudonym} onChange={onChangeHandler} minLength="2" required className={pseudonymClassName} />
-            <div className="errorMsg">{[formErrors.pseudonym].length > 0 && <span>{formErrors.pseudonym}</span>}</div>
+            <div className="errorMsg">{formErrors.pseudonym.length > 0 && <span>{formErrors.pseudonym}</span>}</div>
           </label>
           <label htmlFor="email">
             <span>Email</span>
             <input type="email" name="email" id="email" value={email} onChange={onChangeHandler} required className={emailClassName} />
-            <div className="errorMsg">{[formErrors.email].length > 0 && <span>{formErrors.email}</span>}</div>
+            <div className="errorMsg">{formErrors.email.length > 0 && <span>{formErrors.email}</span>}</div>
           </label>
           <label className={passwordLabelClassName} htmlFor="password">
             <span>Enter a password</span>
             <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} minLength="4" required className={passwordClassName} />
             <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
-            <div className="errorMsg">{[formErrors.password].length > 0 && <span>{formErrors.password}</span>}</div>
+            <div className="errorMsg">{formErrors.password.length > 0 && <span>{formErrors.password}</span>}</div>
           </label>
           <label htmlFor="confirmedPassword">
             <span>Confirm your password</span>
             <input type="password" name="confirmedPassword" id="confirmedPassword" value={confirmedPassword} onChange={onChangeHandler} required className={confirmedPasswordClassName} />
             <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
-            <div className="errorMsg">{[formErrors.confirmedPassword].length > 0 && <span>{formErrors.confirmedPassword}</span>}</div>
+            <div className="errorMsg">{formErrors.confirmedPassword.length > 0 && <span>{formErrors.confirmedPassword}</span>}</div>
           </label>
           <button className="signUpButton" type="submit">Sign up</button>
         </form>
@@ -125,14 +125,12 @@ Signup.propTypes = {
   confirmedPassword: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   checkErrors: PropTypes.func.isRequired,
-  formErrors: PropTypes.objectOf(
-    PropTypes.shape({
-      pseudonym: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      password: PropTypes.string.isRequired,
-      confirmedPassword: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
+  formErrors: PropTypes.shape({
+    pseudonym: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    confirmedPassword: PropTypes.string.isRequired,
+  }).isRequired,
   signUp: PropTypes.func.isRequired,
   loader: PropTypes.bool.isRequired,
   setLoader: PropTypes.func.isRequired,

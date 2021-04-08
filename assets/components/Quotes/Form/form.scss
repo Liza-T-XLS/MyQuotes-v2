@@ -14,11 +14,13 @@
   overflow: hidden;
   position: absolute;
   bottom: 0;
-  // z-index: 2;
   left: 0;
   right: 0;
   h2 {
     align-self: center;
+  }
+  .authorFirstNameLabel, .authorLastNameLabel, .characterNameLabel, .mediumTitleLabel, .tagInputLabel {
+    margin-bottom: 2rem;
   }
   label {
     position: relative;
@@ -47,6 +49,12 @@
       &:hover, &:active {
         filter: $mainOnHoverFilter;
       }
+    }
+    .errorMsg {
+      position: absolute;
+      color: $mainOnHoverColor;
+      font-size: 0.9rem;
+      line-height: 1rem;
     }
   }
   .tagsToSave {

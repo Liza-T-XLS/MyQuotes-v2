@@ -10,6 +10,8 @@ import {
   CHANGE_QUOTE_FORM_FIELD,
   SAVE_TAG,
   DELETE_TAG,
+  CHECK_QUOTE_FORM_ERRORS,
+  CLEAR_TAG_INPUT,
   CLEAR_QUOTE_FORM,
   SAVE_PAGE_QUANTITY,
   SAVE_CURRENT_PAGE,
@@ -47,6 +49,15 @@ const initialState = {
   search: '',
   flash: false,
   flashMsg: '',
+  formErrors: {
+    quoteText: '',
+    authorFirstName: '',
+    authorLastName: '',
+    characterName: '',
+    mediumTitle: '',
+    tagInput: '',
+    tags: '',
+  },
 };
 
 // == Reducer
@@ -96,6 +107,108 @@ const quotesReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         tags: newTagsArray,
+      };
+    }
+    case CHECK_QUOTE_FORM_ERRORS:
+      switch (action.fieldName) {
+        case 'quoteText': {
+          let quoteTextMsg = '';
+          if (state.quoteText.length < 1) {
+            quoteTextMsg = 'The text must be at least 1 character long.';
+          }
+          if (state.quoteText.length > 1000) {
+            quoteTextMsg = 'The text cannot be longer than 1000 characters.';
+          }
+          const newFormErrors = {
+            ...state.formErrors,
+            quoteText: quoteTextMsg,
+          };
+          return {
+            ...state,
+            formErrors: newFormErrors,
+          };
+        }
+        case 'authorFirstName': {
+          let authorFirstNameMsg = '';
+          if (state.authorFirstName.length > 255) {
+            authorFirstNameMsg = 'The author\'s first name cannot be longer than 255 characters.';
+          }
+          const newFormErrors = {
+            ...state.formErrors,
+            authorFirstName: authorFirstNameMsg,
+          };
+          return {
+            ...state,
+            formErrors: newFormErrors,
+          };
+        }
+        case 'authorLastName': {
+          let authorLastNameMsg = '';
+          if (state.authorLastName.length > 255) {
+            authorLastNameMsg = 'The author\'s last name cannot be longer than 255 characters.';
+          }
+          const newFormErrors = {
+            ...state.formErrors,
+            authorLastName: authorLastNameMsg,
+          };
+          return {
+            ...state,
+            formErrors: newFormErrors,
+          };
+        }
+        case 'characterName': {
+          let characterNameMsg = '';
+          if (state.characterName.length > 255) {
+            characterNameMsg = 'The character\'s name cannot be longer than 255 characters.';
+          }
+          const newFormErrors = {
+            ...state.formErrors,
+            characterName: characterNameMsg,
+          };
+          return {
+            ...state,
+            formErrors: newFormErrors,
+          };
+        }
+        case 'mediumTitle': {
+          let mediumTitleMsg = '';
+          if (state.mediumTitle.length > 255) {
+            mediumTitleMsg = 'The medium\'s title cannot be longer than 255 characters.';
+          }
+          const newFormErrors = {
+            ...state.formErrors,
+            mediumTitle: mediumTitleMsg,
+          };
+          return {
+            ...state,
+            formErrors: newFormErrors,
+          };
+        }
+        case 'tagInput': {
+          let tagInputMsg = '';
+          if (state.tagInput.length > 255) {
+            tagInputMsg = 'The medium\'s title cannot be longer than 255 characters.';
+          }
+          const newFormErrors = {
+            ...state.formErrors,
+            tagInput: tagInputMsg,
+          };
+          return {
+            ...state,
+            formErrors: newFormErrors,
+          };
+        }
+        default: return state;
+      }
+    case CLEAR_TAG_INPUT: {
+      const newFormErrors = {
+        ...state.formErrors,
+        tagInput: '',
+      };
+      return {
+        ...state,
+        tagInput: '',
+        formErrors: newFormErrors,
       };
     }
     case CLEAR_QUOTE_FORM:
