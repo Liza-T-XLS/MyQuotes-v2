@@ -20,42 +20,14 @@ class TagRepository extends ServiceEntityRepository
     }
 
     // SQL query: 
-    // SELECT DISTINCT tag.id, tag.name FROM tag INNER JOIN quote_tag ON quote_tag.tag_id = tag.id INNER JOIN quote ON quote_tag.quote_id = quote.id WHERE quote.user_id = 3
+    // SELECT DISTINCT tag.id, tag.name FROM tag INNER JOIN quote_tag ON quote_tag.tag_id = tag.id INNER JOIN quote ON quote_tag.quote_id = quote.id WHERE quote.user_id = 3 ORDER BY tag.name
     public function findAllTagsByUser($userId) {
         $conn = $this->getEntityManager()
         ->getConnection();
-        $sql = 'SELECT DISTINCT tag.id, tag.name FROM tag INNER JOIN quote_tag ON quote_tag.tag_id = tag.id INNER JOIN quote ON quote_tag.quote_id = quote.id WHERE quote.user_id = :userId';
+        $sql = 'SELECT DISTINCT tag.id, tag.name FROM tag INNER JOIN quote_tag ON quote_tag.tag_id = tag.id INNER JOIN quote ON quote_tag.quote_id = quote.id WHERE quote.user_id = :userId ORDER BY tag.name';
         $stmt = $conn->prepare($sql);
         $stmt->execute(array('userId' => $userId));
         return $stmt->fetchAllAssociative();
     }
 
-    // /**
-    //  * @return Tag[] Returns an array of Tag objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Tag
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
