@@ -8,14 +8,13 @@ import {
   logIn,
   clearLogInForm,
   setLoginLoader,
-  logOut,
 } from '../../actions/authentication';
 
 const mapStateToProps = (state) => ({
   email: state.authentication.email,
   password: state.authentication.password,
   formErrors: state.authentication.formErrors,
-  loader: state.authentication.loader,
+  loginLoader: state.authentication.loginLoader,
   isLogged: state.authentication.isLogged,
 });
 
@@ -31,9 +30,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setLoginLoader: (boolean) => {
     dispatch(setLoginLoader(boolean));
-  },
-  logOut: () => {
-    dispatch(logOut());
   },
 });
 

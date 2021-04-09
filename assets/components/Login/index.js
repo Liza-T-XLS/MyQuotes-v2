@@ -27,10 +27,9 @@ const Login = ({
   formErrors,
   logIn,
   clearLogInForm,
-  loader,
+  loginLoader,
   setLoginLoader,
   isLogged,
-  logOut,
 }) => {
   useEffect(() => {
     console.log('Login form useEffect');
@@ -50,17 +49,12 @@ const Login = ({
     setLoginLoader(true);
   };
 
-  const logOutOnClickHandler = (e) => {
-    console.log('logOutOnClickHandler triggered');
-    logOut();
-  };
-
   return (
     <>
       <Helmet>
         <title>MyQuotes | Log In</title>
       </Helmet>
-      {loader && <Loader />}
+      {loginLoader && <Loader />}
       {!isLogged && (
         <div className="login">
           <h2>Log in!</h2>
@@ -106,10 +100,9 @@ Login.propTypes = {
     error: PropTypes.string.isRequired,
   }).isRequired,
   clearLogInForm: PropTypes.func.isRequired,
-  loader: PropTypes.bool.isRequired,
+  loginLoader: PropTypes.bool.isRequired,
   setLoginLoader: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
-  logOut: PropTypes.func.isRequired,
 };
 
 // == Export

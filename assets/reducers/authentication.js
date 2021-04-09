@@ -17,7 +17,7 @@ const initialState = {
   formErrors: {
     error: '',
   },
-  loader: false,
+  loginLoader: false,
   isLogged: false,
   logoutLoader: true,
 };
@@ -53,7 +53,7 @@ const authenticationReducer = (state = initialState, action = {}) => {
     case SET_LOGIN_LOADER:
       return {
         ...state,
-        loader: action.boolean,
+        loginLoader: action.boolean,
       };
     case SET_IS_LOGGED:
       return {
