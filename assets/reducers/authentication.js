@@ -6,6 +6,7 @@ import {
   CLEAR_LOG_IN_FORM,
   SET_LOGIN_LOADER,
   SET_IS_LOGGED,
+  SET_LOGOUT_LOADER,
 } from '../actions/authentication';
 
 // == Initial state
@@ -18,6 +19,7 @@ const initialState = {
   },
   loader: false,
   isLogged: false,
+  logoutLoader: true,
 };
 
 const authenticationReducer = (state = initialState, action = {}) => {
@@ -57,6 +59,11 @@ const authenticationReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLogged: action.boolean,
+      };
+    case SET_LOGOUT_LOADER:
+      return {
+        ...state,
+        logoutLoader: action.boolean,
       };
     default: return state;
   }

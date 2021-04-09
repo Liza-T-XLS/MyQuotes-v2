@@ -1,0 +1,11 @@
+@import '../../styles/vars';
+
+.logout, .logoutFail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  h2 {
+    margin-bottom: 1rem;
+  }
+}

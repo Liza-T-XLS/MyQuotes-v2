@@ -8,6 +8,7 @@ export const SET_LOGIN_LOADER = 'SET_LOGIN_LOADER';
 export const SET_IS_LOGGED = 'SET_IS_LOGGED';
 export const LOG_OUT = 'LOG_OUT';
 export const CHECK_IS_LOGGED = 'CHECK_IS_LOGGED';
+export const SET_LOGOUT_LOADER = 'SET_LOGOUT_LOADER';
 
 // == Action creators
 
@@ -48,4 +49,9 @@ export const logOut = () => ({
 
 export const checkIsLogged = () => ({
   type: CHECK_IS_LOGGED,
+});
+
+export const setLogoutLoader = (boolean) => ({
+  type: SET_LOGOUT_LOADER,
+  boolean,
 });

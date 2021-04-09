@@ -87,7 +87,7 @@ const Login = ({
             You can now access and manage your quotes.
           </p>
           <LinkButton buttonLabel="Quotes" buttonLink="quotes" />
-          <button className="logOutButton" type="button" onClick={logOutOnClickHandler}>Log out</button>
+          <LinkButton buttonLabel="Log out" buttonLink="logout" />
           <img className="logInConfirmationImg" src={logInConfirmationImg} alt="" />
         </div>
       )}
@@ -102,11 +102,9 @@ Login.propTypes = {
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   logIn: PropTypes.func.isRequired,
-  formErrors: PropTypes.objectOf(
-    PropTypes.shape({
-      error: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
+  formErrors: PropTypes.shape({
+    error: PropTypes.string.isRequired,
+  }).isRequired,
   clearLogInForm: PropTypes.func.isRequired,
   loader: PropTypes.bool.isRequired,
   setLoginLoader: PropTypes.func.isRequired,

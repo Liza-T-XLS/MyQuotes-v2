@@ -2,17 +2,18 @@
 
 import { connect } from 'react-redux';
 
-import Nav from '../../../components/Header/Nav';
-import { setOpen } from '../../../actions/nav';
+import Logout from '../../components/Logout';
+
+import { logOut } from '../../actions/authentication';
 
 const mapStateToProps = (state) => ({
-  open: state.nav.open,
+  logoutLoader: state.authentication.logoutLoader,
   isLogged: state.authentication.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setOpen: (boolean) => {
-    dispatch(setOpen(boolean));
+  logOut: () => {
+    dispatch(logOut());
   },
 });
 
@@ -21,4 +22,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Nav);
+)(Logout);

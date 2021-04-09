@@ -10,6 +10,7 @@ import {
   LOG_OUT,
   CHECK_IS_LOGGED,
   clearLogInForm,
+  setLogoutLoader,
 } from '../actions/authentication';
 
 // == Middleware
@@ -24,19 +25,13 @@ const authenticationMiddleware = (store) => (next) => (action) => {
           username: store.getState().authentication.email,
           password: store.getState().authentication.password,
         },
-        // withCredentials: true,
       })
-        .then((response) => {
-          console.log(response.data);
-          console.log('logged');
+        .then(() => {
           store.dispatch(setLoginLoader(false));
           store.dispatch(setIsLogged(true));
           store.dispatch(clearLogInForm());
         })
         .catch((error) => {
-          console.warn(error);
-          console.log(error.response.data.error);
-          console.log('login failed');
           store.dispatch(setLoginLoader(false));
           if (error.response.data.error === 'Your account has not been activated yet. Please click on the link that was sent to you upon registration.') {
             store.dispatch(showServerError(error.response.data.error));
@@ -45,7 +40,6 @@ const authenticationMiddleware = (store) => (next) => (action) => {
           }
         })
         .finally(() => {
-          console.log('finally');
           store.dispatch(setLoginLoader(false));
         });
       next(action);
@@ -56,16 +50,14 @@ const authenticationMiddleware = (store) => (next) => (action) => {
         url: 'http://localhost:8000/api/logout',
       })
         .then(() => {
-          console.log('logged out');
           store.dispatch(setIsLogged(false));
+          store.dispatch(setLogoutLoader(false));
         })
-        .catch((error) => {
-          console.warn(error);
-          console.log(error.response.data);
-          console.log('logout failed');
+        .catch(() => {
+          store.dispatch(setLogoutLoader(false));
         })
         .finally(() => {
-          console.log('finally');
+          store.dispatch(setLogoutLoader(false));
         });
       next(action);
       break;
@@ -75,16 +67,11 @@ const authenticationMiddleware = (store) => (next) => (action) => {
         url: 'http://localhost:8000/api/islogged',
       })
         .then((response) => {
-          console.log('islogged');
-          console.log(response.data);
           store.dispatch(setIsLogged(response.data.isLogged));
         })
-        .catch((error) => {
-          console.warn(error);
-          console.log('islogged failed');
+        .catch(() => {
         })
         .finally(() => {
-          console.log('finally');
         });
       next(action);
       break;

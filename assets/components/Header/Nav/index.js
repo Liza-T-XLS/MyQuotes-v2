@@ -23,18 +23,12 @@ const Nav = ({
   open,
   setOpen,
   isLogged,
-  logOut,
 }) => {
   const burgerCSS = classNames('burger', { active: open });
   const navCSS = classNames('nav', { active: open });
 
   const burgerOnClickHandler = () => {
     setOpen(!open);
-  };
-
-  const logOutOnClickHandler = () => {
-    burgerOnClickHandler();
-    logOut();
   };
 
   return (
@@ -79,7 +73,7 @@ const Nav = ({
           {isLogged && (
             <li className="option">
               <img src={logoutIcon} alt="menu logout icon" className="menuIcon" />
-              <Link to="/" onClick={logOutOnClickHandler} className="link">Logout</Link>
+              <Link to="/logout" onClick={burgerOnClickHandler} className="link">Logout</Link>
             </li>
           )}
         </ul>
@@ -94,7 +88,6 @@ Nav.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
-  logOut: PropTypes.func.isRequired,
 };
 
 // == Export

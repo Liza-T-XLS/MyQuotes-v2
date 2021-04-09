@@ -19,6 +19,7 @@ import Quotes from '../../containers/Quotes';
 import Settings from '../../containers/Settings';
 import NotFound from '../NotFound';
 import About from '../About';
+import Logout from '../../containers/Logout';
 
 // == Component
 
@@ -88,6 +89,12 @@ const App = ({
             exact
           >
             <About />
+          </Route>
+          <Route
+            path="/logout"
+            exact
+          >
+            <Logout />
           </Route>
           <Route>
             <NotFound />
