@@ -15,6 +15,7 @@ const NotFound = () => (
     <Helmet>
       <title>MyQuotes | 404</title>
     </Helmet>
+    <h2>Not Found</h2>
     <p className="notFoundText">
       Oops! The page you are looking for doesn&apos;t exist.
       <br />
