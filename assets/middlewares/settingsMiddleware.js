@@ -29,7 +29,7 @@ const settingsMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.warn(error);
-          console.log(error.response.data.error);
+          console.log(error.response.data);
           console.log('userdata failed');
         })
         .finally(() => {

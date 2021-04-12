@@ -18,6 +18,7 @@ import editIcon from '../../images/edit.svg';
 import visibleIcon from '../../images/visible-24.png';
 
 import Loader from '../Loader';
+import Unauthorized from '../Unauthorized';
 
 import { passwordVisibilityOnClickHandler } from '../../utils/handlers';
 
@@ -42,28 +43,35 @@ const Settings = ({
   setSettingsLoader,
   submitChanges,
   flash,
+  checkIsLogged,
+  isLogged,
 }) => {
   const pseudonymInput = useRef(null);
   const emailInput = useRef(null);
 
   useEffect(() => {
+    checkIsLogged();
     clearUserDataChanges();
     loadUserData();
   }, []);
 
   useEffect(() => {
-    if (pseudonymEditStatus === true) {
-      pseudonymInput.current.removeAttribute('disabled');
-    } else if (pseudonymEditStatus === false) {
-      pseudonymInput.current.setAttribute('disabled', true);
+    if (pseudonymInput.current !== null) {
+      if (pseudonymEditStatus === true) {
+        pseudonymInput.current.removeAttribute('disabled');
+      } else if (pseudonymEditStatus === false) {
+        pseudonymInput.current.setAttribute('disabled', true);
+      }
     }
   }, [pseudonymEditStatus]);
 
   useEffect(() => {
-    if (emailEditStatus === true) {
-      emailInput.current.removeAttribute('disabled');
-    } else if (emailEditStatus === false) {
-      emailInput.current.setAttribute('disabled', true);
+    if (emailInput.current !== null) {
+      if (emailEditStatus === true) {
+        emailInput.current.removeAttribute('disabled');
+      } else if (emailEditStatus === false) {
+        emailInput.current.setAttribute('disabled', true);
+      }
     }
   }, [emailEditStatus]);
 
@@ -117,55 +125,62 @@ const Settings = ({
   };
 
   return (
-    <div className="settings">
-      <Helmet>
-        <title>MyQuotes | Settings</title>
-      </Helmet>
-      {loader && <Loader />}
-      <h2>Settings</h2>
-      <Fade in={flash} timeout={{ enter: 300, exit: 1000 }}>
-        <Alert severity="success">Your changes have been saved!</Alert>
-      </Fade>
-      <form className="userEditForm" onSubmit={onSubmitHandler} noValidate>
-        <label htmlFor="pseudonym">
-          <span>Pseudonym</span>
-          <input ref={pseudonymInput} type="text" name="pseudonym" id="pseudonym" value={pseudonym} onChange={onChangeHandler} minLength="2" disabled className={pseudonymClassName} />
-          <img className={pseudonymEditIconClassName} src={editIcon} alt="edit icon" title="edit your pseudonym" onClick={editOnClickHandler} />
-          <div className="errorMsg">{formErrors.pseudonym.length > 0 && <span>{formErrors.pseudonym}</span>}</div>
-        </label>
-        <label htmlFor="email">
-          <span>Email</span>
-          <input ref={emailInput} type="email" name="email" id="email" value={email} onChange={onChangeHandler} disabled className={emailClassName} />
-          <img className={emailEditIconClassName} src={editIcon} alt="edit icon" title="edit your email" onClick={editOnClickHandler} />
-          <div className="errorMsg">{formErrors.email.length > 0 && <span>{formErrors.email}</span>}</div>
-        </label>
-        {!passwordEditStatus && (<button className="displayPasswordInputs" type="button" onClick={editPasswordOnClickHandler}>Change my password</button>)}
-        {passwordEditStatus && (
-          <>
-            <label className={passwordLabelClassName} htmlFor="password">
-              <span>Enter a new password</span>
-              <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} minLength="4" required className={passwordClassName} />
-              <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
-              <div className="errorMsg">{formErrors.password.length > 0 && <span>{formErrors.password}</span>}</div>
-            </label>
-            <label htmlFor="confirmedPassword">
-              <span>Confirm your new password</span>
-              <input type="password" name="confirmedPassword" id="confirmedPassword" value={confirmedPassword} onChange={onChangeHandler} required className={confirmedPasswordClassName} />
-              <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
-              <div className="errorMsg">{formErrors.confirmedPassword.length > 0 && <span>{formErrors.confirmedPassword}</span>}</div>
-            </label>
-          </>
-        )}
-        <label htmlFor="currentPassword">
-          <span>To confirm the changes, please enter your current password</span>
-          <input type="password" name="currentPassword" id="currentPassword" value={currentPassword} onChange={onChangeHandler} required className={currentPasswordClassName} />
-          <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
-          <div className="errorMsg">{formErrors.currentPassword.length > 0 && <span>{formErrors.currentPassword}</span>}</div>
-        </label>
-        <button className="submitChangesButton" type="submit">Confirm changes</button>
-        <button className="cancelChangesButton" type="button" onClick={cancelChangesOnClickHandler}>Cancel changes</button>
-      </form>
-    </div>
+    <>
+      {isLogged && (
+      <div className="settings">
+        <Helmet>
+          <title>MyQuotes | Settings</title>
+        </Helmet>
+        {loader && <Loader />}
+        <h2>Settings</h2>
+        <Fade in={flash} timeout={{ enter: 300, exit: 1000 }}>
+          <Alert severity="success">Your changes have been saved!</Alert>
+        </Fade>
+        <form className="userEditForm" onSubmit={onSubmitHandler} noValidate>
+          <label htmlFor="pseudonym">
+            <span>Pseudonym</span>
+            <input ref={pseudonymInput} type="text" name="pseudonym" id="pseudonym" value={pseudonym} onChange={onChangeHandler} minLength="2" disabled className={pseudonymClassName} />
+            <img className={pseudonymEditIconClassName} src={editIcon} alt="edit icon" title="edit your pseudonym" onClick={editOnClickHandler} />
+            <div className="errorMsg">{formErrors.pseudonym.length > 0 && <span>{formErrors.pseudonym}</span>}</div>
+          </label>
+          <label htmlFor="email">
+            <span>Email</span>
+            <input ref={emailInput} type="email" name="email" id="email" value={email} onChange={onChangeHandler} disabled className={emailClassName} />
+            <img className={emailEditIconClassName} src={editIcon} alt="edit icon" title="edit your email" onClick={editOnClickHandler} />
+            <div className="errorMsg">{formErrors.email.length > 0 && <span>{formErrors.email}</span>}</div>
+          </label>
+          {!passwordEditStatus && (<button className="displayPasswordInputs" type="button" onClick={editPasswordOnClickHandler}>Change my password</button>)}
+          {passwordEditStatus && (
+            <>
+              <label className={passwordLabelClassName} htmlFor="password">
+                <span>Enter a new password</span>
+                <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} minLength="4" required className={passwordClassName} />
+                <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
+                <div className="errorMsg">{formErrors.password.length > 0 && <span>{formErrors.password}</span>}</div>
+              </label>
+              <label htmlFor="confirmedPassword">
+                <span>Confirm your new password</span>
+                <input type="password" name="confirmedPassword" id="confirmedPassword" value={confirmedPassword} onChange={onChangeHandler} required className={confirmedPasswordClassName} />
+                <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
+                <div className="errorMsg">{formErrors.confirmedPassword.length > 0 && <span>{formErrors.confirmedPassword}</span>}</div>
+              </label>
+            </>
+          )}
+          <label htmlFor="currentPassword">
+            <span>To confirm the changes, please enter your current password</span>
+            <input type="password" name="currentPassword" id="currentPassword" value={currentPassword} onChange={onChangeHandler} required className={currentPasswordClassName} />
+            <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
+            <div className="errorMsg">{formErrors.currentPassword.length > 0 && <span>{formErrors.currentPassword}</span>}</div>
+          </label>
+          <button className="submitChangesButton" type="submit">Confirm changes</button>
+          <button className="cancelChangesButton" type="button" onClick={cancelChangesOnClickHandler}>Cancel changes</button>
+        </form>
+      </div>
+      )}
+      {!isLogged && (
+        <Unauthorized />
+      )}
+    </>
   );
 };
 
@@ -196,6 +211,8 @@ Settings.propTypes = {
   setSettingsLoader: PropTypes.func.isRequired,
   submitChanges: PropTypes.func.isRequired,
   flash: PropTypes.bool.isRequired,
+  checkIsLogged: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 // == Export

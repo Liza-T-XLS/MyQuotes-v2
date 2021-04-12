@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/forbid-prop-types */
@@ -19,6 +20,7 @@ import Quote from '../../containers/Quotes/Quote';
 import Form from '../../containers/Quotes/Form';
 import Search from '../../containers/Quotes/Search';
 import Tags from '../../containers/Quotes/Tags';
+import Unauthorized from '../Unauthorized';
 
 // == Component
 
@@ -36,8 +38,12 @@ const Quotes = forwardRef(({
   saveCurrentPage,
   flash,
   flashMsg,
+  checkIsLogged,
+  isLogged,
 }, ref) => {
   useEffect(() => {
+    console.log('useEffect: quotes, checkIsLogged');
+    checkIsLogged();
     console.log('useEffect: quotes');
     loadQuotes();
   }, []);
@@ -73,28 +79,35 @@ const Quotes = forwardRef(({
   const addQuoteIconClassName = classNames('addQuoteIcon', { active: quoteFormStatus });
 
   return (
-    <div className="quotes" ref={quotesDivRef}>
-      <Helmet>
-        <title>MyQuotes | Board</title>
-      </Helmet>
-      <Fade className="quoteAlert" in={flash} timeout={{ enter: 300, exit: 1000 }}>
-        <Alert severity="error">{flashMsg}</Alert>
-      </Fade>
-      <div className="quotesMenu" ref={quotesMenuRef}>
-        <div className="firstLevel" ref={quotesMenuFirstLevelRef}>
-          <Search />
-          <img className={addQuoteIconClassName} src={addQuoteIcon} alt="add quote icon" onClick={onClickHandler} />
+    <>
+      {isLogged && (
+        <div className="quotes" ref={quotesDivRef}>
+          <Helmet>
+            <title>MyQuotes | Board</title>
+          </Helmet>
+          <Fade className="quoteAlert" in={flash} timeout={{ enter: 300, exit: 1000 }}>
+            <Alert severity="error">{flashMsg}</Alert>
+          </Fade>
+          <div className="quotesMenu" ref={quotesMenuRef}>
+            <div className="firstLevel" ref={quotesMenuFirstLevelRef}>
+              <Search />
+              <img className={addQuoteIconClassName} src={addQuoteIcon} alt="add quote icon" onClick={onClickHandler} />
+            </div>
+            <Tags />
+          </div>
+          <div className="quotesList" ref={quotesListRef}>
+            {quotes.map((quote) => (
+              <Quote key={quote.id} quote={quote} ref={quotesListRef} displayFormOnClickHandler={onClickHandler} />
+            ))}
+          </div>
+          <Pagination size="small" count={pageQuantity} page={currentPage} showFirstButton showLastButton siblingCount={1} boundaryCount={1} onChange={pageChangeHandler} />
+          <Form />
         </div>
-        <Tags />
-      </div>
-      <div className="quotesList" ref={quotesListRef}>
-        {quotes.map((quote) => (
-          <Quote key={quote.id} quote={quote} ref={quotesListRef} displayFormOnClickHandler={onClickHandler} />
-        ))}
-      </div>
-      <Pagination size="small" count={pageQuantity} page={currentPage} showFirstButton showLastButton siblingCount={1} boundaryCount={1} onChange={pageChangeHandler} />
-      <Form />
-    </div>
+      )}
+      {!isLogged && (
+        <Unauthorized />
+      )}
+    </>
   );
 });
 
@@ -114,6 +127,8 @@ Quotes.propTypes = {
   saveCurrentPage: PropTypes.func.isRequired,
   flash: PropTypes.bool.isRequired,
   flashMsg: PropTypes.string.isRequired,
+  checkIsLogged: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 // == Export

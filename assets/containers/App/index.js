@@ -7,7 +7,6 @@ import { checkIsLogged } from '../../actions/authentication';
 import { setOpen } from '../../actions/nav';
 
 const mapStateToProps = (state) => ({
-  isLogged: state.authentication.isLogged,
   open: state.nav.open,
 });
 

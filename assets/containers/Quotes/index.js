@@ -12,6 +12,7 @@ import {
   saveCurrentPage,
   clearQuoteForm,
 } from '../../actions/quotes';
+import { checkIsLogged } from '../../actions/authentication';
 
 const mapStateToProps = (state) => ({
   quotes: state.quotes.quotes,
@@ -30,6 +31,7 @@ const mapStateToProps = (state) => ({
   currentPage: state.quotes.currentPage,
   flash: state.quotes.flash,
   flashMsg: state.quotes.flashMsg,
+  isLogged: state.authentication.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -53,6 +55,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   clearQuoteForm: () => {
     dispatch(clearQuoteForm());
+  },
+  checkIsLogged: () => {
+    dispatch(checkIsLogged());
   },
 });
 

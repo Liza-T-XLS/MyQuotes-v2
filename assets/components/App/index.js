@@ -5,7 +5,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import './app.scss';
 
@@ -25,7 +25,6 @@ import Logout from '../../containers/Logout';
 
 const App = ({
   checkIsLogged,
-  isLogged,
   open,
   setOpen,
 }) => {
@@ -76,13 +75,13 @@ const App = ({
             path="/quotes"
             exact
           >
-            {!isLogged ? <Redirect to="/" /> : <Quotes ref={appRef} />}
+            <Quotes ref={appRef} />
           </Route>
           <Route
             path="/settings"
             exact
           >
-            {!isLogged ? <Redirect to="/" /> : <Settings />}
+            <Settings />
           </Route>
           <Route
             path="/about"
@@ -110,7 +109,6 @@ const App = ({
 
 App.propTypes = {
   checkIsLogged: PropTypes.func.isRequired,
-  isLogged: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
 };

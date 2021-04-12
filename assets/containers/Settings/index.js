@@ -13,6 +13,7 @@ import {
   clearUserDataChanges,
   setSettingsFlash,
 } from '../../actions/settings';
+import { checkIsLogged } from '../../actions/authentication';
 
 const mapStateToProps = (state) => ({
   pseudonym: state.settings.pseudonym,
@@ -26,6 +27,7 @@ const mapStateToProps = (state) => ({
   formErrors: state.settings.formErrors,
   loader: state.settings.loader,
   flash: state.settings.flash,
+  isLogged: state.authentication.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -52,6 +54,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setSettingsFlash: (boolean) => {
     dispatch(setSettingsFlash(boolean));
+  },
+  checkIsLogged: () => {
+    dispatch(checkIsLogged());
   },
 });
 
