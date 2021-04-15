@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import Helmet from 'react-helmet';
 
 import './signup.scss';
-import visibleIcon from '../../images/visible-24.png';
+import visibleIcon from '../../images/visibility-36dp.svg';
 
 import Loader from '../Loader';
 import LinkButton from '../LinkButton';
@@ -88,13 +88,13 @@ const Signup = ({
           <label className={passwordLabelClassName} htmlFor="password">
             <span>Enter a password</span>
             <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} minLength="4" required className={passwordClassName} />
-            <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
+            <img className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />
             <div className="errorMsg">{formErrors.password.length > 0 && <span>{formErrors.password}</span>}</div>
           </label>
           <label htmlFor="confirmedPassword">
             <span>Confirm your password</span>
             <input type="password" name="confirmedPassword" id="confirmedPassword" value={confirmedPassword} onChange={onChangeHandler} required className={confirmedPasswordClassName} />
-            <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
+            <img className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />
             <div className="errorMsg">{formErrors.confirmedPassword.length > 0 && <span>{formErrors.confirmedPassword}</span>}</div>
           </label>
           <button className="signUpButton" type="submit">Sign up</button>

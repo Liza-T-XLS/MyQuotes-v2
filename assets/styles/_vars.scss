@@ -2,6 +2,10 @@ $mainFamilyFont: 'Nunito', sans-serif;
 $mainColor: black;
 $secondaryColor: white;
 $mainOnHoverColor: #1e90ff;
+// blue #1e90ff
 $mainOnHoverFilter: invert(42%) sepia(77%) saturate(1948%) hue-rotate(192deg) brightness(100%) contrast(103%);
+// red
 $secondaryOnHoverFilter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(360deg) brightness(91%) contrast(135%);
+// black
+$thirdOnHoverFilter: invert(0%) sepia(4%) saturate(15%) hue-rotate(109deg) brightness(100%) contrast(106%);
 $tabletBreakPoint: 659px;

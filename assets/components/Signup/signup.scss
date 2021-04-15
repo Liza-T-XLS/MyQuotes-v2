@@ -43,6 +43,17 @@
           right: 2px;
           top: 50%;
           z-index: 1;
+          height: 24px;
+          width: auto;
+          &:hover, &:active {
+            filter: $mainOnHoverFilter;
+          }
+          &.active {
+            filter: $mainOnHoverFilter;
+            &:hover, &:active {
+              filter: $thirdOnHoverFilter;
+            }
+          }
         }
         .errorMsg {
           position: absolute;

@@ -15,7 +15,7 @@ import Alert from '@material-ui/lab/Alert';
 
 import './settings.scss';
 import editIcon from '../../images/edit.svg';
-import visibleIcon from '../../images/visible-24.png';
+import visibleIcon from '../../images/visibility-36dp.svg';
 
 import Loader from '../Loader';
 import Unauthorized from '../Unauthorized';
@@ -155,13 +155,13 @@ const Settings = ({
               <label className={passwordLabelClassName} htmlFor="password">
                 <span>Enter a new password</span>
                 <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} minLength="4" required className={passwordClassName} />
-                <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
+                <img className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />
                 <div className="errorMsg">{formErrors.password.length > 0 && <span>{formErrors.password}</span>}</div>
               </label>
               <label htmlFor="confirmedPassword">
                 <span>Confirm your new password</span>
                 <input type="password" name="confirmedPassword" id="confirmedPassword" value={confirmedPassword} onChange={onChangeHandler} required className={confirmedPasswordClassName} />
-                <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
+                <img className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />
                 <div className="errorMsg">{formErrors.confirmedPassword.length > 0 && <span>{formErrors.confirmedPassword}</span>}</div>
               </label>
             </>
@@ -169,7 +169,7 @@ const Settings = ({
           <label htmlFor="currentPassword">
             <span>To confirm the changes, please enter your current password</span>
             <input type="password" name="currentPassword" id="currentPassword" value={currentPassword} onChange={onChangeHandler} required className={currentPasswordClassName} />
-            <img className="passwordToggle" src={visibleIcon} alt="password toggle" onClick={passwordVisibilityOnClickHandler} />
+            <img id="currentPasswordToggle" className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />
             <div className="errorMsg">{formErrors.currentPassword.length > 0 && <span>{formErrors.currentPassword}</span>}</div>
           </label>
           <button className="submitChangesButton" type="submit">Confirm changes</button>
