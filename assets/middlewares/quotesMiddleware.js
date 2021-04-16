@@ -40,16 +40,17 @@ const quotesMiddleware = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response.data);
           store.dispatch(savePageQuantity(response.data.pageQuantity));
           store.dispatch(saveQuotes(response.data.quotes));
         })
-        .catch((error) => {
-          console.warn(error);
-          console.log('quotes loading failed');
+        .catch(() => {
+          store.dispatch(setQuotesFlashMsg('Oops! Something went wrong and the quotes could not be loaded...'));
+          store.dispatch(setQuotesFlash(true));
+          setTimeout(() => {
+            store.dispatch(setQuotesFlash(false));
+          }, 5000);
         })
         .finally(() => {
-          console.log('finally');
         });
       next(action);
       break;
@@ -69,7 +70,6 @@ const quotesMiddleware = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response.data);
           store.dispatch(saveCurrentPage(response.data.pageQuantity));
           store.dispatch(loadQuotes());
           store.dispatch(loadTags());
@@ -78,10 +78,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
           store.dispatch(changeQuoteFormStatus());
         })
         .catch((error) => {
-          console.warn(error);
-          console.log(error.response.data);
-          console.log('quote add failed');
-          if (error.response.data.message === 'User not found. Must be connected in order to create a quote.') {
+          if (error.response.data.message) {
             store.dispatch(setQuotesFlashMsg(error.response.data.message));
             store.dispatch(setQuotesFlash(true));
             setTimeout(() => {
@@ -92,7 +89,6 @@ const quotesMiddleware = (store) => (next) => (action) => {
           }
         })
         .finally(() => {
-          console.log('finally');
         });
       next(action);
       break;
@@ -112,8 +108,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
           tags: store.getState().quotes.tags,
         },
       })
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
           store.dispatch(loadQuotes());
           store.dispatch(loadTags());
           store.dispatch(clearQuoteForm());
@@ -121,12 +116,17 @@ const quotesMiddleware = (store) => (next) => (action) => {
           store.dispatch(changeQuoteFormStatus());
         })
         .catch((error) => {
-          console.warn(error);
-          console.log(error.response.data);
-          console.log('quote edit failed');
+          if (error.response.data.message) {
+            store.dispatch(setQuotesFlashMsg(error.response.data.message));
+            store.dispatch(setQuotesFlash(true));
+            setTimeout(() => {
+              store.dispatch(setQuotesFlash(false));
+            }, 5000);
+          } else {
+            store.dispatch(addServerQuoteErrors(error.response.data));
+          }
         })
         .finally(() => {
-          console.log('finally');
         });
       next(action);
       break;
@@ -141,10 +141,6 @@ const quotesMiddleware = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response.data);
-          console.log(store.getState().quotes.selectedTag);
-          console.log(response.data.oldTags);
-          console.log(response.data.oldTags.find((tag) => tag == store.getState().quotes.selectedTag));
           if (response.data.oldTags.find((tag) => tag == store.getState().quotes.selectedTag)) {
             store.dispatch(saveSelectedTag(''));
           }
@@ -152,12 +148,13 @@ const quotesMiddleware = (store) => (next) => (action) => {
           store.dispatch(loadTags());
         })
         .catch((error) => {
-          console.warn(error);
-          console.log(error.response.data);
-          console.log('quote delete failed');
+          store.dispatch(setQuotesFlashMsg(error.response.data.message));
+          store.dispatch(setQuotesFlash(true));
+          setTimeout(() => {
+            store.dispatch(setQuotesFlash(false));
+          }, 5000);
         })
         .finally(() => {
-          console.log('finally');
         });
       next(action);
       break;
@@ -167,16 +164,16 @@ const quotesMiddleware = (store) => (next) => (action) => {
         url: 'http://localhost:8000/api/tags',
       })
         .then((response) => {
-          console.log(response.data);
           store.dispatch(saveUserTags(response.data));
         })
-        .catch((error) => {
-          console.warn(error);
-          console.log(error.response.data);
-          console.log('load tags failed');
+        .catch(() => {
+          store.dispatch(setQuotesFlashMsg('Oops! Something went wrong and the tags could not be loaded...'));
+          store.dispatch(setQuotesFlash(true));
+          setTimeout(() => {
+            store.dispatch(setQuotesFlash(false));
+          }, 5000);
         })
         .finally(() => {
-          console.log('finally');
         });
       next(action);
       break;
