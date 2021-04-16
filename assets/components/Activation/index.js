@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 // ==  Imports
 
 import React, { useEffect } from 'react';
@@ -11,9 +13,10 @@ import Loader from '../Loader';
 
 // == Component
 
-const Activation = ({ activationLoader, activateUser, activationComplete, clearActivation }) => {
+const Activation = ({
+  activationLoader, activateUser, activationComplete, clearActivation,
+}) => {
   useEffect(() => {
-    console.log('Activation useEffect');
     clearActivation();
     activateUser();
   }, []);

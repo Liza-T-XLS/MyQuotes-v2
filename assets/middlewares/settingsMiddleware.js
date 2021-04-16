@@ -23,17 +23,11 @@ const settingsMiddleware = (store) => (next) => (action) => {
         url: 'http://localhost:8000/api/userdata',
       })
         .then((response) => {
-          console.log(response.data);
-          console.log('userdata');
           store.dispatch(setUserData(response.data.pseudonym, response.data.email));
         })
-        .catch((error) => {
-          console.warn(error);
-          console.log(error.response.data);
-          console.log('userdata failed');
+        .catch(() => {
         })
         .finally(() => {
-          console.log('finally');
         });
       next(action);
       break;
@@ -50,9 +44,7 @@ const settingsMiddleware = (store) => (next) => (action) => {
           currentPassword: store.getState().settings.currentPassword,
         },
       })
-        .then((response) => {
-          console.log(response.data);
-          console.log('userdata updated');
+        .then(() => {
           store.dispatch(clearUserDataChanges());
           store.dispatch(loadUserData());
           store.dispatch(setSettingsLoader(false));
@@ -62,14 +54,10 @@ const settingsMiddleware = (store) => (next) => (action) => {
           }, 5000);
         })
         .catch((error) => {
-          console.warn(error);
-          console.log(error.response.data);
-          console.log('userdata update failed');
           store.dispatch(addServerEditErrors(error.response.data));
           store.dispatch(setSettingsLoader(false));
         })
         .finally(() => {
-          console.log('finally');
           store.dispatch(setSettingsLoader(false));
         });
       next(action);

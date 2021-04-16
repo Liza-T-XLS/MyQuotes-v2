@@ -129,7 +129,6 @@ const settingsReducer = (state = initialState, action = {}) => {
       let newFormErrors = {
         ...state.formErrors,
       };
-      console.log(action.errors.message);
       if (action.errors.message === 'Invalid password') {
         newFormErrors = {
           ...newFormErrors,

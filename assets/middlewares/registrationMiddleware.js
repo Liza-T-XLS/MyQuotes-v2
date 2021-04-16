@@ -26,19 +26,15 @@ const registrationMiddleware = (store) => (next) => (action) => {
           password: store.getState().registration.password,
         },
       })
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
           store.dispatch(confirmSignUp(true));
           store.dispatch(setLoader(false));
         })
         .catch((error) => {
-          console.warn(error);
-          console.log(error.response.data);
           store.dispatch(setLoader(false));
           store.dispatch(addServerErrors(error.response.data));
         })
         .finally(() => {
-          console.log('finally');
           store.dispatch(setLoader(false));
         });
       next(action);
@@ -56,18 +52,14 @@ const registrationMiddleware = (store) => (next) => (action) => {
           hash,
         },
       })
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
           store.dispatch(confirmActivation(true));
           store.dispatch(setActivationLoader(false));
         })
-        .catch((error) => {
-          console.warn(error);
-          console.log(error.response.data);
+        .catch(() => {
           store.dispatch(setActivationLoader(false));
         })
         .finally(() => {
-          console.log('finally');
           store.dispatch(setActivationLoader(false));
         });
       next(action);
