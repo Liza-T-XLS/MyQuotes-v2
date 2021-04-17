@@ -48,6 +48,13 @@ const Signup = ({
     changeField(e.target.value, e.target.name);
     checkErrors(e.target.name);
   };
+
+  const formOnKeyDownHandler = (e) => {
+    if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+      e.preventDefault();
+    }
+  };
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
     checkErrors('pseudonym');
@@ -70,7 +77,7 @@ const Signup = ({
       {!registrationComplete && (
       <div className="signup">
         <h2>Sign up!</h2>
-        <form className="signupForm" onSubmit={onSubmitHandler} noValidate>
+        <form className="signupForm" onKeyDown={formOnKeyDownHandler} onSubmit={onSubmitHandler} noValidate>
           <label className="signupLabel" htmlFor="pseudonym">
             <span>Pseudonym</span>
             <input type="text" name="pseudonym" id="pseudonym" value={pseudonym} onChange={onChangeHandler} minLength="2" required className={pseudonymClassName} />
