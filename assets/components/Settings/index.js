@@ -103,6 +103,12 @@ const Settings = ({
     setEditStatus('password', true);
   };
 
+  const formOnKeyDownHandler = (e) => {
+    if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+      e.preventDefault();
+    }
+  };
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
     checkEditErrors('pseudonym');
@@ -136,7 +142,7 @@ const Settings = ({
         <Fade in={flash} timeout={{ enter: 300, exit: 1000 }}>
           <Alert severity="success">Your changes have been saved!</Alert>
         </Fade>
-        <form className="userEditForm" onSubmit={onSubmitHandler} noValidate>
+        <form className="userEditForm" onKeyDown={formOnKeyDownHandler} onSubmit={onSubmitHandler} noValidate>
           <label className="settingsLabel" htmlFor="pseudonym">
             <span>Pseudonym</span>
             <input ref={pseudonymInput} type="text" name="pseudonym" id="pseudonym" value={pseudonym} onChange={onChangeHandler} minLength="2" disabled className={pseudonymClassName} />
