@@ -18,15 +18,12 @@ const Search = ({
   clearSearchInput,
 }) => {
   const onChangeHandler = (e) => {
-    console.log('searchOnChangeHandler');
-    console.log(e.target.value);
     saveSearchInput(e.target.value);
     saveCurrentPage(1);
     loadQuotes();
   };
 
   const resetSearchOnClickHandler = (e) => {
-    console.log('resetSearchOnChangeHandler');
     if (e.target.previousSibling.value !== '') {
       clearSearchInput();
       saveCurrentPage(1);
@@ -36,7 +33,7 @@ const Search = ({
 
   return (
     <>
-      <label htmlFor="search">
+      <label className="searchLabel" htmlFor="search">
         <fieldset>
           <legend>Find a quote</legend>
           <div className="inputDiv">

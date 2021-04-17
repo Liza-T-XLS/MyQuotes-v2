@@ -1,3 +1,5 @@
+@import '../../styles/vars';
+
 .app {
   min-height: 100vh;
   position: relative;
@@ -14,5 +16,13 @@
       width: 100%;
       position: absolute;
       z-index: 5;
+  }
+}
+
+@media (min-width: $largeDesktopBreakPoint) {
+  .app {
+    main {
+      margin: 0rem 3.5rem 1rem 3.5rem;
+    }
   }
 }

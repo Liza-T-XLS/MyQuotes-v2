@@ -35,14 +35,13 @@ const Signup = ({
   clearSignUpForm,
 }) => {
   useEffect(() => {
-    console.log('Signup form useEffect');
     clearSignUpForm();
   }, []);
 
   const pseudonymClassName = classNames('pseudonym', { invalid: formErrors.pseudonym.length > 0 });
   const emailClassName = classNames('email', { invalid: formErrors.email.length > 0 });
   const passwordClassName = classNames('password', { invalid: formErrors.password.length > 0 });
-  const passwordLabelClassName = classNames('', { passwordLabel: formErrors.password.length > 0 });
+  const passwordLabelClassName = classNames('signupLabel', { passwordLabel: formErrors.password.length > 0 });
   const confirmedPasswordClassName = classNames('confirmedPassword', { invalid: formErrors.confirmedPassword.length > 0 });
 
   const onChangeHandler = (e) => {
@@ -51,15 +50,12 @@ const Signup = ({
   };
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log('onSubmitHandler triggered');
     checkErrors('pseudonym');
     checkErrors('email');
     checkErrors('password');
     checkErrors('confirmedPassword');
     const errors = Object.values(formErrors).find((value) => value.length > 0);
-    console.log(Object.values(formErrors));
     if (errors === undefined && pseudonym !== '' && email !== '' && password !== '' && confirmedPassword !== '') {
-      console.log('form submitted');
       setLoader(true);
       signUp();
     }
@@ -75,12 +71,12 @@ const Signup = ({
       <div className="signup">
         <h2>Sign up!</h2>
         <form className="signupForm" onSubmit={onSubmitHandler} noValidate>
-          <label htmlFor="pseudonym">
+          <label className="signupLabel" htmlFor="pseudonym">
             <span>Pseudonym</span>
             <input type="text" name="pseudonym" id="pseudonym" value={pseudonym} onChange={onChangeHandler} minLength="2" required className={pseudonymClassName} />
             <div className="errorMsg">{formErrors.pseudonym.length > 0 && <span>{formErrors.pseudonym}</span>}</div>
           </label>
-          <label htmlFor="email">
+          <label className="signupLabel" htmlFor="email">
             <span>Email</span>
             <input type="email" name="email" id="email" value={email} onChange={onChangeHandler} required className={emailClassName} />
             <div className="errorMsg">{formErrors.email.length > 0 && <span>{formErrors.email}</span>}</div>
@@ -91,7 +87,7 @@ const Signup = ({
             <img className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />
             <div className="errorMsg">{formErrors.password.length > 0 && <span>{formErrors.password}</span>}</div>
           </label>
-          <label htmlFor="confirmedPassword">
+          <label className="signupLabel" htmlFor="confirmedPassword">
             <span>Confirm your password</span>
             <input type="password" name="confirmedPassword" id="confirmedPassword" value={confirmedPassword} onChange={onChangeHandler} required className={confirmedPasswordClassName} />
             <img className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />

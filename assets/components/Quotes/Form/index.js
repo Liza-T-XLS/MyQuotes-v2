@@ -39,11 +39,11 @@ const Form = ({
 }) => {
   const quoteFormClassName = classNames('quoteForm', { active: quoteFormStatus });
 
-  const authorFirstNameLabelClassName = classNames('', { authorFirstNameLabel: formErrors.authorFirstName.length > 0 && quoteFormHeight < 700 });
-  const authorLastNameLabelClassName = classNames('', { authorLastNameLabel: formErrors.authorLastName.length > 0 && quoteFormHeight < 700 });
-  const characterNameLabelClassName = classNames('', { characterNameLabel: formErrors.characterName.length > 0 && quoteFormHeight < 700 });
-  const mediumTitleLabelClassName = classNames('', { mediumTitleLabel: formErrors.mediumTitle.length > 0 && quoteFormHeight < 700 });
-  const tagInputLabelClassName = classNames('', { tagInputLabel: formErrors.tagInput.length > 0 && quoteFormHeight < 700 });
+  const authorFirstNameLabelClassName = classNames('formLabel', { authorFirstNameLabel: formErrors.authorFirstName.length > 0 && quoteFormHeight < 700 });
+  const authorLastNameLabelClassName = classNames('formLabel', { authorLastNameLabel: formErrors.authorLastName.length > 0 && quoteFormHeight < 700 });
+  const characterNameLabelClassName = classNames('formLabel', { characterNameLabel: formErrors.characterName.length > 0 && quoteFormHeight < 700 });
+  const mediumTitleLabelClassName = classNames('formLabel', { mediumTitleLabel: formErrors.mediumTitle.length > 0 && quoteFormHeight < 700 });
+  const tagInputLabelClassName = classNames('formLabel', { tagInputLabel: formErrors.tagInput.length > 0 && quoteFormHeight < 700 });
 
   // custom z-index required despite form being closed, else (white) inputs are still displayed above (black) footer
   let quoteFormZindex;
@@ -79,15 +79,12 @@ const Form = ({
   };
 
   const tagOnClickHandler = () => {
-    console.log('onClickHandler');
     if (tagInput.trim().length > 0) {
       createTag();
     }
   };
 
   const tagDeleteOnClickHandler = (e) => {
-    console.log('tag deleted');
-    console.log(e.target.previousSibling.textContent);
     const tagName = e.target.previousSibling.textContent;
     deleteTag(tagName);
   };
@@ -99,9 +96,7 @@ const Form = ({
   };
 
   const onSubmitHandler = (e) => {
-    console.log(e);
     e.preventDefault();
-    console.log('submitted');
     clearTagInput();
     checkQuoteFormErrors('quoteText');
     checkQuoteFormErrors('authorFirstName');
@@ -121,7 +116,7 @@ const Form = ({
   return (
     <form className={quoteFormClassName} style={quoteFormStyle} onKeyDown={formOnKeyDownHandler} onSubmit={onSubmitHandler}>
       <h2>{quoteFormTitleLabel}</h2>
-      <label htmlFor="quoteText">
+      <label className="formLabel" htmlFor="quoteText">
         <span>Text</span>
         <textarea name="quoteText" value={quoteText} onChange={onChangeHandler} id="quoteText" minLength="1" required />
         <div className="errorMsg">{formErrors.quoteText.length > 0 && <span>{formErrors.quoteText}</span>}</div>

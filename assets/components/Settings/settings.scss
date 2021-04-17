@@ -13,7 +13,7 @@
     .passwordLabel {
       margin-bottom: 4rem;
     }
-    label {
+    .settingsLabel {
       position: relative;
       margin-bottom: 2rem;
       width: calc(100% / 3 * 2);
@@ -114,7 +114,32 @@
 @media (max-width: $tabletBreakPoint) {
   .settings {
     .userEditForm {
-      label {
+      .settingsLabel {
+        #currentPasswordToggle {
+          top: 64%;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $largeDesktopBreakPoint) {
+  .settings {
+    .userEditForm {
+      .settingsLabel {
+        width: calc(100% / 3);
+      }
+      .displayPasswordInputs {
+        width: calc(100% / 3);
+      }
+    }
+  }
+}
+
+@media (min-width: $largeDesktopBreakPoint) and (max-width: 1397px) {
+  .settings {
+    .userEditForm {
+      .settingsLabel {
         #currentPasswordToggle {
           top: 64%;
         }

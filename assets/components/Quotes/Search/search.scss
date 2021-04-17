@@ -1,6 +1,6 @@
 @import '../../../styles/vars';
 
-label {
+.searchLabel {
   fieldset {
     padding-left: 0.5rem;
     padding-right: 0rem;
@@ -30,6 +30,32 @@ label {
         filter: invert(72%) sepia(0%) saturate(1897%) hue-rotate(257deg) brightness(101%) contrast(73%);
         &:hover, &:active {
           filter: $secondaryOnHoverFilter;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $tabletBreakPoint) {
+  .searchLabel {
+    width: 80%;
+    fieldset {
+      .inputDiv {
+        .searchInput {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $largeDesktopBreakPoint) {
+  .searchLabel {
+    width: 85%;
+    fieldset {
+      .inputDiv {
+        .searchInput {
+          width: 100%;
         }
       }
     }

@@ -22,7 +22,7 @@
   .authorFirstNameLabel, .authorLastNameLabel, .characterNameLabel, .mediumTitleLabel, .tagInputLabel {
     margin-bottom: 2rem;
   }
-  label {
+  .formLabel {
     position: relative;
     margin-bottom: 0.8rem;
     display: block;
@@ -32,7 +32,8 @@
     textarea {
       height: 100px;
       display: block;
-      width: 99%;
+      width: 100%;
+      padding: 0;
     }
     .quoteFormInput {
       display: block;
@@ -101,5 +102,14 @@
   &.active {
     background-color: rgba($mainColor, 1);
     overflow: auto;
+  }
+}
+
+@media (min-width: $desktopBreakPoint) {
+  .quoteForm {
+    align-items: center;
+    .formLabel {
+      width: 90%;
+    }
   }
 }

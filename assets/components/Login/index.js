@@ -32,7 +32,6 @@ const Login = ({
   isLogged,
 }) => {
   useEffect(() => {
-    console.log('Login form useEffect');
     clearLogInForm();
   }, []);
 
@@ -44,7 +43,6 @@ const Login = ({
   };
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log('onSubmitHandler triggered');
     logIn();
     setLoginLoader(true);
   };
@@ -59,11 +57,11 @@ const Login = ({
         <div className="login">
           <h2>Log in!</h2>
           <form className="loginForm" onSubmit={onSubmitHandler} noValidate>
-            <label htmlFor="email">
+            <label className="loginLabel" htmlFor="email">
               <span>Email</span>
               <input type="text" name="email" id="email" value={email} onChange={onChangeHandler} required className={emailClassName} />
             </label>
-            <label htmlFor="password">
+            <label className="loginLabel" htmlFor="password">
               <span>Enter your password</span>
               <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} required className={passwordClassName} />
               <img className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />

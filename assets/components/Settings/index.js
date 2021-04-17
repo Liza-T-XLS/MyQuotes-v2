@@ -80,7 +80,7 @@ const Settings = ({
   const emailEditIconClassName = classNames('editIcon', { active: emailEditStatus });
   const emailClassName = classNames('email', { invalid: formErrors.email.length > 0 });
   const passwordClassName = classNames('password', { invalid: formErrors.password.length > 0 });
-  const passwordLabelClassName = classNames('', { passwordLabel: formErrors.password.length > 0 });
+  const passwordLabelClassName = classNames('settingsLabel', { passwordLabel: formErrors.password.length > 0 });
   const confirmedPasswordClassName = classNames('confirmedPassword', { invalid: formErrors.confirmedPassword.length > 0 });
   const currentPasswordClassName = classNames('currentPassword', { invalid: formErrors.currentPassword.length > 0 });
 
@@ -137,13 +137,13 @@ const Settings = ({
           <Alert severity="success">Your changes have been saved!</Alert>
         </Fade>
         <form className="userEditForm" onSubmit={onSubmitHandler} noValidate>
-          <label htmlFor="pseudonym">
+          <label className="settingsLabel" htmlFor="pseudonym">
             <span>Pseudonym</span>
             <input ref={pseudonymInput} type="text" name="pseudonym" id="pseudonym" value={pseudonym} onChange={onChangeHandler} minLength="2" disabled className={pseudonymClassName} />
             <img className={pseudonymEditIconClassName} src={editIcon} alt="edit icon" title="edit your pseudonym" onClick={editOnClickHandler} />
             <div className="errorMsg">{formErrors.pseudonym.length > 0 && <span>{formErrors.pseudonym}</span>}</div>
           </label>
-          <label htmlFor="email">
+          <label className="settingsLabel" htmlFor="email">
             <span>Email</span>
             <input ref={emailInput} type="email" name="email" id="email" value={email} onChange={onChangeHandler} disabled className={emailClassName} />
             <img className={emailEditIconClassName} src={editIcon} alt="edit icon" title="edit your email" onClick={editOnClickHandler} />
@@ -158,7 +158,7 @@ const Settings = ({
                 <img className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />
                 <div className="errorMsg">{formErrors.password.length > 0 && <span>{formErrors.password}</span>}</div>
               </label>
-              <label htmlFor="confirmedPassword">
+              <label className="settingsLabel" htmlFor="confirmedPassword">
                 <span>Confirm your new password</span>
                 <input type="password" name="confirmedPassword" id="confirmedPassword" value={confirmedPassword} onChange={onChangeHandler} required className={confirmedPasswordClassName} />
                 <img className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />
@@ -166,7 +166,7 @@ const Settings = ({
               </label>
             </>
           )}
-          <label htmlFor="currentPassword">
+          <label className="settingsLabel" htmlFor="currentPassword">
             <span>To confirm the changes, please enter your current password</span>
             <input type="password" name="currentPassword" id="currentPassword" value={currentPassword} onChange={onChangeHandler} required className={currentPasswordClassName} />
             <img id="currentPasswordToggle" className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />
