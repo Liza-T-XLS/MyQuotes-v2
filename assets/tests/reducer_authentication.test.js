@@ -28,11 +28,12 @@ describe('authentication reducer', () => {
     expect(authenticationReducer()).to.deep.equal(expectedInitialState);
   });
   it('handles CHANGE_LOGIN_FIELD', () => {
-    expect(authenticationReducer(undefined, {
+    const action = {
       type: CHANGE_LOGIN_FIELD,
       fieldName: 'password',
       newValue: 'bestmdp',
-    })).to.deep.equal({
+    };
+    const expectedState = {
       email: '',
       password: 'bestmdp',
       formErrors: {
@@ -41,13 +42,15 @@ describe('authentication reducer', () => {
       loginLoader: false,
       isLogged: false,
       logoutLoader: true,
-    });
+    };
+    expect(authenticationReducer(undefined, action)).to.deep.equal(expectedState);
   });
   it('handles SHOW_SERVER_ERROR', () => {
-    expect(authenticationReducer(undefined, {
+    const action = {
       type: SHOW_SERVER_ERROR,
       errorMsg: 'wrong credentials',
-    })).to.deep.equal({
+    };
+    const expectedState = {
       email: '',
       password: '',
       formErrors: {
@@ -56,9 +59,13 @@ describe('authentication reducer', () => {
       loginLoader: false,
       isLogged: false,
       logoutLoader: true,
-    });
+    };
+    expect(authenticationReducer(undefined, action)).to.deep.equal(expectedState);
   });
   it('handles CLEAR_LOG_IN_FORM', () => {
+    const action = {
+      type: CLEAR_LOG_IN_FORM,
+    };
     const currentState = {
       email: 'blabla@gmail.com',
       password: 'bestmdp',
@@ -69,9 +76,7 @@ describe('authentication reducer', () => {
       isLogged: false,
       logoutLoader: true,
     };
-    expect(authenticationReducer(currentState, {
-      type: CLEAR_LOG_IN_FORM,
-    })).to.deep.equal({
+    const expectedState = {
       email: '',
       password: '',
       formErrors: {
@@ -80,13 +85,15 @@ describe('authentication reducer', () => {
       loginLoader: false,
       isLogged: false,
       logoutLoader: true,
-    });
+    };
+    expect(authenticationReducer(currentState, action)).to.deep.equal(expectedState);
   });
   it('handles SET_LOGIN_LOADER', () => {
-    expect(authenticationReducer(undefined, {
+    const action = {
       type: SET_LOGIN_LOADER,
       boolean: true,
-    })).to.deep.equal({
+    };
+    const expectedState = {
       email: '',
       password: '',
       formErrors: {
@@ -95,13 +102,15 @@ describe('authentication reducer', () => {
       loginLoader: true,
       isLogged: false,
       logoutLoader: true,
-    });
+    };
+    expect(authenticationReducer(undefined, action)).to.deep.equal(expectedState);
   });
   it('handles SET_IS_LOGGED', () => {
-    expect(authenticationReducer(undefined, {
+    const action = {
       type: SET_IS_LOGGED,
       boolean: true,
-    })).to.deep.equal({
+    };
+    const expectedState = {
       email: '',
       password: '',
       formErrors: {
@@ -110,13 +119,15 @@ describe('authentication reducer', () => {
       loginLoader: false,
       isLogged: true,
       logoutLoader: true,
-    });
+    };
+    expect(authenticationReducer(undefined, action)).to.deep.equal(expectedState);
   });
   it('handles SET_LOGOUT_LOADER', () => {
-    expect(authenticationReducer(undefined, {
+    const action = {
       type: SET_LOGOUT_LOADER,
       boolean: false,
-    })).to.deep.equal({
+    };
+    const expectedState = {
       email: '',
       password: '',
       formErrors: {
@@ -125,6 +136,7 @@ describe('authentication reducer', () => {
       loginLoader: false,
       isLogged: false,
       logoutLoader: false,
-    });
+    };
+    expect(authenticationReducer(undefined, action)).to.deep.equal(expectedState);
   });
 });
