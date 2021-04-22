@@ -21,7 +21,7 @@ describe('registrationReducer', () => {
     expect(registrationReducer).to.be.a('function');
   });
   it('matches initial state', () => {
-    const initialState = {
+    const expectedInitialState = {
       pseudonym: '',
       email: '',
       password: '',
@@ -37,7 +37,7 @@ describe('registrationReducer', () => {
       activationLoader: true,
       activationComplete: false,
     };
-    expect(registrationReducer()).to.deep.equal(initialState);
+    expect(registrationReducer()).to.deep.equal(expectedInitialState);
   });
   it('handles CHANGE_FIELD', () => {
     const action = {
