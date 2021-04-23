@@ -6,8 +6,8 @@ export const CHANGE_QUOTE_FORM_STATUS = 'CHANGE_QUOTE_FORM_STATUS';
 export const SAVE_HEADER_HEIGHT = 'SAVE_HEADER_HEIGHT';
 export const SAVE_FORM_HEIGHT = 'SAVE_FORM_HEIGHT';
 export const CHANGE_QUOTE_FORM_FIELD = 'CHANGE_QUOTE_FORM_FIELD';
-export const SAVE_TAG = 'SAVE_TAG';
-export const DELETE_TAG = 'DELETE_TAG';
+export const SAVE_FORM_TAG = 'SAVE_FORM_TAG';
+export const DELETE_FORM_TAG = 'DELETE_FORM_TAG';
 export const ADD_QUOTE = 'ADD_QUOTE';
 export const CHECK_QUOTE_FORM_ERRORS = 'CHECK_QUOTE_FORM_ERRORS';
 export const ADD_SERVER_QUOTE_ERRORS = 'ADD_SERVER_QUOTE_ERRORS';
@@ -58,13 +58,13 @@ export const changeQuoteFormField = (newValue, fieldName) => ({
   fieldName,
 });
 
-export const saveTag = (tagName) => ({
-  type: SAVE_TAG,
+export const saveFormTag = (tagName) => ({
+  type: SAVE_FORM_TAG,
   tagName,
 });
 
-export const deleteTag = (tagName) => ({
-  type: DELETE_TAG,
+export const deleteFormTag = (tagName) => ({
+  type: DELETE_FORM_TAG,
   tagName,
 });
 

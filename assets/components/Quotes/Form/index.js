@@ -27,8 +27,8 @@ const Form = ({
   mediumTitle,
   tagInput,
   tags,
-  saveTag,
-  deleteTag,
+  saveFormTag,
+  deleteFormTag,
   changeQuoteFormField,
   addQuote,
   quoteId,
@@ -68,7 +68,7 @@ const Form = ({
     checkQuoteFormErrors('tagInput');
     const error = formErrors.tagInput;
     if (error === '') {
-      saveTag(tagInput.trim());
+      saveFormTag(tagInput.trim());
     }
   };
 
@@ -86,7 +86,7 @@ const Form = ({
 
   const tagDeleteOnClickHandler = (e) => {
     const tagName = e.target.previousSibling.textContent;
-    deleteTag(tagName);
+    deleteFormTag(tagName);
   };
 
   const formOnKeyDownHandler = (e) => {
@@ -177,8 +177,8 @@ Form.propTypes = {
   mediumTitle: PropTypes.string.isRequired,
   tagInput: PropTypes.string.isRequired,
   tags: PropTypes.array,
-  saveTag: PropTypes.func.isRequired,
-  deleteTag: PropTypes.func.isRequired,
+  saveFormTag: PropTypes.func.isRequired,
+  deleteFormTag: PropTypes.func.isRequired,
   changeQuoteFormField: PropTypes.func.isRequired,
   addQuote: PropTypes.func.isRequired,
   quoteId: PropTypes.number.isRequired,

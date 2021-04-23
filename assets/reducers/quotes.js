@@ -8,8 +8,8 @@ import {
   SAVE_HEADER_HEIGHT,
   SAVE_FORM_HEIGHT,
   CHANGE_QUOTE_FORM_FIELD,
-  SAVE_TAG,
-  DELETE_TAG,
+  SAVE_FORM_TAG,
+  DELETE_FORM_TAG,
   CHECK_QUOTE_FORM_ERRORS,
   ADD_SERVER_QUOTE_ERRORS,
   CLEAR_TAG_INPUT,
@@ -92,7 +92,7 @@ const quotesReducer = (state = initialState, action = {}) => {
         [target]: action.newValue,
       };
     }
-    case SAVE_TAG: {
+    case SAVE_FORM_TAG: {
       const newTagsArray = [
         ...state.tags,
         slugify(action.tagName, { lower: true }),
@@ -103,7 +103,7 @@ const quotesReducer = (state = initialState, action = {}) => {
         tags: newTagsArray,
       };
     }
-    case DELETE_TAG: {
+    case DELETE_FORM_TAG: {
       const newTagsArray = [...state.tags.filter((tag) => tag !== action.tagName)];
       return {
         ...state,

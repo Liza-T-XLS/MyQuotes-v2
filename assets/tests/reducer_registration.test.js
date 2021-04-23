@@ -16,7 +16,7 @@ import {
   CLEAR_ACTIVATION,
 } from '../actions/registration';
 
-describe('registrationReducer', () => {
+describe('registration reducer', () => {
   it('is a function', () => {
     expect(registrationReducer).to.be.a('function');
   });
