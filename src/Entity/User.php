@@ -23,6 +23,7 @@ class User implements UserInterface
         $this->createdAt = new DateTime();
         $this->quotes = new ArrayCollection();
         $this->active = false;
+        $this->token = new ArrayCollection();
     }
     
     /**
@@ -91,6 +92,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $hash;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Token::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $token;
 
     public function getId(): ?int
     {
@@ -256,6 +262,36 @@ class User implements UserInterface
     public function setHash(?string $hash): self
     {
         $this->hash = $hash;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Token[]
+     */
+    public function getToken(): Collection
+    {
+        return $this->token;
+    }
+
+    public function addToken(Token $token): self
+    {
+        if (!$this->token->contains($token)) {
+            $this->token[] = $token;
+            $token->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeToken(Token $token): self
+    {
+        if ($this->token->removeElement($token)) {
+            // set the owning side to null (unless already changed)
+            if ($token->getUser() === $this) {
+                $token->setUser(null);
+            }
+        }
 
         return $this;
     }
