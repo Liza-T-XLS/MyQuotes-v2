@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Login from '../../components/Login';
 import {
-  changeField,
+  changeLoginField,
   logIn,
   clearLogInForm,
   setLoginLoader,
@@ -19,8 +19,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeField: (newValue, fieldName) => {
-    dispatch(changeField(newValue, fieldName));
+  changeLoginField: (newValue, fieldName) => {
+    dispatch(changeLoginField(newValue, fieldName));
   },
   logIn: (email, password) => {
     dispatch(logIn(email, password));

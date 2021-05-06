@@ -9,6 +9,7 @@ import registrationMiddleware from '../middlewares/registrationMiddleware';
 import authenticationMiddleware from '../middlewares/authenticationMiddleware';
 import quotesMiddleware from '../middlewares/quotesMiddleware';
 import settingsMiddleware from '../middlewares/settingsMiddleware';
+import passwordForgottenMiddleware from '../middlewares/passwordForgottenMiddleware';
 
 // == Components
 
@@ -18,6 +19,7 @@ const enhancers = composeWithDevTools(
     authenticationMiddleware,
     quotesMiddleware,
     settingsMiddleware,
+    passwordForgottenMiddleware,
     // ... other middlewares
   ),
 );

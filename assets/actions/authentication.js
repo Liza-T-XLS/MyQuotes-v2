@@ -12,7 +12,7 @@ export const SET_LOGOUT_LOADER = 'SET_LOGOUT_LOADER';
 
 // == Action creators
 
-export const changeField = (newValue, fieldName) => ({
+export const changeLoginField = (newValue, fieldName) => ({
   type: CHANGE_LOGIN_FIELD,
   newValue,
   fieldName,

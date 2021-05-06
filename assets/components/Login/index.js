@@ -7,6 +7,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Helmet from 'react-helmet';
+import { Link } from 'react-router-dom';
 
 import './login.scss';
 import visibleIcon from '../../images/visibility-36dp.svg';
@@ -23,7 +24,7 @@ import { passwordVisibilityOnClickHandler } from '../../utils/handlers';
 const Login = ({
   email,
   password,
-  changeField,
+  changeLoginField,
   formErrors,
   logIn,
   clearLogInForm,
@@ -39,7 +40,7 @@ const Login = ({
   const passwordClassName = classNames('password', { invalid: formErrors.error.length > 0 });
 
   const onChangeHandler = (e) => {
-    changeField(e.target.value, e.target.name);
+    changeLoginField(e.target.value, e.target.name);
   };
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -59,13 +60,14 @@ const Login = ({
           <form className="loginForm" onSubmit={onSubmitHandler} noValidate>
             <label className="loginLabel" htmlFor="email">
               <span>Email</span>
-              <input type="text" name="email" id="email" value={email} onChange={onChangeHandler} required className={emailClassName} />
+              <input type="email" name="email" id="email" value={email} onChange={onChangeHandler} required className={emailClassName} />
             </label>
-            <label className="loginLabel" htmlFor="password">
+            <label className="loginLabel" htmlFor="password" id="loginLabelPassword">
               <span>Enter your password</span>
               <input type="password" name="password" id="password" value={password} onChange={onChangeHandler} required className={passwordClassName} />
               <img className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />
             </label>
+            <Link to="/password-forgotten" className="passwordForgottenLink">Forgot your password?</Link>
             <div className="errorMsg">{[formErrors.error].length > 0 && <span>{formErrors.error}</span>}</div>
             <button className="logInButton" type="submit">Log in</button>
           </form>
@@ -92,7 +94,7 @@ const Login = ({
 Login.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
-  changeField: PropTypes.func.isRequired,
+  changeLoginField: PropTypes.func.isRequired,
   logIn: PropTypes.func.isRequired,
   formErrors: PropTypes.shape({
     error: PropTypes.string.isRequired,

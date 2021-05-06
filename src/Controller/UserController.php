@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use App\Service\TokenChecker;
 
 class UserController extends AbstractController
 {
@@ -100,7 +101,7 @@ class UserController extends AbstractController
   /**
    * @Route("/api/userdata/password-forgotten", name="api_userdata_password_forgotten", methods={"POST"})
    */
-  public function forgottenPwd(Request $request, UserRepository $userRepository, \Swift_Mailer $mailer)
+  public function requestToken(Request $request, UserRepository $userRepository, \Swift_Mailer $mailer)
   {
     /* 
     expected data format:
@@ -131,12 +132,12 @@ class UserController extends AbstractController
       $entityManager->flush();
 
         // Email is sent to the user with the token needed to set a new password
-      $message = (new \Swift_Message('MyQuotes - Forgotten password'))
+      $message = (new \Swift_Message('MyQuotes - Password Forgotten'))
       ->setFrom('send@example.com')
       ->setTo($user->getEmail())
       ->setBody(
         $this->renderView(
-          'emails/forgotten-password.html.twig',
+          'emails/password-forgotten.html.twig',
           ['pseudonym' => $user->getPseudonym(),
           'token' => $token->getString()]
         ),
@@ -149,10 +150,47 @@ class UserController extends AbstractController
     }
   }
 
+
+  /**
+   * @Route("/api/userdata/password-token-check", name="api_userdata_password_token_check", methods={"POST"})
+   */
+  public function checkToken(Request $request, UserRepository $userRepository, TokenRepository $tokenRepository, TokenChecker $tokenChecker) {
+    /* 
+    expected data format:
+    {
+      "userId": 8,
+      "token": 123456
+    }
+    */
+    $data = json_decode($request->getContent());
+
+    $user = $userRepository->find($data->userId);
+
+    if(!$user) {
+      return $this->json(['message' => 'This user id does not exist.'], Response::HTTP_NOT_FOUND);
+    }
+
+    // looks for a token that matches the provided string and user
+    $token = $tokenRepository->findBy(['string' => $data->token, 'user' => $user ]);
+    
+    if (!$token) {
+        return $this->json(['message' => 'Wrong token provided.'], Response::HTTP_NOT_FOUND);
+    }
+    // else, if the token exists, its validity is checked (created less than 10 minutes ago)
+    $tokenValidity = $tokenChecker->checkTokenValidity($token[0]);
+
+    if (!$tokenValidity) {
+      return $this->json(['message' => 'The token has expired.'], Response::HTTP_BAD_REQUEST);
+    } else {
+      return $this->json(['message' => 'Authorization to reset password granted', 'resetAuthorization' => true], Response::HTTP_OK);
+    }
+  }
+
+
   /**
    * @Route("/api/userdata/password-reset", name="api_userdata_password_reset", methods={"POST"})
    */
-  public function resetPwd(Request $request, UserRepository $userRepository, TokenRepository $tokenRepository, UserPasswordEncoderInterface $passwordEncoder, ValidatorInterface $validator, \Swift_Mailer $mailer)
+  public function resetPassword(Request $request, UserRepository $userRepository, TokenRepository $tokenRepository, TokenChecker $tokenChecker, UserPasswordEncoderInterface $passwordEncoder, ValidatorInterface $validator, \Swift_Mailer $mailer)
   {
     /* 
     expected data format:
@@ -175,29 +213,19 @@ class UserController extends AbstractController
     $token = $tokenRepository->findBy(['string' => $data->token, 'user' => $user ]);
     
     if (!$token) {
-        return $this->json(['Wrong token provided.'], Response::HTTP_NOT_FOUND);
+        return $this->json(['message' => 'Wrong token provided.'], Response::HTTP_NOT_FOUND);
     }
-
     // else, if the token exists, its validity is checked (created less than 10 minutes ago)
+    $tokenValidity = $tokenChecker->checkTokenValidity($token[0]);
 
-    // calculates the time difference between the creation time of the token and the input time of this same token
-    $tokenCreationTime = $token[0]->getCreatedAt();
-    $tokenInputTime = new \DateTime();
-    $dateInterval = $tokenCreationTime->diff($tokenInputTime);
-    $daysInMin = $dateInterval->d * 24 * 60;
-    $hoursInMin = $dateInterval->h * 60;
-    $minutes = $dateInterval->i;
-    $totalMinutes = $daysInMin + $hoursInMin + $minutes;
-    $interval = $totalMinutes;
-
-    // if the difference is greater than 10 minutes, the token is considered expired and therefore destroyed, the user cannot change the password and has to request a new token
-    if ($interval > 10) {
-        $user->removeToken($token[0]);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->flush();
-        return $this->json(['The token has expired.'], Response::HTTP_NOT_FOUND);
+    // if the token has expired it is destroyed, the user cannot change the password and has to request a new token
+ 
+    if (!$tokenValidity) {
+      $user->removeToken($token[0]);
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->flush();
+      return $this->json(['message' => 'The token has expired.'], Response::HTTP_NOT_FOUND);
     }
-
     // if the token is valid and the password deemed acceptable, the new password is set and the token destroyed
     if ($token[0]) {
       $errors = $validator->validate($data->newPassword, [new Assert\NotBlank(), new Assert\Regex([
@@ -225,12 +253,12 @@ class UserController extends AbstractController
       $entityManager->flush();
 
       // Email sent to the user confirming the new password has been set
-      $message = (new \Swift_Message('My Quotes - Password has been changed'))
+      $message = (new \Swift_Message('My Quotes - Password Changed'))
       ->setFrom('send@example.com')
       ->setTo($user->getEmail())
       ->setBody(
         $this->renderView(
-          'emails/forgotten-password-confirmation.html.twig',
+          'emails/password-forgotten-confirmation.html.twig',
           ['pseudonym' => $user->getPseudonym()]
         ),
         'text/html'

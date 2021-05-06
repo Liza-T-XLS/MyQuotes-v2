@@ -15,6 +15,7 @@ import Footer from '../Footer';
 import Signup from '../../containers/Signup';
 import Activation from '../../containers/Activation';
 import Login from '../../containers/Login';
+import PasswordForgotten from '../../containers/PasswordForgotten';
 import Quotes from '../../containers/Quotes';
 import Settings from '../../containers/Settings';
 import NotFound from '../NotFound';
@@ -70,6 +71,12 @@ const App = ({
             exact
           >
             <Login />
+          </Route>
+          <Route
+            path="/password-forgotten"
+            exact
+          >
+            <PasswordForgotten />
           </Route>
           <Route
             path="/quotes"

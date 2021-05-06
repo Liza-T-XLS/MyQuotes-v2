@@ -78,6 +78,16 @@
           border: solid 1px $mainColor;
         }
       }
+      .passwordForgottenLink {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        &:hover, &:active {
+          color: $mainOnHoverColor;
+        }
+      }
+    }
+    #loginLabelPassword {
+      margin-bottom: 0rem;
     }
     .logInImg {
       height: 12rem;
