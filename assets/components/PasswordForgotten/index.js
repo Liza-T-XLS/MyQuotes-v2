@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
@@ -7,6 +8,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './passwordForgotten.scss';
 import notFoundImg from '../../images/lost.svg';
@@ -110,7 +112,11 @@ const PasswordForgotten = ({
               <label className="passwordForgottenLabel" htmlFor="token">
                 <span>Enter the code you received by email</span>
                 <input type="text" name="token" id="token" value={token} onChange={onChangeHandler} required className={tokenClassName} />
-                <div className="errorMsg">{formErrors.token.length > 0 && <span>{formErrors.token}</span>}</div>
+                <div className="errorMsg">
+                  {formErrors.token.length > 0 && (
+                    <span>{formErrors.token}&nbsp;Try verifying your input or&nbsp;<Link to="/password-forgotten" className="passwordForgottenLink">request another token.</Link></span>
+                  )}
+                </div>
               </label>
               <button className="passwordForgottenButton" type="submit">Submit</button>
             </form>
@@ -131,6 +137,9 @@ const PasswordForgotten = ({
                 <img className="passwordToggle" src={visibleIcon} alt="password toggle" title="show password" onClick={passwordVisibilityOnClickHandler} />
                 <div className="errorMsg">{formErrors.confirmedNewPassword.length > 0 && <span>{formErrors.confirmedNewPassword}</span>}</div>
               </label>
+              <div className="otherErrorMsg">{formErrors.token.length > 0 && (
+                <span>{formErrors.token}&nbsp;Try&nbsp;<Link to="/password-forgotten" className="passwordForgottenLink">requesting another token.</Link></span>)}
+              </div>
               <button className="passwordForgottenButton" type="submit">Submit</button>
             </form>
           </>

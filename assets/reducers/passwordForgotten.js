@@ -60,6 +60,17 @@ const passwordForgottenReducer = (state = initialState, action = {}) => {
             formErrors: newFormErrors,
           };
         }
+        case 'token': {
+          const tokenMsg = '';
+          const newFormErrors = {
+            ...state.formErrors,
+            token: tokenMsg,
+          };
+          return {
+            ...state,
+            formErrors: newFormErrors,
+          };
+        }
         case 'newPassword': {
           let newPasswordMsg = '';
           if (invalidPasswordRegex.test(state.newPassword)) {
