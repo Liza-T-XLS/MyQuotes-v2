@@ -4,11 +4,10 @@
 
 // ==  Imports
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import './passwordForgotten.scss';
 import notFoundImg from '../../images/lost.svg';
@@ -36,9 +35,13 @@ const PasswordForgotten = ({
   newPassword,
   confirmedNewPassword,
   resetPassword,
-  finalStep,
   passwordChanged,
+  clearPasswordForgotten,
 }) => {
+  useEffect(() => {
+    clearPasswordForgotten();
+  }, []);
+
   const emailClassName = classNames('email', { invalid: formErrors.email.length > 0 });
   const tokenClassName = classNames('email', { invalid: formErrors.token.length > 0 });
   const newPasswordClassName = classNames('newPassword', { invalid: formErrors.newPassword.length > 0 });
@@ -52,26 +55,18 @@ const PasswordForgotten = ({
 
   const emailOnSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(formErrors);
     const errors = Object.values(formErrors).find((value) => value.length > 0);
-    console.log(errors);
-
     if (errors === undefined && email !== '') {
       setPasswordForgottenLoader(true);
-      console.log('submitted');
       requestToken();
     }
   };
 
   const tokenOnSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(formErrors);
     const errors = Object.values(formErrors).find((value) => value.length > 0);
-    console.log(errors);
-
     if (errors === undefined && token !== '') {
       setPasswordForgottenLoader(true);
-      console.log('submitted');
       checkToken();
     }
   };
@@ -81,7 +76,6 @@ const PasswordForgotten = ({
     const errors = Object.values(formErrors).find((value) => value.length > 0);
     if (errors === undefined && newPassword !== '' && confirmedNewPassword !== '') {
       setPasswordForgottenLoader(true);
-      console.log('submitted');
       resetPassword();
     }
   };
@@ -114,7 +108,7 @@ const PasswordForgotten = ({
                 <input type="text" name="token" id="token" value={token} onChange={onChangeHandler} required className={tokenClassName} />
                 <div className="errorMsg">
                   {formErrors.token.length > 0 && (
-                    <span>{formErrors.token}&nbsp;Try verifying your input or&nbsp;<Link to="/password-forgotten" className="passwordForgottenLink">request another token.</Link></span>
+                    <span>{formErrors.token}&nbsp;Try verifying your input or&nbsp;<a href="/password-forgotten" className="passwordForgottenLink">request another token.</a></span>
                   )}
                 </div>
               </label>
@@ -122,7 +116,7 @@ const PasswordForgotten = ({
             </form>
           </>
         )}
-        {resetAuthorization && !finalStep && !passwordChanged && (
+        {resetAuthorization && !passwordChanged && (
           <>
             <form className="passwordForgottenForm" onSubmit={newPasswordOnSubmitHandler} noValidate>
               <label className={newPasswordLabelClassName} htmlFor="newPassword">
@@ -138,13 +132,13 @@ const PasswordForgotten = ({
                 <div className="errorMsg">{formErrors.confirmedNewPassword.length > 0 && <span>{formErrors.confirmedNewPassword}</span>}</div>
               </label>
               <div className="otherErrorMsg">{formErrors.token.length > 0 && (
-                <span>{formErrors.token}&nbsp;Try&nbsp;<Link to="/password-forgotten" className="passwordForgottenLink">requesting another token.</Link></span>)}
+                <span>{formErrors.token}&nbsp;Try&nbsp;<a href="/password-forgotten" className="passwordForgottenLink">requesting another token.</a></span>)}
               </div>
               <button className="passwordForgottenButton" type="submit">Submit</button>
             </form>
           </>
         )}
-        {finalStep && passwordChanged && (
+        {passwordChanged && (
           <>
             <p className="confirmationText">
               Your password has been changed. You can now log in with your new password.
@@ -181,8 +175,8 @@ PasswordForgotten.propTypes = {
   newPassword: PropTypes.string.isRequired,
   confirmedNewPassword: PropTypes.string.isRequired,
   resetPassword: PropTypes.func.isRequired,
-  finalStep: PropTypes.bool.isRequired,
   passwordChanged: PropTypes.bool.isRequired,
+  clearPasswordForgotten: PropTypes.func.isRequired,
 };
 
 // == Export

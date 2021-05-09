@@ -76,7 +76,7 @@ const App = ({
             path="/password-forgotten"
             exact
           >
-            <PasswordForgotten />
+            <PasswordForgotten timestamp={new Date().toString()} />
           </Route>
           <Route
             path="/quotes"

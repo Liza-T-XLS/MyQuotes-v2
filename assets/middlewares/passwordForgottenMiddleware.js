@@ -11,7 +11,6 @@ import {
   CHECK_TOKEN,
   setResetAuthorization,
   RESET_PASSWORD,
-  setFinalStep,
   setPasswordChanged,
 } from '../actions/passwordForgotten';
 
@@ -28,18 +27,15 @@ const passwordForgottenMiddleware = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response);
           store.dispatch(setTokenIsSent(true));
           store.dispatch(setUserId(response.data.userId));
           store.dispatch(setPasswordForgottenLoader(false));
         })
         .catch((error) => {
-          console.log(error.response.data);
           store.dispatch(addPasswordForgottenServerErrors(error.response.data));
           store.dispatch(setPasswordForgottenLoader(false));
         })
         .finally(() => {
-          console.log('finally');
           store.dispatch(setPasswordForgottenLoader(false));
         });
       next(action);
@@ -53,18 +49,15 @@ const passwordForgottenMiddleware = (store) => (next) => (action) => {
           token: store.getState().passwordForgotten.token,
         },
       })
-        .then((response) => {
-          console.log(response);
+        .then(() => {
           store.dispatch(setResetAuthorization(true));
           store.dispatch(setPasswordForgottenLoader(false));
         })
         .catch((error) => {
-          console.log(error.response.data);
           store.dispatch(addPasswordForgottenServerErrors(error.response.data));
           store.dispatch(setPasswordForgottenLoader(false));
         })
         .finally(() => {
-          console.log('finally');
           store.dispatch(setPasswordForgottenLoader(false));
         });
       next(action);
@@ -79,19 +72,15 @@ const passwordForgottenMiddleware = (store) => (next) => (action) => {
           newPassword: store.getState().passwordForgotten.newPassword,
         },
       })
-        .then((response) => {
-          console.log(response);
-          store.dispatch(setFinalStep(true));
+        .then(() => {
           store.dispatch(setPasswordChanged(true));
           store.dispatch(setPasswordForgottenLoader(false));
         })
         .catch((error) => {
-          console.log(error.response.data);
           store.dispatch(addPasswordForgottenServerErrors(error.response.data));
           store.dispatch(setPasswordForgottenLoader(false));
         })
         .finally(() => {
-          console.log('finally');
           store.dispatch(setPasswordForgottenLoader(false));
         });
       next(action);

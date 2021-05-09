@@ -10,8 +10,8 @@ export const SET_USER_ID = 'SET_USER_ID';
 export const CHECK_TOKEN = 'CHECK_TOKEN';
 export const SET_RESET_AUTHORIZATION = 'SET_RESET_AUTHORIZATION';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
-export const SET_FINAL_STEP = 'SET_FINAL_STEP';
 export const SET_PASSWORD_CHANGED = 'SET_PASSWORD_CHANGED';
+export const CLEAR_PASSWORD_FORGOTTEN = 'CLEAR_PASSWORD_FORGOTTEN';
 
 // == Action creators
 
@@ -71,4 +71,8 @@ export const setFinalStep = (boolean) => ({
 export const setPasswordChanged = (boolean) => ({
   type: SET_PASSWORD_CHANGED,
   boolean,
+});
+
+export const clearPasswordForgotten = () => ({
+  type: CLEAR_PASSWORD_FORGOTTEN,
 });

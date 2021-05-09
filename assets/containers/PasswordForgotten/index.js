@@ -10,6 +10,7 @@ import {
   requestToken,
   checkToken,
   resetPassword,
+  clearPasswordForgotten,
 } from '../../actions/passwordForgotten';
 
 const mapStateToProps = (state) => ({
@@ -20,7 +21,6 @@ const mapStateToProps = (state) => ({
   resetAuthorization: state.passwordForgotten.resetAuthorization,
   newPassword: state.passwordForgotten.newPassword,
   confirmedNewPassword: state.passwordForgotten.confirmedNewPassword,
-  finalStep: state.passwordForgotten.finalStep,
   passwordChanged: state.passwordForgotten.passwordChanged,
 });
 
@@ -42,6 +42,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   resetPassword: () => {
     dispatch(resetPassword());
+  },
+  clearPasswordForgotten: () => {
+    dispatch(clearPasswordForgotten());
   },
 });
 

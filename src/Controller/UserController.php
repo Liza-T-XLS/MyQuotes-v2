@@ -253,7 +253,7 @@ class UserController extends AbstractController
       $entityManager->flush();
 
       // Email sent to the user confirming the new password has been set
-      $message = (new \Swift_Message('My Quotes - Password Changed'))
+      $message = (new \Swift_Message('MyQuotes - Password Changed'))
       ->setFrom('send@example.com')
       ->setTo($user->getEmail())
       ->setBody(

@@ -8,8 +8,8 @@ import {
   SET_TOKEN_IS_SENT,
   SET_USER_ID,
   SET_RESET_AUTHORIZATION,
-  SET_FINAL_STEP,
   SET_PASSWORD_CHANGED,
+  CLEAR_PASSWORD_FORGOTTEN,
 } from '../actions/passwordForgotten';
 
 import { validEmailRegex, invalidPasswordRegex } from '../utils/regex';
@@ -31,7 +31,6 @@ const initialState = {
   resetAuthorization: false,
   newPassword: '',
   confirmedNewPassword: '',
-  finalStep: false,
   passwordChanged: false,
 };
 
@@ -148,15 +147,15 @@ const passwordForgottenReducer = (state = initialState, action = {}) => {
         ...state,
         resetAuthorization: action.boolean,
       };
-    case SET_FINAL_STEP:
-      return {
-        ...state,
-        finalStep: action.boolean,
-      };
     case SET_PASSWORD_CHANGED:
       return {
         ...state,
         passwordChanged: action.boolean,
+      };
+    case CLEAR_PASSWORD_FORGOTTEN:
+      return {
+        ...state,
+        ...initialState,
       };
     default: return state;
   }
