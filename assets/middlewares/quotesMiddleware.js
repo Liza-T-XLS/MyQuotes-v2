@@ -28,11 +28,12 @@ import {
 // == Middleware
 
 const quotesMiddleware = (store) => (next) => (action) => {
+  const baseURL = process.env.BASE_URL;
   switch (action.type) {
     case LOAD_QUOTES:
       axios({
         method: 'post',
-        url: 'http://localhost:8000/api/quotes/show',
+        url: `${baseURL}/api/quotes/show`,
         data: {
           currentPage: store.getState().quotes.currentPage,
           tag: store.getState().quotes.selectedTag,
@@ -57,7 +58,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
     case ADD_QUOTE:
       axios({
         method: 'post',
-        url: 'http://localhost:8000/api/quotes',
+        url: `${baseURL}/api/quotes`,
         data: {
           quote: {
             text: store.getState().quotes.quoteText,
@@ -95,7 +96,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
     case EDIT_QUOTE:
       axios({
         method: 'put',
-        url: 'http://localhost:8000/api/quotes',
+        url: `${baseURL}/api/quotes`,
         data: {
           quote: {
             id: store.getState().quotes.quoteId,
@@ -133,7 +134,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
     case DELETE_QUOTE:
       axios({
         method: 'delete',
-        url: 'http://localhost:8000/api/quotes',
+        url: `${baseURL}/api/quotes`,
         data: {
           quote: {
             id: action.quoteId,
@@ -161,7 +162,7 @@ const quotesMiddleware = (store) => (next) => (action) => {
     case LOAD_TAGS:
       axios({
         method: 'get',
-        url: 'http://localhost:8000/api/tags',
+        url: `${baseURL}/api/tags`,
       })
         .then((response) => {
           store.dispatch(saveUserTags(response.data));

@@ -15,11 +15,12 @@ import {
 // == Middleware
 
 const registrationMiddleware = (store) => (next) => (action) => {
+  const baseURL = process.env.BASE_URL;
   switch (action.type) {
     case SIGN_UP:
       axios({
         method: 'post',
-        url: 'http://localhost:8000/api/registration',
+        url: `${baseURL}/api/registration`,
         data: {
           pseudonym: store.getState().registration.pseudonym,
           email: store.getState().registration.email,
@@ -46,7 +47,7 @@ const registrationMiddleware = (store) => (next) => (action) => {
       const hash = window.location.search.match('&hash=(.*)')[1];
       axios({
         method: 'post',
-        url: 'http://localhost:8000/api/activation',
+        url: `${baseURL}/api/activation`,
         data: {
           email,
           hash,

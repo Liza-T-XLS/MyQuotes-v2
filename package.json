@@ -35,6 +35,7 @@
         "@material-ui/lab": "^4.0.0-alpha.57",
         "axios": "^0.21.1",
         "classnames": "^2.2.6",
+        "dotenv": "^9.0.2",
         "node-sass": "4.14.1",
         "prop-types": "^15.7.2",
         "react": "^17.0.1",

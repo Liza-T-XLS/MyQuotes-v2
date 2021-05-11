@@ -16,11 +16,12 @@ import {
 // == Middleware
 
 const authenticationMiddleware = (store) => (next) => (action) => {
+  const baseURL = process.env.BASE_URL;
   switch (action.type) {
     case LOG_IN:
       axios({
         method: 'post',
-        url: 'http://localhost:8000/api/login',
+        url: `${baseURL}/api/login`,
         data: {
           username: store.getState().authentication.email,
           password: store.getState().authentication.password,
@@ -47,7 +48,7 @@ const authenticationMiddleware = (store) => (next) => (action) => {
     case LOG_OUT:
       axios({
         method: 'get',
-        url: 'http://localhost:8000/api/logout',
+        url: `${baseURL}/api/logout`,
       })
         .then(() => {
           store.dispatch(setIsLogged(false));
@@ -64,7 +65,7 @@ const authenticationMiddleware = (store) => (next) => (action) => {
     case CHECK_IS_LOGGED:
       axios({
         method: 'get',
-        url: 'http://localhost:8000/api/islogged',
+        url: `${baseURL}/api/islogged`,
       })
         .then((response) => {
           store.dispatch(setIsLogged(response.data.isLogged));

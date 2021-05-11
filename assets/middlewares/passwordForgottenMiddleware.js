@@ -17,11 +17,12 @@ import {
 // == Middleware
 
 const passwordForgottenMiddleware = (store) => (next) => (action) => {
+  const baseURL = process.env.BASE_URL;
   switch (action.type) {
     case REQUEST_TOKEN:
       axios({
         method: 'post',
-        url: 'http://localhost:8000/api/userdata/password-forgotten',
+        url: `${baseURL}/api/userdata/password-forgotten`,
         data: {
           email: store.getState().passwordForgotten.email,
         },
@@ -43,7 +44,7 @@ const passwordForgottenMiddleware = (store) => (next) => (action) => {
     case CHECK_TOKEN:
       axios({
         method: 'post',
-        url: 'http://localhost:8000/api/userdata/password-token-check',
+        url: `${baseURL}/api/userdata/password-token-check`,
         data: {
           userId: store.getState().passwordForgotten.userId,
           token: store.getState().passwordForgotten.token,
@@ -65,7 +66,7 @@ const passwordForgottenMiddleware = (store) => (next) => (action) => {
     case RESET_PASSWORD:
       axios({
         method: 'post',
-        url: 'http://localhost:8000/api/userdata/password-reset',
+        url: `${baseURL}/api/userdata/password-reset`,
         data: {
           userId: store.getState().passwordForgotten.userId,
           token: store.getState().passwordForgotten.token,

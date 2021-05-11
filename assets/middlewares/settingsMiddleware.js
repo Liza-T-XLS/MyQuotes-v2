@@ -16,11 +16,12 @@ import {
 // == Middleware
 
 const settingsMiddleware = (store) => (next) => (action) => {
+  const baseURL = process.env.BASE_URL;
   switch (action.type) {
     case LOAD_USER_DATA:
       axios({
         method: 'get',
-        url: 'http://localhost:8000/api/userdata',
+        url: `${baseURL}/api/userdata`,
       })
         .then((response) => {
           store.dispatch(setUserData(response.data.pseudonym, response.data.email));
@@ -34,7 +35,7 @@ const settingsMiddleware = (store) => (next) => (action) => {
     case SUBMIT_CHANGES:
       axios({
         method: 'patch',
-        url: 'http://localhost:8000/api/userdata',
+        url: `${baseURL}/api/userdata`,
         data: {
           updatedUser: {
             pseudonym: store.getState().settings.pseudonym,
