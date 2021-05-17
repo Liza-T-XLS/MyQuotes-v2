@@ -55,7 +55,6 @@ const Quote = forwardRef(({
   };
 
   const editOnClickHandler = () => {
-    console.log('edit icon clicked');
     changeQuoteFormLabels('Edit the quote', 'Edit');
     loadQuoteData(quote.id, quote.text, quote.authorFirstName, quote.authorLastName, quote.characterName, quote.mediumTitle, quote.tags);
     displayFormOnClickHandler();

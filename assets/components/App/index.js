@@ -30,7 +30,6 @@ const App = ({
   setOpen,
 }) => {
   useEffect(() => {
-    console.log('useEffect: checkIsLogged');
     checkIsLogged();
   },
   []);

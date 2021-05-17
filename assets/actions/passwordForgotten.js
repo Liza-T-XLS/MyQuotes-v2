@@ -63,11 +63,6 @@ export const resetPassword = () => ({
   type: RESET_PASSWORD,
 });
 
-export const setFinalStep = (boolean) => ({
-  type: SET_FINAL_STEP,
-  boolean,
-});
-
 export const setPasswordChanged = (boolean) => ({
   type: SET_PASSWORD_CHANGED,
   boolean,

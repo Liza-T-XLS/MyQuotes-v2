@@ -13,7 +13,6 @@ import Loader from '../Loader';
 
 const Logout = ({ logOut, logoutLoader, isLogged }) => {
   useEffect(() => {
-    console.log('Logout useEffect');
     logOut();
   }, []);
 

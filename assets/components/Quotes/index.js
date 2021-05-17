@@ -42,9 +42,7 @@ const Quotes = forwardRef(({
   isLogged,
 }, ref) => {
   useEffect(() => {
-    console.log('useEffect: quotes, checkIsLogged');
     checkIsLogged();
-    console.log('useEffect: quotes');
     loadQuotes();
   }, []);
 
@@ -57,8 +55,6 @@ const Quotes = forwardRef(({
   const app = ref.current;
 
   const onClickHandler = () => {
-    console.log('addQuote icon clicked');
-    console.log(window.innerHeight);
     const formHeight = app.clientHeight - headerHeight - quotesMenuFirstLevelRef.current.clientHeight;
     if (!quoteFormStatus) {
       saveFormHeight(formHeight);

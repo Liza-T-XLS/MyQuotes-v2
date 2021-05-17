@@ -24,7 +24,6 @@ const Tags = ({
   saveCurrentPage,
 }) => {
   useEffect(() => {
-    console.log('useEffect: tags');
     loadTags();
   }, []);
 
@@ -41,14 +40,12 @@ const Tags = ({
   };
 
   const tagOnClickHandler = (e) => {
-    console.log(e.target);
     saveSelectedTag(e.target.id);
     saveCurrentPage(1);
     loadQuotes();
   };
 
   const tagUnselectOnClickHandler = () => {
-    console.log('tag unselected');
     saveSelectedTag('');
     loadQuotes();
   };
