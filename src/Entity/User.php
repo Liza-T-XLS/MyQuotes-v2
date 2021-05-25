@@ -24,6 +24,7 @@ class User implements UserInterface
         $this->quotes = new ArrayCollection();
         $this->active = false;
         $this->token = new ArrayCollection();
+        $this->firstConnection = false;
     }
     
     /**
@@ -97,6 +98,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Token::class, mappedBy="user", orphanRemoval=true)
      */
     private $token;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $firstConnection;
 
     public function getId(): ?int
     {
@@ -292,6 +298,18 @@ class User implements UserInterface
                 $token->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFirstConnection(): ?bool
+    {
+        return $this->firstConnection;
+    }
+
+    public function setFirstConnection(bool $firstConnection): self
+    {
+        $this->firstConnection = $firstConnection;
 
         return $this;
     }
