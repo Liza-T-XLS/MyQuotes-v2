@@ -43,16 +43,20 @@ const Nav = ({
             <Link to="/" onClick={burgerOnClickHandler} className="link">Home</Link>
           </li>
           {isLogged && (
-            <li className="option">
-              <img src={quoteIcon} alt="menu quote icon" className="menuIcon" />
-              <Link to="/quotes" onClick={burgerOnClickHandler} className="link">My quotes</Link>
-            </li>
-          )}
-          {isLogged && (
-            <li className="option">
-              <img src={settingsIcon} alt="menu settings icon" className="menuIcon" />
-              <Link to="/settings" onClick={burgerOnClickHandler} className="link">Settings</Link>
-            </li>
+            <>
+              <li className="option">
+                <img src={quoteIcon} alt="menu quote icon" className="menuIcon" />
+                <Link to="/quotes" onClick={burgerOnClickHandler} className="link">My quotes</Link>
+              </li>
+              <li className="option">
+                <img src={settingsIcon} alt="menu settings icon" className="menuIcon" />
+                <Link to="/settings" onClick={burgerOnClickHandler} className="link">Settings</Link>
+              </li>
+              <li className="option">
+                <img src={aboutIcon} alt="menu help icon" className="menuIcon" />
+                <Link to="/help" onClick={burgerOnClickHandler} className="link">Help</Link>
+              </li>
+            </>
           )}
           {!isLogged && (
             <>

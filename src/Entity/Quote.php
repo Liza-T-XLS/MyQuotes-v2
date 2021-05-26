@@ -24,11 +24,11 @@ class Quote
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=1000)
+     * @ORM\Column(type="string", length=1200)
      * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 1,
-     *      max = 1000,
+     *      max = 1200,
      *      minMessage = "The text must be at least {{ limit }} character long",
      *      maxMessage = "The text cannot be longer than {{ limit }} characters"
      * )

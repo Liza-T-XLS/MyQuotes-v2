@@ -18,6 +18,7 @@ import Login from '../../containers/Login';
 import PasswordForgotten from '../../containers/PasswordForgotten';
 import Quotes from '../../containers/Quotes';
 import Settings from '../../containers/Settings';
+import Help from '../Help';
 import NotFound from '../NotFound';
 import About from '../About';
 import Logout from '../../containers/Logout';
@@ -88,6 +89,12 @@ const App = ({
             exact
           >
             <Settings />
+          </Route>
+          <Route
+            path="/help"
+            exact
+          >
+            <Help />
           </Route>
           <Route
             path="/about"

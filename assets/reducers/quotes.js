@@ -117,8 +117,8 @@ const quotesReducer = (state = initialState, action = {}) => {
           if (state.quoteText.length < 1) {
             quoteTextMsg = 'The text must be at least 1 character long.';
           }
-          if (state.quoteText.length > 1000) {
-            quoteTextMsg = 'The text cannot be longer than 1000 characters.';
+          if (state.quoteText.length > 1200) {
+            quoteTextMsg = 'The text cannot be longer than 1200 characters.';
           }
           const newFormErrors = {
             ...state.formErrors,
