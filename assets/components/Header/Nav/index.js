@@ -12,6 +12,7 @@ import './nav.scss';
 import homeIcon from '../../../images/home.svg';
 import quoteIcon from '../../../images/quote-36dp.svg';
 import settingsIcon from '../../../images/settings-36dp.svg';
+import helpIcon from '../../../images/help-36dp.svg';
 import loginIcon from '../../../images/login-36dp.svg';
 import signupIcon from '../../../images/signup.svg';
 import aboutIcon from '../../../images/about-36dp.svg';
@@ -53,7 +54,7 @@ const Nav = ({
                 <Link to="/settings" onClick={burgerOnClickHandler} className="link">Settings</Link>
               </li>
               <li className="option">
-                <img src={aboutIcon} alt="menu help icon" className="menuIcon" />
+                <img src={helpIcon} alt="menu help icon" className="menuIcon" />
                 <Link to="/help" onClick={burgerOnClickHandler} className="link">Help</Link>
               </li>
             </>
