@@ -70,14 +70,14 @@ const Quote = forwardRef(({
   return (
     <div className="quote" ref={quoteRef} id={quote.id}>
       <div className="quoteMain">
-        {quote.text.length <= 200 && <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text}</p>}
-        {quote.text.length > 200 && isTruncated && (
+        {quote.text.length <= 250 && <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text}</p>}
+        {quote.text.length > 250 && isTruncated && (
           <>
-            <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text.substr(0, 200)} ... </p>
+            <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text.substr(0, 250)} ... </p>
             <img className="expandIcon" src={expandIcon} alt="expand icon" title="show full text" onClick={expandOnClickHandler} />
           </>
         )}
-        {quote.text.length > 200 && !isTruncated && (
+        {quote.text.length > 250 && !isTruncated && (
           <>
             <p className="quoteText" onClick={quoteOnClickHandler}>{quote.text} </p>
             <img className="unexpandIcon" src={unexpandIcon} alt="unexpand icon" title="hide text" onClick={unexpandOnClickHandler} />

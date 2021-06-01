@@ -44,8 +44,12 @@ const quotesMiddleware = (store) => (next) => (action) => {
           store.dispatch(savePageQuantity(response.data.pageQuantity));
           store.dispatch(saveQuotes(response.data.quotes));
         })
-        .catch(() => {
-          store.dispatch(setQuotesFlashMsg('Oops! Something went wrong and the quotes could not be loaded...'));
+        .catch((error) => {
+          if (error.response.data.message === 'User not found. Must be connected in order to load the quotes.') {
+            store.dispatch(setQuotesFlashMsg(error.response.data.message));
+          } else {
+            store.dispatch(setQuotesFlashMsg('Oops! Something went wrong and the quotes could not be loaded...'));
+          }
           store.dispatch(setQuotesFlash(true));
           setTimeout(() => {
             store.dispatch(setQuotesFlash(false));

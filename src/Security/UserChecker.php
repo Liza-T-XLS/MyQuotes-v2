@@ -56,7 +56,7 @@ class UserChecker implements UserCheckerInterface
                         \n- To add a new quote, click on the Add Icon (+) in the top right corner of the page
                         \n- You can find one or several quotes by using the Search Box at the top of the page
                         \n- or by selecting a tag in your Tag List
-                        \n You can now delete this welcome quote if you want.
+                        \n You can now delete this welcome quote if you want. Don't worry, you can find all these tips in the Help section.
                         \n Enjoy!
                         ",
                         "authorFirstName" => "John",
