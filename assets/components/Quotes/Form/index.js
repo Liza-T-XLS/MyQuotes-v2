@@ -122,22 +122,22 @@ const Form = ({
         <div className="errorMsg">{formErrors.quoteText.length > 0 && <span>{formErrors.quoteText}</span>}</div>
       </label>
       <label className={authorFirstNameLabelClassName} htmlFor="authorFirstName">
-        <span>Author's first name</span>
+        <span>Author&apos;s first name</span>
         <input className="quoteFormInput" name="authorFirstName" value={authorFirstName} onChange={onChangeHandler} id="authorFirstName" minLength="1" />
         <div className="errorMsg">{formErrors.authorFirstName.length > 0 && <span>{formErrors.authorFirstName}</span>}</div>
       </label>
       <label className={authorLastNameLabelClassName} htmlFor="authorLastName">
-        <span>Author's last name</span>
+        <span>Author&apos;s last name</span>
         <input className="quoteFormInput" name="authorLastName" value={authorLastName} onChange={onChangeHandler} id="authorLastName" minLength="1" />
         <div className="errorMsg">{formErrors.authorLastName.length > 0 && <span>{formErrors.authorLastName}</span>}</div>
       </label>
       <label className={characterNameLabelClassName} htmlFor="character's name">
-        <span>Character's last name</span>
+        <span>Character&apos;s last name</span>
         <input className="quoteFormInput" name="characterName" value={characterName} onChange={onChangeHandler} id="character's name" minLength="1" />
         <div className="errorMsg">{formErrors.characterName.length > 0 && <span>{formErrors.characterName}</span>}</div>
       </label>
       <label className={mediumTitleLabelClassName} htmlFor="mediumTitle">
-        <span>Medium's title</span>
+        <span>Medium&apos;s title</span>
         <input className="quoteFormInput" name="mediumTitle" value={mediumTitle} onChange={onChangeHandler} id="mediumTitle" minLength="1" />
         <div className="errorMsg">{formErrors.mediumTitle.length > 0 && <span>{formErrors.mediumTitle}</span>}</div>
       </label>

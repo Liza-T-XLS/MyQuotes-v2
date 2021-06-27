@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 // == Imports
 
 import { connect } from 'react-redux';

@@ -1,7 +1,6 @@
 // == Imports
 
 import axios from 'axios';
-import { changeQuoteFormField, addQuote } from '../actions/quotes';
 
 import {
   SIGN_UP,
