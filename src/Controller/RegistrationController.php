@@ -64,7 +64,7 @@ class RegistrationController extends AbstractController
 
         // sends an email with the above link to the user
         $message = (new \Swift_Message('MyQuotes - Thank you for signing up! Please verify your email'))
-        ->setFrom('send@example.com')
+        ->setFrom($_ENV['SENDER'])
         ->setTo($user->getEmail())
         ->setBody(
             $this->renderView(
