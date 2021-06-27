@@ -133,7 +133,7 @@ class UserController extends AbstractController
 
         // Email is sent to the user with the token needed to set a new password
       $message = (new \Swift_Message('MyQuotes - Password Forgotten'))
-      ->setFrom('send@example.com')
+      ->setFrom($_ENV['SENDER'])
       ->setTo($user->getEmail())
       ->setBody(
         $this->renderView(
@@ -254,12 +254,13 @@ class UserController extends AbstractController
 
       // Email sent to the user confirming the new password has been set
       $message = (new \Swift_Message('MyQuotes - Password Changed'))
-      ->setFrom('send@example.com')
+      ->setFrom($_ENV['SENDER'])
       ->setTo($user->getEmail())
       ->setBody(
         $this->renderView(
           'emails/password-forgotten-confirmation.html.twig',
-          ['pseudonym' => $user->getPseudonym()]
+          ['pseudonym' => $user->getPseudonym(),
+          'baseUrl' => $_ENV['BASE_URL']]
         ),
         'text/html'
       );

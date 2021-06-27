@@ -58,7 +58,7 @@ class RegistrationController extends AbstractController
         $entityManager->flush();
 
         // creates activation link to verify the user's email
-        $baseUrl = 'http://localhost:8000/';
+        $baseUrl = $_ENV['BASE_URL'];
         $email = $user->getEmail();
         $link = $baseUrl . 'verify?email=' . $email . '&hash=' . $hash;
 
