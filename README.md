@@ -1,9 +1,11 @@
 # MyQuotes-v2
 
-Any group of words, short or long, can be a quote. Some quotes are popular, some aren't. But they got **your** attention!
+I built this website for my personal use and for training purposes.
 
-MyQuotes enables you to save any quote to your personal space. They are **your** quotes!
+I wanted to be able to save any quotes, including the less famous ones, a sentence you would hear at a family dinner or in a TV show, anything you deem worth remembering.
 
-**Work in progress**
+Available at: https://myquotes.me/
 
-But don't hesitate to check out my code, especially with https://github1s.com/Liza-T-XLS/MyQuotes-v2
+To read the code with VS Code: https://github1s.com/Liza-T-XLS/MyQuotes-v2
+
+#javascript #react #redux #react-router-dom #scss #responsiveDesign #php #symfony #mySQL #deployment
